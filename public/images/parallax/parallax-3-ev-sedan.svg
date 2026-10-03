@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgG3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050a18"/>
+      <stop offset="50%" stop-color="#0a1a2e"/>
+      <stop offset="100%" stop-color="#030814"/>
+    </linearGradient>
+    <radialGradient id="glowG3" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#00f2fe" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#050a18" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="carBodyG3" x1="0%" y1="0%" x2="100%" y2="40%">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="45%" stop-color="#00b0ff"/>
+      <stop offset="100%" stop-color="#1a237e"/>
+    </linearGradient>
+    <linearGradient id="glassG3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b9f6ca" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0a192f" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="650" fill="url(#bgG3)" rx="16"/>
+  <circle cx="600" cy="300" r="410" fill="url(#glowG3)"/>
+
+  <!-- High-Tech Eco Grid Floor -->
+  <g stroke="#00e676" stroke-opacity="0.12" stroke-width="1.5">
+    <line x1="80" y1="520" x2="1120" y2="520"/>
+    <line x1="40" y1="550" x2="1160" y2="550"/>
+    <line x1="0" y1="590" x2="1200" y2="590"/>
+    <line x1="280" y1="480" x2="120" y2="650"/>
+    <line x1="440" y1="480" x2="360" y2="650"/>
+    <line x1="600" y1="480" x2="600" y2="650"/>
+    <line x1="760" y1="480" x2="840" y2="650"/>
+    <line x1="920" y1="480" x2="1080" y2="650"/>
+  </g>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="600" cy="510" rx="400" ry="26" fill="#000000" opacity="0.8"/>
+  <ellipse cx="600" cy="508" rx="340" ry="12" fill="#00e676" opacity="0.25"/>
+
+  <!-- Fastback Sedan Body Silhouette -->
+  <!-- Underbody -->
+  <path d="M 240 480 Q 600 492 960 480 L 950 455 Q 600 465 250 455 Z" fill="#09111e"/>
+
+  <!-- Sleek Fastback Line -->
+  <path d="M 250 452 C 265 410 320 395 400 390 L 530 330 C 620 270 770 270 850 340 L 935 385 C 975 405 980 435 965 460 C 890 465 310 465 250 452 Z" fill="url(#carBodyG3)"/>
+
+  <!-- Glasshouse / Aerodynamic Cabin -->
+  <path d="M 535 330 L 825 335 C 840 365 870 375 875 380 L 440 380 C 475 350 515 335 535 330 Z" fill="url(#glassG3)"/>
+  <line x1="670" y1="328" x2="665" y2="380" stroke="#00e676" stroke-width="3" stroke-opacity="0.8"/>
+
+  <!-- Cyber Matrix LED Lights -->
+  <path d="M 910 400 L 970 406 L 960 422 L 895 415 Z" fill="#00e676" filter="drop-shadow(0 0 10px #00e676)"/>
+  <path d="M 240 410 L 275 410 L 270 424 L 235 422 Z" fill="#00b0ff" filter="drop-shadow(0 0 8px #00b0ff)"/>
+
+  <!-- Dynamic Aerodynamic Flow lines -->
+  <path d="M 270 430 Q 600 445 930 430" stroke="#00e676" stroke-width="3" fill="none" opacity="0.9"/>
+  <path d="M 400 390 Q 600 385 840 380" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+  <!-- Alloy Aerodynamic Wheels -->
+  <!-- Rear Wheel -->
+  <circle cx="380" cy="465" r="62" fill="#0a1222" stroke="#00e676" stroke-width="4"/>
+  <circle cx="380" cy="465" r="40" fill="#152642" stroke="#00b0ff" stroke-width="2"/>
+  <circle cx="380" cy="465" r="14" fill="#00e676"/>
+  <!-- Front Wheel -->
+  <circle cx="820" cy="465" r="62" fill="#0a1222" stroke="#00e676" stroke-width="4"/>
+  <circle cx="820" cy="465" r="40" fill="#152642" stroke="#00b0ff" stroke-width="2"/>
+  <circle cx="820" cy="465" r="14" fill="#00e676"/>
+
+  <!-- Branding Badge & HUD Accents -->
+  <text x="600" y="110" font-family="'Rajdhani', sans-serif" font-size="28" font-weight="700" fill="#00e676" text-anchor="middle" letter-spacing="6">RODOPERU URBAN SEDAN EV</text>
+  <text x="600" y="145" font-family="'Montserrat', sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle" letter-spacing="2">EFICIENCIA URBANA Y FLOTAS · COSTO X KM S/ 0.05 · CARGA RÁPIDA 30 MIN</text>
+  
+  <rect x="520" y="170" width="160" height="28" rx="14" fill="rgba(0, 230, 118, 0.15)" stroke="#00e676" stroke-width="1"/>
+  <text x="600" y="188" font-family="'Montserrat', sans-serif" font-size="11" font-weight="600" fill="#00e676" text-anchor="middle" letter-spacing="1">CERO EMISIONES CO2</text>
+</svg>

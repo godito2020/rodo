@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sliderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b263b" />
+      <stop offset="60%" stop-color="#0a101d" />
+      <stop offset="100%" stop-color="#1b263b" />
+    </linearGradient>
+    <linearGradient id="neonBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff88" />
+      <stop offset="100%" stop-color="#00f2fe" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#sliderGrad)" />
+  
+  <!-- Modern Tech Geometry -->
+  <path d="M 0 0 L 700 0 L 500 700 L 0 700 Z" fill="#ffffff" opacity="0.02"/>
+  <circle cx="1300" cy="350" r="300" fill="none" stroke="#00ff88" stroke-width="2" opacity="0.15" stroke-dasharray="20 15"/>
+  <circle cx="1300" cy="350" r="220" fill="none" stroke="#00f2fe" stroke-width="1.5" opacity="0.1"/>
+
+  <!-- Geometric Speed Lines -->
+  <line x1="850" y1="200" x2="1550" y2="200" stroke="url(#neonBar)" stroke-width="3" opacity="0.4" stroke-dasharray="150 20"/>
+  <line x1="950" y1="350" x2="1550" y2="350" stroke="url(#neonBar)" stroke-width="4" opacity="0.6" stroke-dasharray="250 40"/>
+  <line x1="900" y1="500" x2="1500" y2="500" stroke="url(#neonBar)" stroke-width="2" opacity="0.3" stroke-dasharray="80 15"/>
+
+  <!-- Enterprise Tag -->
+  <rect x="100" y="140" width="260" height="40" rx="8" fill="#00ff88" fill-opacity="0.15" stroke="#00ff88" stroke-width="2"/>
+  <text x="120" y="166" fill="#00ff88" font-family="system-ui, sans-serif" font-size="16" font-weight="800" letter-spacing="2">RODOPERU INDUSTRIAL</text>
+
+  <!-- Big Title -->
+  <text x="100" y="270" fill="#ffffff" font-family="system-ui, sans-serif" font-size="46" font-weight="900">Entrega Inmediata en Semirremolques Tolva y F...</text>
+  
+  <!-- Subtitle -->
+  <text x="100" y="340" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="22" font-weight="400">Unidades listas para salir a trabajar con placa y trámite registral incl...</text>
+
+  <!-- Technical badges bar -->
+  <g transform="translate(100, 420)">
+    <rect width="200" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="25" y="30" fill="#00ff88" font-family="system-ui, sans-serif" font-size="16" font-weight="700">100% ELÉCTRICO</text>
+    <text x="25" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Cero Emisiones</text>
+
+    <rect x="230" width="200" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="255" y="30" fill="#00ff88" font-family="system-ui, sans-serif" font-size="16" font-weight="700">FACCHINI TECH</text>
+    <text x="255" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Calidad Rodoviaria</text>
+
+    <rect x="460" width="200" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="485" y="30" fill="#00ff88" font-family="system-ui, sans-serif" font-size="16" font-weight="700">SOPORTE TOTAL</text>
+    <text x="485" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">Red Nacional Perú</text>
+  </g>
+</svg>

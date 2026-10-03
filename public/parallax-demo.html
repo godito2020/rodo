@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODOPERU - Parallax Scroll Showcase (GSAP & ScrollTrigger)</title>
+    
+    <!-- Fuentes Web -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-deep: #050a18;
+            --bg-card: rgba(11, 19, 38, 0.85);
+            --electric-cyan: #00f2fe;
+            --electric-blue: #4facfe;
+            --industrial-amber: #ff9100;
+            --eco-green: #00e676;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-tech {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Banner de Introducción */
+        .intro-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, #0d1b38 0%, #050a18 80%);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 4rem 1rem;
+        }
+
+        /* ==========================================================================
+           CONTENEDOR MAESTRO DE LA SECCIÓN PARALLAX
+           ========================================================================== */
+        .parallax-master-section {
+            background: radial-gradient(circle at 50% 30%, #0a1630 0%, #050a18 70%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax-item-container {
+            margin-bottom: 6rem;
+            position: relative;
+        }
+        .parallax-item-container:last-child {
+            margin-bottom: 2rem;
+        }
+
+        /* Marco de la Imagen: Debe tener overflow: hidden para encuadrar el escalado 0.7 -> 1.2 */
+        .parallax-img-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #091124;
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Imagen animada con GSAP & ScrollTrigger */
+        .parallax-showcase-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            will-change: transform, opacity;
+            transform-origin: center center;
+        }
+
+        /* Tarjeta de Información Detallada */
+        .parallax-card-details {
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 18px;
+            padding: 2.25rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .badge-cyber {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 0.45rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .btn-electric {
+            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
+            color: #050a18;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-electric:hover {
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Introductorio -->
+    <header class="intro-hero">
+        <div class="container">
+            <span class="badge py-2 px-3 mb-3" style="background: rgba(0, 242, 254, 0.15); color: #00f2fe; border: 1px solid #00f2fe; letter-spacing: 2px;">
+                <i class="fas fa-layer-group me-1"></i> GSAP + SCROLLTRIGGER DEMO
+            </span>
+            <h1 class="display-3 fw-bold text-white mb-3">RODOPERU PARALLAX</h1>
+            <p class="lead text-muted mx-auto mb-4" style="max-width: 680px;">
+                Efecto de desplazamiento inmersivo: Escala <strong>0.7 a 1.2</strong>, opacidad <strong>0 a 1</strong> en <strong>600px</strong> de recorrido con ease <code>power2.out</code> y desfase vertical del <strong>20%</strong>.
+            </p>
+            <div class="scroll-indicator text-info mt-3 fs-3">
+                <i class="fas fa-chevron-down"></i>
+                <div class="small text-muted" style="font-size: 0.8rem; font-family: 'Montserrat', sans-serif;">Haz scroll hacia abajo</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN PARALLAX CON LAS 3 IMÁGENES -->
+    <main class="parallax-master-section" id="seccion-parallax">
+        <div class="container">
+
+            <div class="text-center mb-5 pb-3">
+                <span class="badge badge-cyber bg-dark border border-info text-info">
+                    <i class="fas fa-microchip me-1"></i> TECNOLOGÍA EN MOVIMIENTO
+                </span>
+                <h2 class="display-5 fw-bold text-white mb-2">Ingeniería & Flotas de Alta Capacidad</h2>
+                <p class="text-muted mx-auto" style="max-width: 640px;">
+                    Control dinámico de profundidad mediante aceleración por hardware.
+                </p>
+            </div>
+
+            <!-- IMAGEN 1: SUV Eléctrico Insignia -->
+            <section class="parallax-item-container rodo-parallax-item">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7">
+                        <div class="parallax-img-frame">
+                            <img src="images/parallax/parallax-1-ev-suv.svg" 
+                                 alt="RODOPERU EV-600 Grand SUV Eléctrico" 
+                                 class="parallax-showcase-img">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="parallax-card-details parallax-content">
+                            <span class="badge-cyber bg-info text-dark">
+                                <i class="fas fa-bolt me-1"></i> ELECTROMOVILIDAD PURA
+                            </span>
+                            <h3 class="display-6 fw-bold text-white mb-3">RODOPERU EV-600 INSIGNIA</h3>
+                            <p class="text-light mb-4" style="line-height: 1.7;">
+                                Plataforma modular 100% eléctrica. Eficiencia aerodinámica de vanguardia con batería LFP Blade y autonomía garantizada de 520 km.
+                            </p>
+                            <div class="row g-2 mb-4 text-center">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-info fw-bold mb-0">520 km</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Autonomía</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-info fw-bold mb-0">30 min</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Carga CCS2</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-info fw-bold mb-0">82 kWh</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Capacidad</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-electric px-4 py-2">
+                                Explorar Unidad <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IMAGEN 2: Semirremolque Facchini 3 Ejes -->
+            <section class="parallax-item-container rodo-parallax-item">
+                <div class="row align-items-center g-5 flex-lg-row-reverse">
+                    <div class="col-lg-7">
+                        <div class="parallax-img-frame" style="border-color: rgba(255, 145, 0, 0.35);">
+                            <img src="images/parallax/parallax-2-facchini-truck.svg" 
+                                 alt="Semirremolque Facchini 3 Ejes" 
+                                 class="parallax-showcase-img">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="parallax-card-details parallax-content" style="border-color: rgba(255, 145, 0, 0.2);">
+                            <span class="badge-cyber bg-warning text-dark">
+                                <i class="fas fa-truck-moving me-1"></i> CARGA PESADA FACCHINI
+                            </span>
+                            <h3 class="display-6 fw-bold text-white mb-3">SEMIRREMOLQUES FACCHINI</h3>
+                            <p class="text-light mb-4" style="line-height: 1.7;">
+                                Tecnología brasileña líder con respaldo y homologación MTC en Perú. Chasis de acero estructural con triple eje y suspensión neumática.
+                            </p>
+                            <div class="row g-2 mb-4 text-center">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-warning fw-bold mb-0">35 Ton</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Carga Útil</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-warning fw-bold mb-0">3 Ejes</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Configuración</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-warning fw-bold mb-0">14.5 m</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Longitud</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-warning text-dark px-4 py-2 fw-bold">
+                                Ficha Técnica <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IMAGEN 3: Urban Sedan EV -->
+            <section class="parallax-item-container rodo-parallax-item">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7">
+                        <div class="parallax-img-frame" style="border-color: rgba(0, 230, 118, 0.35);">
+                            <img src="images/parallax/parallax-3-ev-sedan.svg" 
+                                 alt="RODOPERU Urban Sedan EV Cero Emisiones" 
+                                 class="parallax-showcase-img">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="parallax-card-details parallax-content" style="border-color: rgba(0, 230, 118, 0.2);">
+                            <span class="badge-cyber bg-success text-dark">
+                                <i class="fas fa-leaf me-1"></i> EFICIENCIA URBANA CORPORATIVA
+                            </span>
+                            <h3 class="display-6 fw-bold text-white mb-3">RODOPERU URBAN SEDAN EV</h3>
+                            <p class="text-light mb-4" style="line-height: 1.7;">
+                                Solución de costo ultrabajo para flotas ejecutivas y urbanas. Menos de S/ 0.05 por kilómetro recorrido y mantenimiento reducido en 70%.
+                            </p>
+                            <div class="row g-2 mb-4 text-center">
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-success fw-bold mb-0">S/ 0.05</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Costo x Km</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-success fw-bold mb-0">400 km</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Autonomía</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 rounded bg-dark border border-secondary">
+                                        <div class="h5 text-success fw-bold mb-0">0% CO2</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Emisiones</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-outline-success px-4 py-2 fw-bold">
+                                Cotizar Flota <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="py-5 text-center text-muted border-top border-secondary" style="background: #03060f;">
+        <p class="mb-0 small">RODOPERU &copy; 2026. Todos los derechos reservados. Desarrollado con GSAP y ScrollTrigger.</p>
+    </footer>
+
+    <!-- ==========================================================================
+       CDNs REQUERIDAS DE GSAP Y SCROLLTRIGGER
+       ========================================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- ==========================================================================
+       SCRIPT JS CON LA LÓGICA DE PARALLAX Y DESPLAZAMIENTO
+       ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Registro del plugin ScrollTrigger en GSAP
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 2. Selección de todos los bloques parallax
+            const parallaxCards = document.querySelectorAll('.rodo-parallax-item');
+
+            parallaxCards.forEach((item) => {
+                const img = item.querySelector('.parallax-showcase-img');
+                const content = item.querySelector('.parallax-content');
+
+                if (img) {
+                    /*
+                     * CONFIGURACIÓN SOLICITADA POR EL USUARIO:
+                     * - Escala: Suavemente desde 0.7 hasta 1.2
+                     * - Opacidad: De 0 a 1
+                     * - Recorrido: 600px de scroll (end: "+=600")
+                     * - Ease: 'power2.out'
+                     * - Movimiento vertical: 20% más lento que el scroll para sensación de profundidad
+                     *   (20% de 600px = 120px de desplazamiento rezagado en dirección del scroll)
+                     */
+                    gsap.fromTo(img,
+                        {
+                            scale: 0.7,
+                            opacity: 0,
+                            y: 0
+                        },
+                        {
+                            scale: 1.2,
+                            opacity: 1,
+                            y: 120, // Desplazamiento relativo de 120px (20% de 600px)
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: item,
+                                start: 'top bottom', // Inicia al asomarse en la parte inferior del viewport
+                                end: '+=600',        // Recorrido exacto de 600px de scroll
+                                scrub: 1,            // Suavizado dinámico reactivo
+                                invalidateOnRefresh: true
+                            }
+                        }
+                    );
+                }
+
+                if (content) {
+                    // Animación sincronizada para el bloque de contenido descriptivo
+                    gsap.fromTo(content,
+                        {
+                            opacity: 0,
+                            y: 40
+                        },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: item,
+                                start: 'top 80%',
+                                end: '+=450',
+                                scrub: 1
+                            }
+                        }
+                    );
+                }
+            });
+        });
+    </script>
+</body>
+</html>
