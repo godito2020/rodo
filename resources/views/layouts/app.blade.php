@@ -442,14 +442,18 @@
             position: absolute;
             top: 12px;
             left: 12px;
-            background: rgba(0, 242, 254, 0.2);
+            background: rgba(7, 13, 30, 0.9);
+            backdrop-filter: blur(8px);
             color: var(--electric-cyan);
             border: 1px solid var(--electric-cyan);
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.72rem;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 4px 10px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .product-badge-discount {
@@ -1020,6 +1024,316 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        }
+
+        /* -----------------------------------------------------------------
+           PERFECT GEOMETRIC CIRCLE ICONS (Elimina óvalos/esferas estiradas)
+           ----------------------------------------------------------------- */
+        .rodo-icon-circle {
+            width: 64px !important;
+            height: 64px !important;
+            min-width: 64px !important;
+            min-height: 64px !important;
+            max-width: 64px !important;
+            max-height: 64px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            font-size: 1.6rem !important;
+            line-height: 1 !important;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .rodo-icon-cyan {
+            background: rgba(0, 242, 254, 0.12);
+            color: var(--electric-cyan);
+            border: 2px solid rgba(0, 242, 254, 0.5);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+        }
+        [data-bs-theme="light"] .rodo-icon-cyan {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 2px solid #7dd3fc;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+        }
+
+        .rodo-icon-amber {
+            background: rgba(255, 145, 0, 0.12);
+            color: var(--industrial-amber);
+            border: 2px solid rgba(255, 145, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 145, 0, 0.25);
+        }
+        [data-bs-theme="light"] .rodo-icon-amber {
+            background: #fef3c7;
+            color: #d97706;
+            border: 2px solid #fcd34d;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+        }
+
+        .contact-icon-circle {
+            width: 46px !important;
+            height: 46px !important;
+            min-width: 46px !important;
+            min-height: 46px !important;
+            max-width: 46px !important;
+            max-height: 46px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            font-size: 1.15rem !important;
+            line-height: 1 !important;
+            transition: all 0.25s ease;
+        }
+
+        .contact-icon-cyan {
+            background: rgba(0, 242, 254, 0.15);
+            color: #00f2fe;
+            border: 1.5px solid rgba(0, 242, 254, 0.4);
+        }
+        [data-bs-theme="light"] .contact-icon-cyan {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1.5px solid #7dd3fc;
+        }
+
+        .contact-icon-blue {
+            background: rgba(79, 172, 254, 0.15);
+            color: #4facfe;
+            border: 1.5px solid rgba(79, 172, 254, 0.4);
+        }
+        [data-bs-theme="light"] .contact-icon-blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1.5px solid #93c5fd;
+        }
+
+        .contact-icon-whatsapp {
+            background: rgba(37, 211, 102, 0.15);
+            color: #25d366;
+            border: 1.5px solid rgba(37, 211, 102, 0.4);
+        }
+        [data-bs-theme="light"] .contact-icon-whatsapp {
+            background: #dcfce7;
+            color: #16a34a;
+            border: 1.5px solid #86efac;
+        }
+
+        .contact-icon-amber {
+            background: rgba(255, 145, 0, 0.15);
+            color: #ff9100;
+            border: 1.5px solid rgba(255, 145, 0, 0.4);
+        }
+        [data-bs-theme="light"] .contact-icon-amber {
+            background: #fef3c7;
+            color: #d97706;
+            border: 1.5px solid #fcd34d;
+        }
+
+        .contact-icon-purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1.5px solid rgba(168, 85, 247, 0.4);
+        }
+        [data-bs-theme="light"] .contact-icon-purple {
+            background: #f3e8ff;
+            color: #7e22ce;
+            border: 1.5px solid #d8b4fe;
+        }
+
+        /* Card custom reusable */
+        .card-custom {
+            background-color: var(--rodo-bg-card);
+            border: 1px solid var(--rodo-border);
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+        [data-bs-theme="light"] .card-custom {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* -----------------------------------------------------------------
+           SECTION OVERRIDES FOR LIGHT & DARK THEMES
+           ----------------------------------------------------------------- */
+        .home-tech-strip {
+            background: #080e1c;
+            border-bottom: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .home-tech-strip {
+            background: #f1f5f9 !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        .home-section-ev {
+            background: #080f22;
+        }
+        [data-bs-theme="light"] .home-section-ev {
+            background: #f8fafc !important;
+        }
+
+        .home-section-sim {
+            background: linear-gradient(135deg, #091326 0%, #101c38 100%);
+            border-top: 1px solid var(--rodo-border);
+            border-bottom: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .home-section-sim {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        .home-section-facchini {
+            background: #080e1e;
+        }
+        [data-bs-theme="light"] .home-section-facchini {
+            background: #ffffff !important;
+        }
+        [data-bs-theme="light"] .home-section-facchini h2 {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .home-section-facchini .text-warning {
+            color: #b45309 !important;
+        }
+
+        .home-section-brands {
+            background: #060b18;
+            border-top: 1px solid var(--rodo-border);
+            border-bottom: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .home-section-brands {
+            background: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+        }
+        [data-bs-theme="light"] .home-section-brands .bg-dark {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .home-section-news {
+            background: #080f22;
+        }
+        [data-bs-theme="light"] .home-section-news {
+            background: #ffffff !important;
+        }
+
+        .home-cta-section {
+            background: linear-gradient(135deg, #0b1a38 0%, #060c1c 100%);
+            border-top: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .home-cta-section {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%) !important;
+            border-top: 1px solid #cbd5e1 !important;
+        }
+        [data-bs-theme="light"] .home-cta-section h2 {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .home-cta-section p {
+            color: #334155 !important;
+        }
+        [data-bs-theme="light"] .home-cta-section .btn-outline-light {
+            border-color: #0284c7 !important;
+            color: #0284c7 !important;
+            background-color: #ffffff !important;
+        }
+        [data-bs-theme="light"] .home-cta-section .btn-outline-light:hover {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+        }
+
+        /* Empresa page */
+        .empresa-hero {
+            background: linear-gradient(135deg, #070d1e 0%, #152243 100%);
+            border-bottom: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .empresa-hero {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 100%) !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        [data-bs-theme="light"] .empresa-hero h1 {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .empresa-hero p {
+            color: #334155 !important;
+        }
+
+        .empresa-stat-card {
+            background: #0f1930;
+        }
+        [data-bs-theme="light"] .empresa-stat-card {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+        }
+        [data-bs-theme="light"] .empresa-stat-card .bg-dark {
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        .empresa-mv-card {
+            background: #0d172d;
+        }
+        [data-bs-theme="light"] .empresa-mv-card {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+        }
+        [data-bs-theme="light"] .empresa-mv-card h3 {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .empresa-mv-card p {
+            color: #475569 !important;
+        }
+
+        /* Contacto page */
+        .contacto-header-bar {
+            background: #091022;
+            border-bottom: 1px solid var(--rodo-border);
+        }
+        [data-bs-theme="light"] .contacto-header-bar {
+            background: #f1f5f9 !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        [data-bs-theme="light"] .contacto-header-bar h1 {
+            color: #0f172a !important;
+        }
+
+        .contacto-form-card {
+            background: #0f182e;
+        }
+        [data-bs-theme="light"] .contacto-form-card {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        .contacto-info-card {
+            background: #0d1629;
+        }
+        [data-bs-theme="light"] .contacto-info-card {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+        }
+        [data-bs-theme="light"] .contacto-info-card h4,
+        [data-bs-theme="light"] .contacto-info-card .text-white {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .contacto-info-card .text-muted {
+            color: #475569 !important;
+        }
+
+        /* General hardcoded hex overrides in light mode */
+        [data-bs-theme="light"] div[style*="background: #0"],
+        [data-bs-theme="light"] div[style*="background:#0"],
+        [data-bs-theme="light"] div[style*="background: #1"],
+        [data-bs-theme="light"] div[style*="background:#1"] {
+            background-color: #ffffff !important;
         }
     </style>
     @stack('styles')

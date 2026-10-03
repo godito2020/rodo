@@ -206,13 +206,13 @@
     <!-- =========================================================================
          2. FRANJA ORDENADA DE VALOR TÉCNICO (Sin emojis clásicos)
          ========================================================================= -->
-    <section class="py-4" style="background: #080e1c; border-bottom: 1px solid var(--border-dark);">
+    <section class="py-4 home-tech-strip">
         <div class="container">
             <div class="row g-3">
                 <div class="col-lg-3 col-sm-6">
                     <div class="clean-feature-box d-flex align-items-center gap-3">
-                        <div class="p-3 rounded-3 text-info" style="background: rgba(0, 242, 254, 0.1); font-size: 1.5rem;">
-                            <i class="fas fa-bolt"></i>
+                        <div class="rounded-3 text-info d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; min-width: 52px; min-height: 52px; background: rgba(0, 242, 254, 0.12); font-size: 1.4rem;">
+                            <i class="fas fa-bolt-lightning"></i>
                         </div>
                         <div>
                             <div class="fw-bold text-white fs-6">100% ELÉCTRICO</div>
@@ -222,8 +222,8 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="clean-feature-box d-flex align-items-center gap-3">
-                        <div class="p-3 rounded-3 text-warning" style="background: rgba(255, 145, 0, 0.1); font-size: 1.5rem;">
-                            <i class="fas fa-truck-moving"></i>
+                        <div class="rounded-3 text-warning d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; min-width: 52px; min-height: 52px; background: rgba(255, 145, 0, 0.12); font-size: 1.4rem;">
+                            <i class="fas fa-truck-front"></i>
                         </div>
                         <div>
                             <div class="fw-bold text-white fs-6">CALIDAD FACCHINI</div>
@@ -233,7 +233,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="clean-feature-box d-flex align-items-center gap-3">
-                        <div class="p-3 rounded-3 text-success" style="background: rgba(0, 230, 118, 0.1); font-size: 1.5rem;">
+                        <div class="rounded-3 text-success d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; min-width: 52px; min-height: 52px; background: rgba(0, 230, 118, 0.12); font-size: 1.4rem;">
                             <i class="fas fa-charging-station"></i>
                         </div>
                         <div>
@@ -244,8 +244,8 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="clean-feature-box d-flex align-items-center gap-3">
-                        <div class="p-3 rounded-3 text-primary" style="background: rgba(79, 172, 254, 0.1); font-size: 1.5rem;">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="rounded-3 text-primary d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; min-width: 52px; min-height: 52px; background: rgba(79, 172, 254, 0.12); font-size: 1.4rem;">
+                            <i class="fas fa-shield-halved"></i>
                         </div>
                         <div>
                             <div class="fw-bold text-white fs-6">SOPORTE EN PERÚ</div>
@@ -448,7 +448,7 @@
     <!-- =========================================================================
          4. CATÁLOGO ORDENADO: VEHÍCULOS ELÉCTRICOS DISPONIBLES
          ========================================================================= -->
-    <section class="py-5" style="background: #080f22;">
+    <section class="py-5 home-section-ev">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -475,7 +475,7 @@
     <!-- =========================================================================
          5. SIMULADOR INTERACTIVO DE IMPACTO Y AHORRO ENERGÉTICO
          ========================================================================= -->
-    <section class="py-5" style="background: linear-gradient(135deg, #091326 0%, #101c38 100%); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark);">
+    <section class="py-5 home-section-sim">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-5">
@@ -535,7 +535,7 @@
     <!-- =========================================================================
          6. IMPLEMENTOS RODOVIARIOS FACCHINI
          ========================================================================= -->
-    <section class="py-5" style="background: #080e1e;">
+    <section class="py-5 home-section-facchini">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
                 <div>
@@ -562,7 +562,7 @@
     <!-- =========================================================================
          7. MARCAS HOMOLOGADAS
          ========================================================================= -->
-    <section class="py-5" style="background: #060b18; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark);">
+    <section class="py-5 home-section-brands">
         <div class="container text-center">
             <span class="text-muted fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 0.82rem;">MARCAS OFICIALES & TECNOLOGÍA INTEGRADA</span>
             <div class="row g-4 justify-content-center align-items-center mt-3">
@@ -581,7 +581,7 @@
     <!-- =========================================================================
          8. NOVEDADES & ARTÍCULOS TÉCNICOS
          ========================================================================= -->
-    <section class="py-5" style="background: #080f22;">
+    <section class="py-5 home-section-news">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end mb-4">
                 <div>
@@ -622,7 +622,7 @@
     <!-- =========================================================================
          9. FRANJA FINAL DE LLAMADO A LA ACCIÓN (CTA)
          ========================================================================= -->
-    <section class="py-5 text-center text-md-start" style="background: linear-gradient(135deg, #0b1a38 0%, #060c1c 100%); border-top: 1px solid var(--border-dark);">
+    <section class="py-5 text-center text-md-start home-cta-section">
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8">

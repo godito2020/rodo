@@ -4,7 +4,7 @@
 @section('meta_description', 'Conoce la historia, misión y visión de RODOPERU, empresa peruana pionera en electromovilidad automotriz y distribución oficial de implementos Facchini.')
 
 @section('content')
-<div class="py-5 text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, #070d1e 0%, #152243 100%); border-bottom: 1px solid var(--border-dark);">
+<div class="py-5 text-center position-relative overflow-hidden empresa-hero">
     <div class="container position-relative z-1 py-4">
         <span class="badge bg-dark border border-info text-info px-3 py-2 mb-3 text-uppercase font-weight-bold">
             <i class="fas fa-building me-1"></i> IDENTIDAD CORPORATIVA
@@ -31,7 +31,7 @@
                 </p>
             </div>
             <div class="col-lg-6">
-                <div class="p-4 rounded-4 border border-secondary" style="background: #0f1930;">
+                <div class="p-4 rounded-4 border border-secondary empresa-stat-card">
                     <img src="{{ asset(\App\Models\Setting::get('logo_path', 'images/logo/RODO.png')) }}" alt="RODOPERU" class="img-fluid mb-4 p-3 bg-dark rounded border border-dark">
                     <div class="row g-3 text-center">
                         <div class="col-6">
@@ -54,9 +54,9 @@
         <!-- Misión y Visión -->
         <div class="row g-4 mb-5">
             <div class="col-md-6">
-                <div class="p-5 rounded-4 border border-secondary h-100" style="background: #0d172d;">
-                    <div class="p-3 rounded-circle text-info bg-dark d-inline-block mb-3 fs-3 border border-info">
-                        <i class="fas fa-bullseye"></i>
+                <div class="p-5 rounded-4 border border-secondary h-100 empresa-mv-card">
+                    <div class="rodo-icon-circle rodo-icon-cyan">
+                        <i class="fas fa-crosshairs"></i>
                     </div>
                     <h3 class="text-white fw-bold mb-3">Nuestra Misión</h3>
                     <p class="text-muted mb-0" style="line-height: 1.8;">
@@ -65,9 +65,9 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="p-5 rounded-4 border border-secondary h-100" style="background: #0d172d;">
-                    <div class="p-3 rounded-circle text-warning bg-dark d-inline-block mb-3 fs-3 border border-warning">
-                        <i class="fas fa-eye"></i>
+                <div class="p-5 rounded-4 border border-secondary h-100 empresa-mv-card">
+                    <div class="rodo-icon-circle rodo-icon-amber">
+                        <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3 class="text-white fw-bold mb-3">Nuestra Visión</h3>
                     <p class="text-muted mb-0" style="line-height: 1.8;">

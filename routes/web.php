@@ -45,6 +45,10 @@ Route::get('/novedades/{slug}', [PageController::class, 'novedadShow'])->name('n
 Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 Route::post('/contacto', [PageController::class, 'submitContacto'])->name('contacto.submit');
 
+Route::get('/en-construccion', function() {
+    return response()->file(public_path('en-construccion.html'));
+})->name('en-construccion');
+
 Route::get('/api/search-suggest', [ProductController::class, 'searchSuggest'])->name('api.search-suggest');
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('seo.sitemap');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('seo.robots');
