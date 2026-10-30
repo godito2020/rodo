@@ -17,6 +17,11 @@ class PageController extends Controller
         return view('frontend.pages.empresa', compact('brands'));
     }
 
+    public function simulador()
+    {
+        return view('frontend.pages.simulador');
+    }
+
     public function novedades()
     {
         $articles = Article::where('is_published', true)->latest()->paginate(6);

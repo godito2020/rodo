@@ -35,13 +35,9 @@ use App\Http\Controllers\Admin\AdminSettingController;
 | Public Web Routes
 |--------------------------------------------------------------------------
 */
-// Ruta principal temporal mientras se construye el sitio
-Route::get('/', function() {
-    return response()->file(public_path('en-construccion.html'));
-})->name('home');
-
-// Vista previa de la tienda completa (para desarrollo y pruebas)
-Route::get('/inicio', [HomeController::class, 'index'])->name('home.preview');
+// Ruta principal oficial
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/simulador', [PageController::class, 'simulador'])->name('simulador');
 Route::get('/empresa', [PageController::class, 'empresa'])->name('empresa');
 Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
 Route::get('/producto/{slug}', [ProductController::class, 'show'])->name('products.show');

@@ -1,123 +1,165 @@
 @extends('layouts.app')
 
-@section('title', 'Pedido Confirmado | RODOPERU')
+@section('title', 'Orden Confirmada ' . $order->order_number . ' | RODOPERU')
 
 @php
     $currency = \App\Models\Setting::get('currency_symbol', 'USD $');
     $bankInstructions = \App\Models\Setting::get('payment_bank_instructions', "Banco BCP Cta Cte Dólares: 191-88992233-1-45 (CCI: 002-1910088992233145-56)\nBanco BBVA Cta Cte Soles: 0011-0345-0100098765\nTitular: RODOPERU S.A.C. - RUC 20601234567");
     $yapePhone = \App\Models\Setting::get('payment_yape_phone', '987 654 321 (RODOPERU S.A.C.)');
+    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '+51987654321');
+    $whatsappClean = preg_replace('/[^0-9]/', '', $whatsappNumber);
 @endphp
 
 @section('content')
-<div class="py-5">
-    <div class="container">
-        <div class="mx-auto" style="max-width: 800px;">
-            <!-- Success Card -->
-            <div class="p-5 rounded-4 border border-secondary text-center mb-4" style="background: #0f182e;">
-                <div class="p-3 rounded-circle text-success bg-dark border border-success d-inline-block fs-1 mb-3">
-                    <i class="fas fa-check"></i>
-                </div>
-                <h2 class="display-6 fw-bold text-white mb-2">¡Gracias por tu Pedido!</h2>
-                <p class="text-light lead mb-3">
-                    Tu orden <strong class="text-info font-monospace">{{ $order->order_number }}</strong> ha sido registrada exitosamente.
-                </p>
-                <div class="d-flex justify-content-center gap-2 mb-4">
-                    {!! $order->status_badge !!}
-                    {!! $order->payment_badge !!}
-                </div>
+
+<!-- Masthead Breadcrumb & Success Notice -->
+<section class="w-full bg-[#051125] text-white py-12 px-4 sm:px-6 lg:px-12 border-b border-slate-800">
+    <div class="max-w-[1000px] mx-auto text-center space-y-4">
+        <div class="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto">
+            <span class="material-symbols-outlined text-4xl">check_circle</span>
+        </div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1b263b] border border-slate-700 text-xs font-metric text-[#ffdea6]">
+            <span>ORDEN REGISTRADA EXITOSAMENTE</span>
+        </div>
+        <h1 class="font-headline text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            ¡Gracias por tu Adquisición Corporativa!
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+            Tu solicitud con orden <strong class="text-[#ffdea6] font-metric">{{ $order->order_number }}</strong> ha sido enviada al área comercial y de operaciones de RODOPERU S.A.C.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <span class="px-3 py-1 rounded-full text-xs font-metric font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                Estado: {{ strtoupper($order->status ?? 'Pendiente') }}
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-metric font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">
+                Pago: {{ strtoupper($order->payment_status ?? 'Por Validar') }}
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- Content Section -->
+<section class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-12 py-10 font-body space-y-8">
+    
+    <!-- Bank Instructions & Voucher Upload -->
+    @if($order->payment_method === 'transfer' || $order->payment_method === 'yape_plin')
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-3 pb-4 border-b border-slate-200">
+                <span class="material-symbols-outlined text-2xl text-blue-700">account_balance</span>
+                <h2 class="font-headline text-lg font-bold text-[#051125]">
+                    Instrucciones de Abono &amp; Transferencia
+                </h2>
             </div>
 
-            <!-- Payment Instructions & Voucher Upload -->
-            @if($order->payment_method === 'transfer' || $order->payment_method === 'yape_plin')
-                <div class="p-4 rounded-4 border border-info mb-4" style="background: rgba(0, 242, 254, 0.05);">
-                    <h4 class="text-info fw-bold mb-3"><i class="fas fa-university me-2"></i> Instrucciones de Pago</h4>
-                    
-                    @if($order->payment_method === 'transfer')
-                        <div class="p-3 bg-dark rounded border border-secondary text-light mb-3 font-monospace small" style="white-space: pre-line; line-height: 1.7;">
-                            {{ $bankInstructions }}
-                        </div>
-                    @else
-                        <div class="p-3 bg-dark rounded border border-secondary text-light mb-3">
-                            <div class="fw-bold text-success mb-1"><i class="fas fa-mobile-alt me-1"></i> Número de Yape / Plin Oficial:</div>
-                            <div class="fs-5 text-white font-monospace">{{ $yapePhone }}</div>
-                        </div>
-                    @endif
-
-                    <!-- Voucher Upload Form -->
-                    <div class="p-4 rounded-3 border border-secondary bg-dark">
-                        <h5 class="text-white fw-bold mb-2"><i class="fas fa-receipt text-warning me-2"></i> Adjuntar Voucher o Comprobante de Abono</h5>
-                        <p class="text-muted small mb-3">Sube una foto o PDF de la transferencia para que nuestro equipo contable valide y procese de inmediato tu pedido.</p>
-
-                        @if($order->voucher_path)
-                            <div class="alert alert-success d-flex align-items-center justify-content-between mb-0">
-                                <span><i class="fas fa-check-circle me-2"></i> Voucher ya adjuntado y en verificación contable.</span>
-                                <a href="{{ asset($order->voucher_path) }}" target="_blank" class="btn btn-sm btn-outline-light">Ver Voucher</a>
-                            </div>
-                        @else
-                            <form action="{{ route('checkout.voucher', $order->order_number) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="file" name="voucher" class="form-control" required accept="image/*,application/pdf">
-                                    <button type="submit" class="btn btn-electric px-4 fw-bold">
-                                        <i class="fas fa-upload me-1"></i> Subir Voucher
-                                    </button>
-                                </div>
-                            </form>
-                        @endif
+            @if($order->payment_method === 'transfer')
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 font-metric text-xs text-slate-700 leading-relaxed whitespace-pre-line">
+                    {{ $bankInstructions }}
+                </div>
+            @else
+                <div class="p-4 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-between">
+                    <div>
+                        <span class="font-metric text-xs text-purple-700 font-bold block">Billetera Digital Oficial (Yape / Plin)</span>
+                        <span class="font-metric text-xl font-bold text-purple-950">{{ $yapePhone }}</span>
                     </div>
+                    <span class="material-symbols-outlined text-purple-600 text-3xl">phone_iphone</span>
                 </div>
             @endif
 
-            <!-- Order Details Table -->
-            <div class="p-4 rounded-4 border border-secondary mb-4" style="background: #0f182e;">
-                <h4 class="text-white fw-bold mb-3 pb-2 border-bottom border-secondary">Detalle de Unidades</h4>
+            <!-- Voucher Upload Form -->
+            <div class="pt-4 border-t border-slate-200">
+                <h3 class="font-headline font-bold text-sm text-[#051125] mb-2 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-600 text-[18px]">receipt_long</span>
+                    <span>Adjuntar Voucher o Comprobante Bancario</span>
+                </h3>
+                <p class="text-xs text-slate-600 mb-4">
+                    Adjunta una fotografía o archivo PDF de la constancia para agilizar la emisión de factura y programación de entrega.
+                </p>
 
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped mb-0">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th class="text-center">Precio</th>
-                                <th class="text-center">Cantidad</th>
-                                <th class="text-end">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($order->items as $it)
-                                <tr>
-                                    <td class="text-white fw-semibold">{{ $it->product_name }}</td>
-                                    <td class="text-center text-muted">{{ $currency }} {{ number_format($it->price, 2) }}</td>
-                                    <td class="text-center text-white">{{ $it->quantity }}</td>
-                                    <td class="text-end text-info fw-bold">{{ $currency }} {{ number_format($it->total, 2) }}</td>
-                                </tr>
-                            @endforeach
-                            <tr class="border-top border-secondary">
-                                <td colspan="3" class="text-end text-light">Subtotal:</td>
-                                <td class="text-end text-white fw-bold">{{ $currency }} {{ number_format($order->subtotal, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-end text-light">IGV:</td>
-                                <td class="text-end text-white">{{ $currency }} {{ number_format($order->tax, 2) }}</td>
-                            </tr>
-                            <tr class="fs-5 border-top border-secondary">
-                                <td colspan="3" class="text-end text-white fw-bold">Total General:</td>
-                                <td class="text-end text-info fw-bold">{{ $currency }} {{ number_format($order->total, 2) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                @if($order->voucher_path)
+                    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+                        <span class="font-metric text-xs text-emerald-800 font-semibold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-emerald-600">check_circle</span>
+                            <span>Comprobante recibido y en revisión contable.</span>
+                        </span>
+                        <a href="{{ asset($order->voucher_path) }}" target="_blank" class="font-metric text-xs font-bold text-emerald-800 underline hover:text-emerald-950">
+                            Ver Archivo
+                        </a>
+                    </div>
+                @else
+                    <form action="{{ route('checkout.voucher', $order->order_number) }}" method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        @csrf
+                        <input type="file" name="voucher" required accept="image/*,application/pdf" class="flex-1 text-xs text-slate-700 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#051125] file:text-[#ffdea6] hover:file:bg-[#1b263b] file:cursor-pointer border border-slate-300 rounded-xl p-1 bg-slate-50">
+                        <button type="submit" class="py-2.5 px-6 rounded-xl bg-[#051125] hover:bg-[#1b263b] text-[#ffdea6] font-headline text-xs font-bold tracking-wide flex items-center justify-center gap-2 shadow transition-all">
+                            <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                            <span>Subir Comprobante</span>
+                        </button>
+                    </form>
+                @endif
             </div>
+        </div>
+    @endif
 
-            <!-- Actions row -->
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('home') }}" class="btn btn-outline-secondary text-white">
-                    <i class="fas fa-home me-1"></i> Volver a la Tienda
-                </a>
-                <a href="{{ route('products.index') }}" class="btn btn-electric">
-                    <i class="fas fa-shopping-bag me-1"></i> Ver Más Productos
-                </a>
+    <!-- Order Items Summary Table -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="font-headline font-bold text-sm text-[#051125] uppercase tracking-wider">
+                Detalle de Equipos Adjudicados
+            </h3>
+            <span class="font-metric text-xs text-slate-500">Orden: {{ $order->order_number }}</span>
+        </div>
+
+        <div class="divide-y divide-slate-100">
+            @foreach($order->items as $it)
+                <div class="p-5 flex items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-headline font-bold text-sm text-[#051125]">{{ $it->product_name }}</h4>
+                        <div class="font-metric text-xs text-slate-500">
+                            Cant: <strong class="text-slate-800">{{ $it->quantity }}</strong> &bull; Precio: {{ $currency }} {{ number_format($it->price, 2) }}
+                        </div>
+                    </div>
+                    <div class="font-metric text-sm font-bold text-slate-900">
+                        {{ $currency }} {{ number_format($it->total, 2) }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-2 font-metric text-xs">
+            <div class="flex items-center justify-between text-slate-600">
+                <span>Subtotal Neto:</span>
+                <span class="font-bold text-slate-900">{{ $currency }} {{ number_format($order->subtotal, 2) }}</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-600">
+                <span>IGV Ley (18%):</span>
+                <span class="font-bold text-slate-900">{{ $currency }} {{ number_format($order->tax, 2) }}</span>
+            </div>
+            <div class="pt-3 border-t border-slate-200 flex items-baseline justify-between">
+                <span class="font-headline font-bold text-base text-[#051125]">Monto Total Facturado:</span>
+                <span class="font-metric text-2xl font-bold text-blue-700">
+                    {{ $currency }} {{ number_format($order->total, 2) }}
+                </span>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Actions & Assistance -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+        <a href="{{ route('home') }}" class="font-metric text-xs font-bold text-[#051125] hover:text-blue-700 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">home</span>
+            <span>Volver a la Portada</span>
+        </a>
+
+        <div class="flex items-center gap-3">
+            <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20acabo%20de%20generar%20la%20orden%20{{ $order->order_number }}%20por%20valor%20de%20{{ urlencode($currency . ' ' . number_format($order->total, 2)) }}" target="_blank" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-metric text-xs font-bold flex items-center gap-2 shadow">
+                <i class="fab fa-whatsapp"></i>
+                <span>Confirmar Vía WhatsApp</span>
+            </a>
+            <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-xl bg-[#051125] hover:bg-[#1b263b] text-[#ffdea6] font-metric text-xs font-bold flex items-center gap-2">
+                <span>Ver Más Equipos</span>
+            </a>
+        </div>
+    </div>
+
+</section>
+
 @endsection

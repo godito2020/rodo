@@ -1,30 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es" class="light" id="html-root">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Instant Theme Detection Script (Zero FOUC) -->
-    <script>
-        (function() {
-            var savedTheme = localStorage.getItem('rodo_theme') || 'system';
-            var resolvedTheme = savedTheme;
-            if (savedTheme === 'system') {
-                resolvedTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-            }
-            document.documentElement.setAttribute('data-bs-theme', resolvedTheme);
-            document.documentElement.setAttribute('data-rodo-theme-pref', savedTheme);
-        })();
-    </script>
 
     @php
         $siteName = \App\Models\Setting::get('site_name', 'RODOPERU');
-        $siteTagline = \App\Models\Setting::get('site_tagline', 'Electromovilidad e Implementos Rodoviarios');
+        $siteTagline = \App\Models\Setting::get('site_tagline', 'Electromovilidad & Implementos Rodoviarios');
         $defaultTitle = $siteName . ' | ' . $siteTagline;
         $metaTitle = $metaTitle ?? \App\Models\Setting::get('seo_meta_title', $defaultTitle);
-        $metaDescription = $metaDescription ?? \App\Models\Setting::get('seo_meta_description', 'Líderes en automóviles y camiones 100% eléctricos y semirremolques rodoviarios en Perú.');
-        $metaKeywords = $metaKeywords ?? \App\Models\Setting::get('seo_meta_keywords', 'vehiculos electricos peru, semirremolques facchini, jmev peru, rodoperu');
+        $metaDescription = $metaDescription ?? \App\Models\Setting::get('seo_meta_description', 'Líderes en transporte sostenible y carga pesada en Perú. Vehículos 100% eléctricos JMEV y semirremolques, tolvas y furgones Facchini.');
+        $metaKeywords = $metaKeywords ?? \App\Models\Setting::get('seo_meta_keywords', 'vehiculos electricos peru, semirremolques facchini, jmev peru, tolvas mineras, rodoperu, camion electrico lima');
         $metaImage = $metaImage ?? asset(\App\Models\Setting::get('logo_path', 'images/logo/RODO.png'));
         $faviconPath = \App\Models\Setting::get('favicon_path', 'favicon.png');
         $currency = \App\Models\Setting::get('currency_symbol', 'USD $');
@@ -32,6 +19,7 @@
         $whatsappClean = preg_replace('/[^0-9]/', '', $whatsappNumber);
         $companyPhone = \App\Models\Setting::get('company_phone', '+51 (01) 719-8900');
         $supportEmail = \App\Models\Setting::get('support_email', 'ventas@rodoperu.com');
+        $cartCount = count(session('cart', []));
     @endphp
 
     <title>@yield('title', $metaTitle)</title>
@@ -42,7 +30,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <!-- Open Graph / Facebook / WhatsApp Preview -->
+    <!-- Open Graph / WhatsApp Preview -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', $metaTitle)">
@@ -57,1917 +45,600 @@
     <meta name="twitter:image" content="{{ $metaImage }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset($faviconPath) }}?v=2">
-    <link rel="shortcut icon" href="{{ asset($faviconPath) }}?v=2">
+    <link rel="icon" type="image/png" href="{{ asset($faviconPath) }}?v=3">
+    <link rel="shortcut icon" href="{{ asset($faviconPath) }}?v=3">
 
-    <!-- Fonts: Orbitron / Montserrat / Syne -->
+    <!-- Schema.org JSON-LD Structured Data for High-Tier Industrial SEO -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "AutoDealer",
+      "name": "RODOPERU S.A.C.",
+      "alternateName": "RODOPERU Electromovilidad y Carga Pesada",
+      "url": "{{ url('/') }}",
+      "logo": "{{ asset('images/logo/RODO.png') }}",
+      "image": "{{ asset('images/catalog/hero-ev-stage.jpg') }}",
+      "description": "Distribuidor oficial de vehículos comerciales 100% eléctricos JMEV e implementos rodoviarios y semirremolques pesados Facchini en Perú.",
+      "telephone": "{{ $companyPhone }}",
+      "email": "{{ $supportEmail }}",
+      "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Av. Evitamiento Km 8.5, Zona Industrial",
+        "addressLocality": "Ate",
+        "addressRegion": "Lima",
+        "postalCode": "15022",
+        "addressCountry": "PE"
+      },
+      "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": "-12.0432",
+        "longitude": "-76.9658"
+      },
+      "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:30",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://facebook.com/rodoperu",
+        "https://instagram.com/rodoperu_oficial",
+        "https://linkedin.com/company/rodoperu"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts & Material Symbols -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-
-    <!-- CSS Frameworks & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Custom Theme Styling (Fusion Facchini Industrial + JMEV Futuristic EV) -->
+    <!-- Tailwind CSS with Stitch Design Tokens -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#051125",
+                    "primary-container": "#1b263b",
+                    "secondary": "#765a23",
+                    "secondary-fixed": "#ffdea6",
+                    "secondary-container": "#fed894",
+                    "on-secondary-fixed": "#271900",
+                    "tertiary": "#041221",
+                    "tertiary-container": "#1a2737",
+                    "surface": "#f9faf5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f4f0",
+                    "surface-container": "#edeeea",
+                    "surface-container-high": "#e8e8e4",
+                    "surface-container-highest": "#e2e3df",
+                    "on-surface": "#1a1c1a",
+                    "on-surface-variant": "#45474d",
+                    "outline": "#75777d",
+                    "outline-variant": "#c5c6cd",
+                    "rodo-blue": "#0284c7",
+                    "rodo-cyan": "#00d2ff",
+                    "facchini-gold": "#B39255",
+                    "rodo-green": "#10b981",
+                },
+                fontFamily: {
+                    "headline": ["Space Grotesk", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "metric": ["JetBrains Mono", "monospace"],
+                    "spec": ["JetBrains Mono", "monospace"],
+                    "roboto": ["Roboto", "sans-serif"]
+                }
+            }
+        }
+    };
+    </script>
+
     <style>
-        :root, [data-bs-theme="dark"] {
-            --primary-dark: #070d1e;
-            --secondary-dark: #0f172a;
-            --card-dark: #162035;
-            --border-dark: #243452;
-            --electric-cyan: #00f2fe;
-            --electric-blue: #4facfe;
-            --neon-green: #00e676;
-            --industrial-amber: #ff9100;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-            --rodo-bg-body: #070d1e;
-            --rodo-bg-surface: #0f172a;
-            --rodo-bg-card: #162035;
-            --rodo-bg-card-subtle: #0f182d;
-            --rodo-border: #243452;
-            --rodo-border-subtle: rgba(255, 255, 255, 0.12);
-            --rodo-text-primary: #f8fafc;
-            --rodo-text-secondary: #94a3b8;
-            --rodo-text-muted: #94a3b8;
-            --rodo-text-heading: #ffffff;
-            --rodo-input-bg: #0d162a;
-            --rodo-input-color: #f8fafc;
-            --rodo-input-border: #243452;
-            --rodo-input-placeholder: #64748b;
-            --navbar-bg: rgba(7, 13, 30, 0.98);
-            --navbar-border: rgba(0, 242, 254, 0.18);
-            --navbar-link: #cbd5e1;
-            --navbar-link-hover: #ffffff;
-            --footer-bg: #060a17;
-            --dropdown-bg: #0f172a;
-            --dropdown-color: #e2e8f0;
-        }
-
-        [data-bs-theme="light"] {
-            --primary-dark: #f8fafc;
-            --secondary-dark: #ffffff;
-            --card-dark: #ffffff;
-            --border-dark: #e2e8f0;
-            --electric-cyan: #0284c7;
-            --electric-blue: #0369a1;
-            --neon-green: #15803d;
-            --industrial-amber: #d97706;
-            --text-light: #0f172a;
-            --text-muted: #64748b;
-            --rodo-bg-body: #f8fafc;
-            --rodo-bg-surface: #ffffff;
-            --rodo-bg-card: #ffffff;
-            --rodo-bg-card-subtle: #f1f5f9;
-            --rodo-border: #e2e8f0;
-            --rodo-border-subtle: #cbd5e1;
-            --rodo-text-primary: #0f172a;
-            --rodo-text-secondary: #334155;
-            --rodo-text-muted: #64748b;
-            --rodo-text-heading: #0f172a;
-            --rodo-input-bg: #ffffff;
-            --rodo-input-color: #0f172a;
-            --rodo-input-border: #cbd5e1;
-            --rodo-input-placeholder: #94a3b8;
-            --navbar-bg: rgba(255, 255, 255, 0.98);
-            --navbar-border: rgba(0, 0, 0, 0.08);
-            --navbar-link: #334155;
-            --navbar-link-hover: #0f172a;
-            --footer-bg: #0b1329;
-            --dropdown-bg: #ffffff;
-            --dropdown-color: #1e293b;
-        }
-
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--rodo-bg-body);
-            color: var(--rodo-text-primary);
-            overflow-x: hidden;
-            transition: background-color 0.25s ease, color 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            color: #1a1c1a;
+            background-color: #f9faf5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4, h5, h6, .brand-font {
-            font-family: 'Rajdhani', 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        .dark body {
+            background-color: #051125;
+            color: #f8fafc;
         }
 
-        /* Top Bar */
-        .top-announcement-bar {
-            background: linear-gradient(90deg, #0b132b 0%, #1c2541 50%, #0b132b 100%);
-            border-bottom: 1px solid var(--border-dark);
-            font-size: 0.82rem;
-            color: #cbd5e1;
-            padding: 7px 0;
+        /* Material Symbols optical styling */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
         }
 
-        .top-announcement-bar a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.2s;
+        /* Metric font */
+        .font-metric {
+            font-family: 'JetBrains Mono', monospace;
         }
-        .top-announcement-bar a:hover {
-            color: var(--electric-cyan);
-        }
-
-        /* Sticky Navigation - Tight, Adjusted & High-End */
-        .rodo-navbar {
-            background: rgba(7, 13, 30, 0.98);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(0, 242, 254, 0.18);
-            padding: 8px 0;
-            z-index: 1020;
+        .font-headline {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .rodo-navbar .navbar-brand img {
-            height: 38px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        .rodo-navbar .navbar-nav {
-            align-items: center;
-            gap: 2px;
-        }
-
-        .rodo-navbar .nav-link {
-            font-size: 0.88rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            color: #cbd5e1 !important;
-            padding: 7px 12px !important;
-            border-radius: 6px;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            position: relative;
-            transition: all 0.2s ease;
-            height: 38px;
-        }
-
-        .rodo-navbar .nav-link:hover {
-            color: #ffffff !important;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .rodo-navbar .nav-link.active {
-            color: var(--electric-cyan) !important;
-            background: rgba(0, 242, 254, 0.08);
-            font-weight: 700;
-        }
-
-        .rodo-navbar .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 12px;
-            right: 12px;
-            height: 2px;
-            background: var(--electric-cyan);
-            border-radius: 2px;
-            box-shadow: 0 0 8px var(--electric-cyan);
-        }
-
-        /* Search Bar - Compact, perfectly proportioned */
-        .rodo-search-box {
-            position: relative;
-            width: 175px;
-            transition: width 0.3s ease;
-        }
-        .rodo-search-box:focus-within {
-            width: 220px;
-        }
-        .rodo-search-box input {
-            background-color: #0f182d;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            border-radius: 20px;
-            padding-left: 32px;
-            padding-right: 12px;
-            font-size: 0.82rem;
-            height: 38px;
-            transition: all 0.25s ease;
-        }
-        .rodo-search-box input:focus {
-            background-color: #14223d;
-            border-color: var(--electric-cyan);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.25);
-            color: #ffffff;
-        }
-        .rodo-search-box .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-            font-size: 0.8rem;
-            pointer-events: none;
-        }
-
-        /* Unified Header Action Buttons (Cart, Account, Cotizar) */
-        .header-action-btn {
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            white-space: nowrap;
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 0 14px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .header-btn-cart {
-            width: 38px;
-            padding: 0;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f1f5f9;
-            position: relative;
-        }
-        .header-btn-cart:hover {
-            border-color: var(--electric-cyan);
-            color: var(--electric-cyan);
-            background: rgba(0, 242, 254, 0.06);
-        }
-
-        .header-btn-user {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f1f5f9;
-        }
-        .header-btn-user:hover {
-            border-color: var(--electric-cyan);
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .header-btn-theme {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f1f5f9;
-            padding: 0 10px;
-            cursor: pointer;
-        }
-        .header-btn-theme:hover {
-            border-color: var(--electric-cyan);
-            color: var(--electric-cyan);
-            background: rgba(0, 242, 254, 0.06);
-        }
-
-        .header-btn-quote {
-            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-            color: #050a18 !important;
-            border: none;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 10px rgba(0, 242, 254, 0.3);
-            gap: 6px;
-        }
-        .header-btn-quote:hover {
-            box-shadow: 0 0 16px rgba(0, 242, 254, 0.55);
-            transform: translateY(-1px);
-            color: #000 !important;
-        }
-
-        /* Auto suggest box */
-        #search-results-dropdown {
-            position: absolute;
-            top: 105%;
-            left: 0;
-            right: 0;
-            background: #111b2e;
-            border: 1px solid var(--border-dark);
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 9999;
-            display: none;
-            max-height: 380px;
-            overflow-y: auto;
-        }
-
-        /* Buttons & Badges */
-        .btn-electric {
-            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
-            color: #070d1e;
-            font-weight: 700;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-        }
-        .btn-electric:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
-            color: #000;
-        }
-
-        .btn-outline-electric {
-            border: 1.5px solid var(--electric-cyan);
-            color: var(--electric-cyan);
-            font-weight: 600;
-            border-radius: 6px;
-            padding: 8px 18px;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        .btn-outline-electric:hover {
-            background: var(--electric-cyan);
-            color: #070d1e;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-        }
-
-        .btn-whatsapp-quote {
-            background-color: #25d366;
-            color: #ffffff;
-            font-weight: 700;
-            border-radius: 6px;
-            border: none;
-            transition: all 0.3s;
-        }
-        .btn-whatsapp-quote:hover {
-            background-color: #20ba5a;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Product Cards */
-        .product-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .product-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(0, 242, 254, 0.5);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 242, 254, 0.15);
-        }
-        .product-card .card-img-wrap {
-            position: relative;
-            overflow: hidden;
-            background: #0b1323;
-            height: 230px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-card .card-img-wrap img {
-            max-height: 100%;
-            width: 100%;
-            object-fit: contain;
-            transition: transform 0.4s ease;
-            padding: 10px;
-        }
-        .product-card:hover .card-img-wrap img {
-            transform: scale(1.05);
-        }
-
-        .product-badge-tech {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(7, 13, 30, 0.9);
-            backdrop-filter: blur(8px);
-            color: var(--electric-cyan);
-            border: 1px solid var(--electric-cyan);
-            border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 2;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .product-badge-discount {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #ef4444;
-            color: #ffffff;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 3px 8px;
-        }
-
-        .product-card .card-body {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .product-card .product-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-            text-decoration: none;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            min-height: 2.6rem;
-        }
-        .product-card .product-title:hover {
-            color: var(--electric-cyan);
-        }
-
-        .spec-pill {
-            background: #111b2e;
-            border: 1px solid #22324e;
-            color: #94a3b8;
-            font-size: 0.72rem;
-            border-radius: 4px;
-            padding: 3px 7px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-
-        /* Floating WhatsApp Button */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        .floating-whatsapp:hover {
-            transform: scale(1.1);
-            color: #ffffff;
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
-        }
-
-        /* Floating Chatbot Widget */
-        .floating-chatbot-btn {
-            position: fixed;
-            bottom: 95px;
-            right: 25px;
-            width: 54px;
-            height: 54px;
-            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
-            color: #070d1e;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 18px rgba(0, 242, 254, 0.5);
-            z-index: 999;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .floating-chatbot-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 22px rgba(0, 242, 254, 0.8);
-        }
-
-        .chatbot-window {
-            position: fixed;
-            bottom: 160px;
-            right: 25px;
-            width: 350px;
-            max-width: 90vw;
-            background: #0f172a;
-            border: 1px solid var(--border-dark);
-            border-radius: 14px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            z-index: 1001;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chatbot-header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid var(--border-dark);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chatbot-body {
-            height: 320px;
-            overflow-y: auto;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: #090e1a;
-        }
-
-        .chatbot-bubble {
-            max-width: 82%;
-            padding: 9px 13px;
-            border-radius: 12px;
-            font-size: 0.84rem;
-            line-height: 1.4;
-        }
-        .chatbot-bubble.bot {
-            background: #1e293b;
-            color: #f1f5f9;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-        .chatbot-bubble.user {
-            background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%);
-            color: #070d1e;
-            align-self: flex-end;
-            font-weight: 500;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chatbot-footer {
-            padding: 10px;
-            background: #111928;
-            border-top: 1px solid var(--border-dark);
-            display: flex;
-            gap: 6px;
-        }
-
-        /* Footer */
-        .rodo-footer {
-            background-color: #060a17;
-            border-top: 2px solid var(--border-dark);
-            color: var(--text-muted);
-            padding-top: 60px;
-            padding-bottom: 30px;
-            font-size: 0.9rem;
-        }
-        .rodo-footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .rodo-footer a:hover {
-            color: var(--electric-cyan);
-        }
-        .rodo-footer h5 {
-            color: #ffffff;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .rodo-footer h5::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 35px;
-            height: 2px;
-            background: var(--electric-cyan);
-        }
-
-        /* Dropdown custom */
-        .dropdown-menu-dark-custom, .rodo-dropdown-menu {
-            background-color: var(--dropdown-bg);
-            border: 1px solid var(--rodo-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-        .dropdown-menu-dark-custom .dropdown-item, .rodo-dropdown-menu .dropdown-item {
-            color: var(--dropdown-color);
-            padding: 8px 16px;
-            font-size: 0.88rem;
-            transition: all 0.2s ease;
-        }
-        .dropdown-menu-dark-custom .dropdown-item:hover, .rodo-dropdown-menu .dropdown-item:hover {
-            background-color: rgba(0, 242, 254, 0.1);
-            color: var(--electric-cyan);
-        }
-
-        /* ----------------------------------------------------
-           HIGH-CONTRAST FORM CONTROLS (CRITICAL CONTRAST FIX)
-           ---------------------------------------------------- */
-        .form-control, .form-select {
-            background-color: var(--rodo-input-bg) !important;
-            color: var(--rodo-input-color) !important;
-            border: 1px solid var(--rodo-input-border) !important;
-            border-radius: 8px;
-            font-size: 0.92rem;
-            transition: all 0.2s ease;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: var(--rodo-input-bg) !important;
-            color: var(--rodo-input-color) !important;
-            border-color: var(--electric-cyan) !important;
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.25) !important;
-        }
-        .form-control::placeholder {
-            color: var(--rodo-input-placeholder) !important;
-            opacity: 1;
-        }
-        .input-group-text {
-            background-color: var(--rodo-bg-card-subtle) !important;
-            border-color: var(--rodo-input-border) !important;
-            color: var(--rodo-text-secondary) !important;
-        }
-        .form-check-input {
-            background-color: var(--rodo-input-bg);
-            border-color: var(--rodo-input-border);
-        }
-        .form-check-input:checked {
-            background-color: var(--electric-cyan);
-            border-color: var(--electric-cyan);
-        }
-
-        /* ----------------------------------------------------
-           HIGH-CONTRAST BADGES & BUTTONS (CRITICAL CONTRAST FIX)
-           ---------------------------------------------------- */
-        .pill-badge-cyan, .badge-cyan {
-            background-color: rgba(0, 242, 254, 0.15) !important;
-            color: #00f2fe !important;
-            border: 1px solid rgba(0, 242, 254, 0.5) !important;
-            font-weight: 700;
-        }
-        .pill-badge-amber, .badge-amber {
-            background-color: rgba(255, 145, 0, 0.18) !important;
-            color: #ffb74d !important;
-            border: 1px solid rgba(255, 145, 0, 0.5) !important;
-            font-weight: 700;
-        }
-        .pill-badge-green, .badge-green {
-            background-color: rgba(0, 230, 118, 0.18) !important;
-            color: #00e676 !important;
-            border: 1px solid rgba(0, 230, 118, 0.5) !important;
-            font-weight: 700;
-        }
-
-        .btn-amber {
-            background-color: #ff9100;
-            color: #070d1e !important;
-            font-weight: 700;
-            border: none;
-            transition: all 0.25s ease;
-        }
-        .btn-amber:hover {
-            background-color: #ffa726;
-            color: #000000 !important;
-            box-shadow: 0 4px 15px rgba(255, 145, 0, 0.4);
-        }
-
-        .btn-neon-green {
-            background-color: #00e676;
-            color: #070d1e !important;
-            font-weight: 700;
-            border: none;
-            transition: all 0.25s ease;
-        }
-        .btn-neon-green:hover {
-            background-color: #33eb91;
-            color: #000000 !important;
-            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);
-        }
-
-        /* Dark Mode: Prevent any dark-on-dark text accidents */
-        [data-bs-theme="dark"] .text-dark:not(.btn-electric):not(.btn-amber):not(.btn-neon-green):not(.btn-warning):not(.badge-warning):not(.header-btn-quote) {
-            color: #f8fafc !important;
-        }
-        [data-bs-theme="dark"] .bg-info.text-dark,
-        [data-bs-theme="dark"] .badge.bg-info.text-dark {
-            background-color: rgba(0, 242, 254, 0.2) !important;
-            color: #00f2fe !important;
-            border: 1px solid rgba(0, 242, 254, 0.4) !important;
-        }
-        [data-bs-theme="dark"] .bg-warning.text-dark,
-        [data-bs-theme="dark"] .badge.bg-warning.text-dark {
-            background-color: rgba(255, 145, 0, 0.2) !important;
-            color: #ffb74d !important;
-            border: 1px solid rgba(255, 145, 0, 0.4) !important;
-        }
-        [data-bs-theme="dark"] .bg-success.text-dark,
-        [data-bs-theme="dark"] .badge.bg-success.text-dark {
-            background-color: rgba(0, 230, 118, 0.2) !important;
-            color: #00e676 !important;
-            border: 1px solid rgba(0, 230, 118, 0.4) !important;
-        }
-        [data-bs-theme="dark"] .text-muted {
-            color: #94a3b8 !important;
-        }
-
-        /* ----------------------------------------------------
-           LIGHT MODE OVERRIDES & PURITY
-           ---------------------------------------------------- */
-        [data-bs-theme="light"] .rodo-navbar {
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
-        }
-        [data-bs-theme="light"] .rodo-navbar .nav-link {
-            color: #334155 !important;
-        }
-        [data-bs-theme="light"] .rodo-navbar .nav-link:hover {
-            color: #0f172a !important;
-            background: rgba(0, 0, 0, 0.04);
-        }
-        [data-bs-theme="light"] .rodo-navbar .nav-link.active {
-            color: #0284c7 !important;
-            background: rgba(2, 132, 199, 0.08);
-        }
-        [data-bs-theme="light"] .rodo-navbar .nav-link.active::after {
-            background: #0284c7;
-            box-shadow: 0 0 8px rgba(2, 132, 199, 0.5);
-        }
-        [data-bs-theme="light"] .rodo-search-box input {
-            background-color: #f1f5f9;
-            border-color: #cbd5e1;
-            color: #0f172a;
-        }
-        [data-bs-theme="light"] .rodo-search-box input:focus {
-            background-color: #ffffff;
-            border-color: #0284c7;
-            color: #0f172a;
-            box-shadow: 0 0 10px rgba(2, 132, 199, 0.2);
-        }
-        [data-bs-theme="light"] #search-results-dropdown {
-            background: #ffffff;
-            border-color: #cbd5e1;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        [data-bs-theme="light"] #search-results-dropdown a {
-            color: #0f172a !important;
-            border-color: #e2e8f0 !important;
-        }
-        [data-bs-theme="light"] .header-btn-cart,
-        [data-bs-theme="light"] .header-btn-user,
-        [data-bs-theme="light"] .header-btn-theme {
-            border-color: #cbd5e1;
-            color: #334155;
-        }
-        [data-bs-theme="light"] .header-btn-cart:hover,
-        [data-bs-theme="light"] .header-btn-user:hover,
-        [data-bs-theme="light"] .header-btn-theme:hover {
-            border-color: #0284c7;
-            color: #0284c7;
-            background: rgba(2, 132, 199, 0.06);
-        }
-        [data-bs-theme="light"] .header-btn-quote {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            color: #ffffff !important;
-            box-shadow: 0 2px 10px rgba(2, 132, 199, 0.3);
-        }
-        [data-bs-theme="light"] .header-btn-quote:hover {
-            color: #ffffff !important;
-            box-shadow: 0 0 16px rgba(2, 132, 199, 0.5);
-        }
-        [data-bs-theme="light"] .btn-electric {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            color: #ffffff !important;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
-        }
-        [data-bs-theme="light"] .btn-electric:hover {
-            color: #ffffff !important;
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
-        }
-        [data-bs-theme="light"] .btn-outline-electric {
-            border-color: #0284c7;
-            color: #0284c7;
-        }
-        [data-bs-theme="light"] .btn-outline-electric:hover {
-            background: #0284c7;
-            color: #ffffff !important;
-        }
-        [data-bs-theme="light"] .product-card {
-            background: #ffffff;
-            border-color: #e2e8f0;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-        [data-bs-theme="light"] .product-card:hover {
-            border-color: #0284c7;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.1), 0 0 12px rgba(2, 132, 199, 0.15);
-        }
-        [data-bs-theme="light"] .product-card .card-img-wrap {
-            background: #f8fafc;
-        }
-        [data-bs-theme="light"] .product-card .product-title {
-            color: #0f172a;
-        }
-        [data-bs-theme="light"] .product-card .product-title:hover {
-            color: #0284c7;
-        }
-        [data-bs-theme="light"] .spec-pill {
-            background: #f1f5f9;
-            border-color: #e2e8f0;
-            color: #475569;
-        }
-        [data-bs-theme="light"] .pill-badge-cyan,
-        [data-bs-theme="light"] .badge-cyan {
-            background-color: #e0f2fe !important;
-            color: #0369a1 !important;
-            border-color: #7dd3fc !important;
-        }
-        [data-bs-theme="light"] .pill-badge-amber,
-        [data-bs-theme="light"] .badge-amber {
-            background-color: #fef3c7 !important;
-            color: #b45309 !important;
-            border-color: #fcd34d !important;
-        }
-        [data-bs-theme="light"] .pill-badge-green,
-        [data-bs-theme="light"] .badge-green {
-            background-color: #dcfce7 !important;
-            color: #15803d !important;
-            border-color: #86efac !important;
-        }
-
-        /* Light mode text & container adaptations */
-        [data-bs-theme="light"] h1.text-white,
-        [data-bs-theme="light"] h2.text-white,
-        [data-bs-theme="light"] h3.text-white,
-        [data-bs-theme="light"] h4.text-white,
-        [data-bs-theme="light"] h5.text-white,
-        [data-bs-theme="light"] h6.text-white,
-        [data-bs-theme="light"] p.text-white,
-        [data-bs-theme="light"] span.text-white:not(.badge):not(.btn),
-        [data-bs-theme="light"] div.text-white:not(.btn):not(.badge) {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .text-light {
-            color: #334155 !important;
-        }
-        [data-bs-theme="light"] .text-muted {
-            color: #64748b !important;
-        }
-        [data-bs-theme="light"] .border-secondary,
-        [data-bs-theme="light"] .border-dark {
-            border-color: #e2e8f0 !important;
-        }
-        [data-bs-theme="light"] .bg-dark:not(.top-announcement-bar):not(.rodo-footer) {
-            background-color: #f1f5f9 !important;
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] div[style*="background: #0f182e"],
-        [data-bs-theme="light"] div[style*="background: #0f1930"],
-        [data-bs-theme="light"] div[style*="background: #091022"],
-        [data-bs-theme="light"] div[style*="background: #0b1323"] {
-            background-color: #ffffff !important;
-        }
-        [data-bs-theme="light"] section[style*="background: #080f22"],
-        [data-bs-theme="light"] div[style*="background: #091022"] {
-            background-color: #f8fafc !important;
-        }
-        [data-bs-theme="light"] section[style*="linear-gradient(135deg, #091326"] {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
-            border-color: #cbd5e1 !important;
-        }
-        [data-bs-theme="light"] .table-dark {
-            --bs-table-bg: #ffffff;
-            --bs-table-striped-bg: #f8fafc;
-            --bs-table-color: #0f172a;
-            --bs-table-border-color: #e2e8f0;
-        }
-        [data-bs-theme="light"] .table-dark td,
-        [data-bs-theme="light"] .table-dark th {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .table-dark td.text-info {
-            color: #0284c7 !important;
-        }
-
-        /* Light mode Chatbot */
-        [data-bs-theme="light"] .chatbot-window {
-            background: #ffffff;
-            border-color: #cbd5e1;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        [data-bs-theme="light"] .chatbot-header {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-bottom: 1px solid #cbd5e1;
-        }
-        [data-bs-theme="light"] .chatbot-header h6 {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .chatbot-header #chatbot-close-btn {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .chatbot-body {
-            background: #f8fafc;
-        }
-        [data-bs-theme="light"] .chatbot-bubble.bot {
-            background: #ffffff;
-            color: #1e293b;
-            border: 1px solid #e2e8f0;
-        }
-        [data-bs-theme="light"] .chatbot-footer {
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        /* Parallax & Hero light mode adaptation */
-        [data-bs-theme="light"] .hero-parallax-intro {
-            background: radial-gradient(circle at 50% 40%, #e0f2fe 0%, #f1f5f9 60%, #f8fafc 100%);
-            border-bottom: 1px solid #e2e8f0;
-        }
-        [data-bs-theme="light"] .hero-title-main {
-            background: linear-gradient(135deg, #0f172a 30%, #0369a1 80%, #0284c7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        [data-bs-theme="light"] .scroll-down-badge {
-            background: rgba(2, 132, 199, 0.08);
-            border-color: #0284c7;
-            color: #0284c7;
-        }
-        [data-bs-theme="light"] .parallax-master-showcase {
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        [data-bs-theme="light"] .parallax-viewport-frame {
-            background: #ffffff;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
         }
-        [data-bs-theme="light"] .parallax-info-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
-        }
-        [data-bs-theme="light"] .spec-mini-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-        [data-bs-theme="light"] .clean-feature-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-        }
-        [data-bs-theme="light"] .clean-sim-panel {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
         }
 
-        /* -----------------------------------------------------------------
-           PERFECT GEOMETRIC CIRCLE ICONS (Elimina óvalos/esferas estiradas)
-           ----------------------------------------------------------------- */
-        .rodo-icon-circle {
-            width: 64px !important;
-            height: 64px !important;
-            min-width: 64px !important;
-            min-height: 64px !important;
-            max-width: 64px !important;
-            max-height: 64px !important;
-            border-radius: 50% !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            flex-shrink: 0 !important;
-            font-size: 1.6rem !important;
-            line-height: 1 !important;
-            margin-bottom: 1.25rem;
-            transition: all 0.3s ease;
+        /* Pulsing indicator */
+        .pulse-beacon {
+            animation: beacon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-
-        .rodo-icon-cyan {
-            background: rgba(0, 242, 254, 0.12);
-            color: var(--electric-cyan);
-            border: 2px solid rgba(0, 242, 254, 0.5);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
-        }
-        [data-bs-theme="light"] .rodo-icon-cyan {
-            background: #e0f2fe;
-            color: #0284c7;
-            border: 2px solid #7dd3fc;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
-        }
-
-        .rodo-icon-amber {
-            background: rgba(255, 145, 0, 0.12);
-            color: var(--industrial-amber);
-            border: 2px solid rgba(255, 145, 0, 0.5);
-            box-shadow: 0 0 15px rgba(255, 145, 0, 0.25);
-        }
-        [data-bs-theme="light"] .rodo-icon-amber {
-            background: #fef3c7;
-            color: #d97706;
-            border: 2px solid #fcd34d;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
-        }
-
-        .contact-icon-circle {
-            width: 46px !important;
-            height: 46px !important;
-            min-width: 46px !important;
-            min-height: 46px !important;
-            max-width: 46px !important;
-            max-height: 46px !important;
-            border-radius: 50% !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            flex-shrink: 0 !important;
-            font-size: 1.15rem !important;
-            line-height: 1 !important;
-            transition: all 0.25s ease;
-        }
-
-        .contact-icon-cyan {
-            background: rgba(0, 242, 254, 0.15);
-            color: #00f2fe;
-            border: 1.5px solid rgba(0, 242, 254, 0.4);
-        }
-        [data-bs-theme="light"] .contact-icon-cyan {
-            background: #e0f2fe;
-            color: #0284c7;
-            border: 1.5px solid #7dd3fc;
-        }
-
-        .contact-icon-blue {
-            background: rgba(79, 172, 254, 0.15);
-            color: #4facfe;
-            border: 1.5px solid rgba(79, 172, 254, 0.4);
-        }
-        [data-bs-theme="light"] .contact-icon-blue {
-            background: #dbeafe;
-            color: #1d4ed8;
-            border: 1.5px solid #93c5fd;
-        }
-
-        .contact-icon-whatsapp {
-            background: rgba(37, 211, 102, 0.15);
-            color: #25d366;
-            border: 1.5px solid rgba(37, 211, 102, 0.4);
-        }
-        [data-bs-theme="light"] .contact-icon-whatsapp {
-            background: #dcfce7;
-            color: #16a34a;
-            border: 1.5px solid #86efac;
-        }
-
-        .contact-icon-amber {
-            background: rgba(255, 145, 0, 0.15);
-            color: #ff9100;
-            border: 1.5px solid rgba(255, 145, 0, 0.4);
-        }
-        [data-bs-theme="light"] .contact-icon-amber {
-            background: #fef3c7;
-            color: #d97706;
-            border: 1.5px solid #fcd34d;
-        }
-
-        .contact-icon-purple {
-            background: rgba(168, 85, 247, 0.15);
-            color: #c084fc;
-            border: 1.5px solid rgba(168, 85, 247, 0.4);
-        }
-        [data-bs-theme="light"] .contact-icon-purple {
-            background: #f3e8ff;
-            color: #7e22ce;
-            border: 1.5px solid #d8b4fe;
-        }
-
-        /* Card custom reusable */
-        .card-custom {
-            background-color: var(--rodo-bg-card);
-            border: 1px solid var(--rodo-border);
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-        }
-        [data-bs-theme="light"] .card-custom {
-            background-color: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
-        }
-
-        /* -----------------------------------------------------------------
-           SECTION OVERRIDES FOR LIGHT & DARK THEMES
-           ----------------------------------------------------------------- */
-        .home-tech-strip {
-            background: #080e1c;
-            border-bottom: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .home-tech-strip {
-            background: #f1f5f9 !important;
-            border-bottom: 1px solid #e2e8f0 !important;
-        }
-
-        .home-section-ev {
-            background: #080f22;
-        }
-        [data-bs-theme="light"] .home-section-ev {
-            background: #f8fafc !important;
-        }
-
-        .home-section-sim {
-            background: linear-gradient(135deg, #091326 0%, #101c38 100%);
-            border-top: 1px solid var(--rodo-border);
-            border-bottom: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .home-section-sim {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
-            border-color: #cbd5e1 !important;
-        }
-
-        .home-section-facchini {
-            background: #080e1e;
-        }
-        [data-bs-theme="light"] .home-section-facchini {
-            background: #ffffff !important;
-        }
-        [data-bs-theme="light"] .home-section-facchini h2 {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .home-section-facchini .text-warning {
-            color: #b45309 !important;
-        }
-
-        .home-section-brands {
-            background: #060b18;
-            border-top: 1px solid var(--rodo-border);
-            border-bottom: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .home-section-brands {
-            background: #f8fafc !important;
-            border-color: #e2e8f0 !important;
-        }
-        [data-bs-theme="light"] .home-section-brands .bg-dark {
-            background-color: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-        }
-
-        .home-section-news {
-            background: #080f22;
-        }
-        [data-bs-theme="light"] .home-section-news {
-            background: #ffffff !important;
-        }
-
-        .home-cta-section {
-            background: linear-gradient(135deg, #0b1a38 0%, #060c1c 100%);
-            border-top: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .home-cta-section {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%) !important;
-            border-top: 1px solid #cbd5e1 !important;
-        }
-        [data-bs-theme="light"] .home-cta-section h2 {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .home-cta-section p {
-            color: #334155 !important;
-        }
-        [data-bs-theme="light"] .home-cta-section .btn-outline-light {
-            border-color: #0284c7 !important;
-            color: #0284c7 !important;
-            background-color: #ffffff !important;
-        }
-        [data-bs-theme="light"] .home-cta-section .btn-outline-light:hover {
-            background-color: #0284c7 !important;
-            color: #ffffff !important;
-        }
-
-        /* Empresa page */
-        .empresa-hero {
-            background: linear-gradient(135deg, #070d1e 0%, #152243 100%);
-            border-bottom: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .empresa-hero {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 100%) !important;
-            border-bottom: 1px solid #e2e8f0 !important;
-        }
-        [data-bs-theme="light"] .empresa-hero h1 {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .empresa-hero p {
-            color: #334155 !important;
-        }
-
-        .empresa-stat-card {
-            background: #0f1930;
-        }
-        [data-bs-theme="light"] .empresa-stat-card {
-            background: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
-        }
-        [data-bs-theme="light"] .empresa-stat-card .bg-dark {
-            background-color: #f8fafc !important;
-            border-color: #e2e8f0 !important;
-        }
-
-        .empresa-mv-card {
-            background: #0d172d;
-        }
-        [data-bs-theme="light"] .empresa-mv-card {
-            background: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-        }
-        [data-bs-theme="light"] .empresa-mv-card h3 {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .empresa-mv-card p {
-            color: #475569 !important;
-        }
-
-        /* Contacto page */
-        .contacto-header-bar {
-            background: #091022;
-            border-bottom: 1px solid var(--rodo-border);
-        }
-        [data-bs-theme="light"] .contacto-header-bar {
-            background: #f1f5f9 !important;
-            border-bottom: 1px solid #e2e8f0 !important;
-        }
-        [data-bs-theme="light"] .contacto-header-bar h1 {
-            color: #0f172a !important;
-        }
-
-        .contacto-form-card {
-            background: #0f182e;
-        }
-        [data-bs-theme="light"] .contacto-form-card {
-            background: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-        }
-
-        .contacto-info-card {
-            background: #0d1629;
-        }
-        [data-bs-theme="light"] .contacto-info-card {
-            background: #ffffff !important;
-            border-color: #e2e8f0 !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-        }
-        [data-bs-theme="light"] .contacto-info-card h4,
-        [data-bs-theme="light"] .contacto-info-card .text-white {
-            color: #0f172a !important;
-        }
-        [data-bs-theme="light"] .contacto-info-card .text-muted {
-            color: #475569 !important;
-        }
-
-        /* General hardcoded hex overrides in light mode */
-        [data-bs-theme="light"] div[style*="background: #0"],
-        [data-bs-theme="light"] div[style*="background:#0"],
-        [data-bs-theme="light"] div[style*="background: #1"],
-        [data-bs-theme="light"] div[style*="background:#1"] {
-            background-color: #ffffff !important;
+        @keyframes beacon-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.15); }
         }
     </style>
+
     @stack('styles')
 </head>
-<body>
+<body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
 
-    <!-- 1. Top Announcement Bar -->
-    <div class="top-announcement-bar d-none d-md-block">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-4">
-                <span><i class="fas fa-phone-alt text-info me-1"></i> {{ $companyPhone }}</span>
-                <span><i class="fab fa-whatsapp text-success me-1"></i> <a href="https://api.whatsapp.com/send?phone={{ $whatsappClean }}" target="_blank">{{ $whatsappNumber }}</a></span>
-                <span><i class="fas fa-envelope text-warning me-1"></i> {{ $supportEmail }}</span>
-                <span class="badge bg-dark border border-secondary text-info"><i class="fas fa-bolt me-1"></i> Líderes en Electromovilidad Perú</span>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                <a href="{{ \App\Models\Setting::get('social_facebook', '#') }}" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="{{ \App\Models\Setting::get('social_instagram', '#') }}" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="{{ \App\Models\Setting::get('social_linkedin', '#') }}" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="{{ \App\Models\Setting::get('social_youtube', '#') }}" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="{{ \App\Models\Setting::get('social_tiktok', '#') }}" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. Sticky Navbar (Clean, Fitted & Modern) -->
-    <nav class="navbar navbar-expand-lg rodo-navbar sticky-top">
-        <div class="container-fluid px-xl-5 px-lg-4 px-3">
-            <!-- Brand Logo -->
-            <a class="navbar-brand d-flex align-items-center me-3" href="{{ route('home') }}">
-                <img src="{{ asset(\App\Models\Setting::get('logo_path', 'images/logo/RODO.png')) }}" alt="{{ $siteName }}" height="38" class="d-inline-block">
-            </a>
-
-            <!-- Mobile Toggler -->
-            <button class="navbar-toggler text-white border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#rodoNavbarContent">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="rodoNavbarContent">
-                <!-- Navigation Tabs (Sleek, Clean, No awkward icon stacking) -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('empresa') ? 'active' : '' }}" href="{{ route('empresa') }}">
-                            Empresa
-                        </a>
-                    </li>
-                    <!-- Products Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('products.*') && !request()->routeIs('products.destacados') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
-                            Productos
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark-custom">
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}"><i class="fas fa-bolt text-info me-2"></i> Vehículos 100% Eléctricos</a></li>
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'suvs-electricos']) }}"><i class="fas fa-car-side text-info me-2"></i> SUVs Eléctricos</a></li>
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'camiones-utilitarios-electricos']) }}"><i class="fas fa-truck-pickup text-info me-2"></i> Camiones & Utilitarios EV</a></li>
-                            <li><hr class="dropdown-divider border-secondary"></li>
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}"><i class="fas fa-trailer text-warning me-2"></i> Implementos Rodoviarios (Facchini)</a></li>
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'semirremolques-furgon']) }}"><i class="fas fa-box text-warning me-2"></i> Semirremolques Furgón</a></li>
-                            <li><a class="dropdown-item" href="{{ route('products.index', ['categoria' => 'tolvas-y-basculantes']) }}"><i class="fas fa-mountain text-warning me-2"></i> Tolvas Basculantes Mineras</a></li>
-                            <li><hr class="dropdown-divider border-secondary"></li>
-                            <li><a class="dropdown-item fw-bold text-info" href="{{ route('products.index') }}"><i class="fas fa-th-large me-2"></i> Ver Catálogo Completo</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('products.destacados') ? 'active' : '' }}" href="{{ route('products.destacados') }}">
-                            Destacados
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('novedades.*') ? 'active' : '' }}" href="{{ route('novedades.index') }}">
-                            Novedades
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contacto') ? 'active' : '' }}" href="{{ route('contacto') }}">
-                            Contacto
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Live Search Box with Auto-Suggest -->
-                <div class="rodo-search-box me-3 position-relative d-none d-md-block">
-                    <form action="{{ route('products.index') }}" method="GET" id="global-search-form">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" name="buscar" id="global-search-input" class="form-control" placeholder="Buscar modelo o SKU..." value="{{ request('buscar') }}" autocomplete="off">
-                    </form>
-                    <div id="search-results-dropdown"></div>
+    <!-- 1. TOP UTILITY STRIP -->
+    <header class="fixed top-0 left-0 w-full z-50 shadow-[0_2px_12px_rgba(0,0,0,0.08)] bg-white">
+        <div class="w-full text-white" style="background: linear-gradient(90deg, #07153b 0%, #0d2a78 60%, #155dfc 100%);">
+            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-10 flex items-center justify-between font-metric text-[12px]">
+                <div class="flex items-center gap-4">
+                    <span class="hidden lg:flex items-center gap-1.5 text-secondary-fixed font-semibold">
+                        <span class="material-symbols-outlined text-[16px]">electric_bolt</span>
+                        <span>Líderes en Electromovilidad Perú</span>
+                    </span>
+                    <span class="hidden lg:inline text-white/30">|</span>
+                    <a href="tel:{{ preg_replace('/[^0-9]/', '', $companyPhone) }}" class="flex items-center gap-1 text-slate-200 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-[15px] text-[#B39255]">call</span>
+                        <span>{{ $companyPhone }}</span>
+                    </a>
+                    <span class="hidden sm:inline text-white/30">|</span>
+                    <a href="mailto:{{ $supportEmail }}" class="hidden sm:flex items-center gap-1 text-slate-200 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-[15px] text-[#B39255]">mail</span>
+                        <span>{{ $supportEmail }}</span>
+                    </a>
                 </div>
 
-                <!-- Right Actions: Cart, User Account & Cotizar -->
-                <div class="d-flex align-items-center gap-2">
-                    <!-- Cart Button -->
-                    @php
-                        $cartCount = array_sum(array_column(session()->get('cart', []), 'quantity'));
-                    @endphp
-                    <a href="{{ route('cart.index') }}" class="header-action-btn header-btn-cart position-relative" title="Carrito de Compras">
-                        <i class="fas fa-shopping-cart text-info"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-counter-badge" style="font-size: 0.65rem;">
-                            {{ $cartCount }}
-                        </span>
+                <div class="flex items-center gap-4">
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#25D366] hover:text-white transition-colors font-semibold">
+                        <i class="fab fa-whatsapp text-[15px]"></i>
+                        <span>WhatsApp: {{ $whatsappNumber }}</span>
+                    </a>
+                    <span class="hidden md:inline text-white/30">|</span>
+                    <span class="hidden md:inline px-2.5 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-[#1B263B] text-[#B39255] border border-[#B39255]/40">
+                        DISTRIBUIDOR OFICIAL FACCHINI &amp; JMEV
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. MAIN NAVIGATION BAR -->
+        <div class="w-full bg-white/95 backdrop-blur-xl border-b border-slate-200">
+            <div class="h-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
+                
+                <!-- Brand Logo -->
+                <a href="{{ route('home') }}" class="flex items-center gap-3.5 group">
+                    <img src="{{ asset('images/logo/RODO.png') }}" alt="RODOPERU Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300" onerror="this.outerHTML='<span class=\'font-headline text-2xl font-bold tracking-tight text-primary\'>RODO<span class=\'text-blue-600\'>PERU</span></span>'">
+                    <div class="flex flex-col">
+                        <span class="font-headline text-[20px] font-bold tracking-tight text-[#051125] leading-none uppercase">RODOPERU</span>
+                        <span class="font-metric text-[10px] tracking-[0.2em] text-[#B39255] uppercase mt-1 font-semibold">Electromovilidad &amp; Carga</span>
+                    </div>
+                </a>
+
+                <!-- Nav Links Desktop -->
+                <nav class="hidden xl:flex items-center gap-1 font-body text-sm font-medium">
+                    <a href="{{ route('home') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('home') ? 'bg-[#051125] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Inicio
+                    </a>
+                    <a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request('categoria') == 'vehiculos-electricos' ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Vehículos Eléctricos
+                    </a>
+                    <a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request('categoria') == 'implementos-rodoviarios' ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Implementos Rodoviarios
+                    </a>
+                    <a href="{{ route('simulador') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('simulador') ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Simulador de Ahorro
+                    </a>
+                    <a href="{{ route('empresa') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('empresa') ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Empresa
+                    </a>
+                    <a href="{{ route('novedades.index') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('novedades*') ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Novedades
+                    </a>
+                    <a href="{{ route('contacto') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('contacto') ? 'bg-[#051125] text-white font-semibold' : 'text-slate-700 hover:text-primary hover:bg-slate-100' }}">
+                        Contacto
+                    </a>
+                </nav>
+
+                <!-- Action Strip Right -->
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    
+                    <!-- Cotizar Button -->
+                    <button type="button" onclick="openQuickQuoteModal()" class="hidden sm:inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded bg-[#051125] text-white text-xs font-semibold hover:bg-[#1b263b] transition-all shadow-sm border border-[#051125]">
+                        <span class="material-symbols-outlined text-[17px] text-[#B39255]">request_quote</span>
+                        <span>Cotizar en Línea</span>
+                    </button>
+
+                    <!-- WhatsApp Advisor -->
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20comunicarme%20con%20un%20asesor%20comercial." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20bd5a] transition-all shadow-sm">
+                        <i class="fab fa-whatsapp text-[16px]"></i>
+                        <span class="hidden md:inline">Asesor WhatsApp</span>
                     </a>
 
-                    <!-- Theme Switcher Dropdown (Claro / Oscuro / Sistema) -->
-                    <div class="dropdown" id="theme-selector-dropdown">
-                        <button class="header-action-btn header-btn-theme dropdown-toggle" type="button" id="themeDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Cambiar Tema (Claro / Oscuro / Sistema)">
-                            <i class="fas fa-moon me-1 text-info" id="theme-btn-icon"></i>
-                            <span class="d-none d-xl-inline" id="theme-btn-label" style="font-size: 0.8rem;">Tema</span>
+                    <!-- Cart icon with badge -->
+                    <a href="{{ route('cart.index') }}" class="relative w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-800 transition-colors" title="Carrito de Cotizaciones / Pedidos">
+                        <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                        @if($cartCount > 0)
+                            <span class="absolute -top-1 -right-1 bg-blue-600 text-white font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
+
+                    <!-- User Account Dropdown -->
+                    <div class="relative group">
+                        <button type="button" class="w-10 h-10 rounded-full bg-[#051125] text-white flex items-center justify-center hover:bg-[#1b263b] transition-colors" aria-label="Cuenta de usuario">
+                            <span class="material-symbols-outlined text-[20px]">person</span>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end rodo-dropdown-menu" aria-labelledby="themeDropdownBtn" style="min-width: 175px;">
-                            <li>
-                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" onclick="setRodoTheme('light')">
-                                    <span><i class="fas fa-sun text-warning me-2"></i> Claro</span>
-                                    <i class="fas fa-check text-info theme-check d-none" data-theme-check="light"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" onclick="setRodoTheme('dark')">
-                                    <span><i class="fas fa-moon text-info me-2"></i> Oscuro</span>
-                                    <i class="fas fa-check text-info theme-check d-none" data-theme-check="dark"></i>
-                                </button>
-                            </li>
-                            <li><hr class="dropdown-divider my-1"></li>
-                            <li>
-                                <button type="button" class="dropdown-item d-flex align-items-center justify-content-between py-2" onclick="setRodoTheme('system')">
-                                    <span><i class="fas fa-desktop text-secondary me-2"></i> Sistema</span>
-                                    <i class="fas fa-check text-info theme-check d-none" data-theme-check="system"></i>
-                                </button>
-                            </li>
-                        </ul>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-2 hidden group-hover:block z-50 font-body text-xs">
+                            @auth
+                                <div class="px-4 py-2 border-b border-slate-100">
+                                    <p class="font-bold text-slate-800 truncate">{{ auth()->user()->name }}</p>
+                                    <p class="text-[11px] text-slate-500 truncate">{{ auth()->user()->email }}</p>
+                                </div>
+                                @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-blue-700 hover:bg-blue-50 font-semibold">
+                                        <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span> Panel de Control
+                                    </a>
+                                @endif
+                                <a href="{{ route('customer.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-[16px]">dashboard</span> Mi Cuenta
+                                </a>
+                                <a href="{{ route('customer.orders') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-[16px]">inventory_2</span> Mis Pedidos
+                                </a>
+                                <form method="POST" action="{{ route('logout') }}" class="border-t border-slate-100 mt-1">
+                                    @csrf
+                                    <button type="submit" class="w-full text-left flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50">
+                                        <span class="material-symbols-outlined text-[16px]">logout</span> Cerrar Sesión
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50 font-semibold">
+                                    <span class="material-symbols-outlined text-[16px]">login</span> Iniciar Sesión
+                                </a>
+                                <a href="{{ route('register') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-[16px]">person_add</span> Registrarse
+                                </a>
+                                <div class="border-t border-slate-100 my-1"></div>
+                                <a href="{{ route('admin.login') }}" class="flex items-center gap-2 px-4 py-2 text-slate-500 hover:text-slate-800 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-[16px]">lock</span> Acceso Admin
+                                </a>
+                            @endauth
+                        </div>
                     </div>
 
-                    <!-- User Account / Auth Dropdown -->
-                    @auth
-                        <div class="dropdown">
-                            <button class="header-action-btn header-btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle text-info me-1"></i> {{ Str::words(Auth::user()->name, 1, '') }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark-custom">
-                                <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}"><i class="fas fa-tachometer-alt me-2 text-info"></i> Mi Cuenta</a></li>
-                                <li><a class="dropdown-item" href="{{ route('customer.orders') }}"><i class="fas fa-box-open me-2 text-info"></i> Mis Pedidos</a></li>
-                                <li><a class="dropdown-item" href="{{ route('customer.chats') }}"><i class="fas fa-comments me-2 text-info"></i> Mis Chats con Asesor</a></li>
-                                <li><a class="dropdown-item" href="{{ route('customer.profile') }}"><i class="fas fa-id-card me-2 text-info"></i> Mi Perfil</a></li>
-                                @if(Auth::user()->isAdmin())
-                                    <li><hr class="dropdown-divider border-secondary"></li>
-                                    <li><a class="dropdown-item text-warning fw-bold" href="{{ route('admin.dashboard') }}"><i class="fas fa-user-shield me-2"></i> Panel de Control Admin</a></li>
-                                @endif
-                                <li><hr class="dropdown-divider border-secondary"></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @else
-                        <a href="{{ route('login') }}" class="header-action-btn header-btn-user">
-                            <i class="fas fa-user me-1 text-info"></i> Ingresar
-                        </a>
-                    @endauth
-
-                    <!-- Cotizar WhatsApp Button (Strictly Inline, Perfectly Adjusted Height) -->
-                    <a href="https://api.whatsapp.com/send?phone={{ $whatsappClean }}&text={{ rawurlencode('Hola RODOPERU, deseo asesoría técnica y cotización comercial.') }}" target="_blank" class="header-action-btn header-btn-quote">
-                        <i class="fab fa-whatsapp fs-6"></i>
-                        <span>Cotizar</span>
-                    </a>
+                    <!-- Mobile Menu Hamburger -->
+                    <button type="button" onclick="toggleMobileNav()" class="xl:hidden w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-800 hover:bg-slate-200 transition-colors" aria-label="Abrir Menú">
+                        <span class="material-symbols-outlined text-[24px]">menu</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Flash Alert Messages -->
-    <div class="container mt-3">
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-nav" class="hidden xl:hidden bg-white border-b border-slate-200 px-6 py-4 shadow-lg animate-fadeIn font-body text-sm space-y-2">
+            <a href="{{ route('home') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Inicio</a>
+            <a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Vehículos 100% Eléctricos</a>
+            <a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Implementos Rodoviarios Facchini</a>
+            <a href="{{ route('simulador') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Simulador de Ahorro y ROI</a>
+            <a href="{{ route('empresa') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Empresa &amp; Respaldo</a>
+            <a href="{{ route('novedades.index') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Novedades &amp; Blog</a>
+            <a href="{{ route('contacto') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Contacto &amp; Sedes</a>
+            <div class="pt-3 border-t border-slate-200 flex flex-col gap-2">
+                <button type="button" onclick="openQuickQuoteModal()" class="w-full py-2.5 rounded bg-[#051125] text-white font-semibold text-center text-xs">
+                    Cotizar en Línea
+                </button>
+                <a href="https://wa.me/{{ $whatsappClean }}" target="_blank" class="w-full py-2.5 rounded bg-[#25D366] text-white font-semibold text-center text-xs flex items-center justify-center gap-1.5">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Corporativo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full pt-[7.5rem] flex-grow">
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show border-0 bg-success text-white shadow-sm" role="alert">
-                <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 mt-4">
+                <div class="bg-emerald-50 border border-emerald-300 text-emerald-800 px-4 py-3 rounded-xl flex items-center gap-3 shadow-sm font-body text-sm">
+                    <span class="material-symbols-outlined text-emerald-600 text-[22px]">check_circle</span>
+                    <span>{{ session('success') }}</span>
+                </div>
             </div>
         @endif
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show border-0 bg-danger text-white shadow-sm" role="alert">
-                <i class="fas fa-exclamation-triangle me-2"></i> {{ session('error') }}
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-        @if(session('info'))
-            <div class="alert alert-info alert-dismissible fade show border-0 pill-badge-cyan shadow-sm" role="alert">
-                <i class="fas fa-info-circle me-2"></i> {{ session('info') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-        @if(isset($errors) && $errors->any())
-            <div class="alert alert-danger alert-dismissible fade show border-0 bg-danger text-white shadow-sm" role="alert">
-                <ul class="mb-0">
-                    @foreach($errors->all() as $err)
-                        <li><i class="fas fa-times-circle me-1"></i> {{ $err }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-    </div>
 
-    <!-- Main Content Yield -->
-    <main>
+        @if(session('error'))
+            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 mt-4">
+                <div class="bg-red-50 border border-red-300 text-red-800 px-4 py-3 rounded-xl flex items-center gap-3 shadow-sm font-body text-sm">
+                    <span class="material-symbols-outlined text-red-600 text-[22px]">error</span>
+                    <span>{{ session('error') }}</span>
+                </div>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 
-    <!-- 3. Floating WhatsApp -->
-    <a href="https://api.whatsapp.com/send?phone={{ $whatsappClean }}&text={{ rawurlencode('¡Hola RODOPERU! Deseo información de sus vehículos eléctricos e implementos.') }}" target="_blank" class="floating-whatsapp" title="Hablar por WhatsApp con un Asesor">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- 4. Floating Chatbot Button & Modal -->
-    <div class="floating-chatbot-btn" id="chatbot-toggle-btn" title="Asistente Virtual RODOPERU">
-        <i class="fas fa-robot"></i>
-    </div>
-
-    <div class="chatbot-window" id="rodo-chatbot-box">
-        <div class="chatbot-header">
-            <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-info p-2 rounded-circle text-white"><i class="fas fa-bolt"></i></span>
-                <div>
-                    <h6 class="mb-0 text-white font-weight-bold" style="font-size: 0.95rem;">RODO Asistente Virtual</h6>
-                    <small class="text-success" style="font-size: 0.75rem;"><i class="fas fa-circle" style="font-size: 8px;"></i> En línea 24/7</small>
-                </div>
-            </div>
-            <button type="button" class="btn btn-sm btn-link text-white text-decoration-none" id="chatbot-close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chatbot-body" id="chatbot-messages">
-            <div class="chatbot-bubble bot">
-                ¡Hola! Bienvenido a <strong>RODOPERU</strong>. Soy tu asistente virtual. ¿En qué podemos orientarte hoy?
-            </div>
-            <div class="d-flex flex-wrap gap-1 mt-2">
-                <button class="btn btn-sm btn-outline-info py-1 px-2 chatbot-quick-q" data-q="¿Qué autonomía tienen sus autos eléctricos?"><i class="fas fa-bolt me-1"></i> Autonomía EV</button>
-                <button class="btn btn-sm btn-outline-info py-1 px-2 chatbot-quick-q" data-q="¿Tienen semirremolques Facchini en stock?"><i class="fas fa-truck-moving me-1"></i> Facchini Stock</button>
-                <button class="btn btn-sm btn-outline-info py-1 px-2 chatbot-quick-q" data-q="¿Cuáles son los métodos de pago disponibles?"><i class="fas fa-credit-card me-1"></i> Medios de Pago</button>
-                <button class="btn btn-sm btn-outline-info py-1 px-2 chatbot-quick-q" data-q="Quiero hablar con un asesor humano"><i class="fas fa-headset me-1"></i> Asesor Humano</button>
-            </div>
-        </div>
-        <div class="chatbot-footer">
-            <input type="text" id="chatbot-user-input" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Escribe tu consulta...">
-            <button class="btn btn-sm btn-electric" id="chatbot-send-btn"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
-    <!-- 5. Promotional Modal Popup (Configurable from Admin) -->
-    @php
-        $popupActive = \App\Models\Setting::get('popup_active', '1') == '1';
-        $popupTitle = \App\Models\Setting::get('popup_title', '');
-        $popupSubtitle = \App\Models\Setting::get('popup_subtitle', '');
-        $popupButtonText = \App\Models\Setting::get('popup_button_text', '');
-        $popupButtonUrl = \App\Models\Setting::get('popup_button_url', '');
-        $popupCountdown = \App\Models\Setting::get('popup_countdown', '');
-    @endphp
-    @if($popupActive && !empty($popupTitle))
-    <div class="modal fade" id="rodoPromoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background: #0f172a; border: 2px solid var(--electric-cyan); border-radius: 14px;">
-                <div class="modal-header border-0 pb-0">
-                    <span class="badge bg-danger text-uppercase px-3 py-2 font-weight-bold"><i class="fas fa-fire me-1"></i> OFERTA LIMITADA</span>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center pt-2 pb-4">
-                    <img src="{{ asset(\App\Models\Setting::get('logo_path', 'images/logo/RODO.png')) }}" alt="RODOPERU" height="42" class="mb-3">
-                    <h3 class="text-white font-weight-bold mb-2">{{ $popupTitle }}</h3>
-                    <p class="text-light mb-3" style="font-size: 0.95rem;">{{ $popupSubtitle }}</p>
-
-                    @if(!empty($popupCountdown))
-                        <div class="d-flex justify-content-center gap-3 my-3">
-                            <div class="bg-dark p-2 rounded border border-secondary text-center" style="min-width: 60px;">
-                                <div class="h4 mb-0 text-info fw-bold" id="popup-days">15</div>
-                                <small class="text-muted" style="font-size: 10px;">DÍAS</small>
-                            </div>
-                            <div class="bg-dark p-2 rounded border border-secondary text-center" style="min-width: 60px;">
-                                <div class="h4 mb-0 text-info fw-bold" id="popup-hours">08</div>
-                                <small class="text-muted" style="font-size: 10px;">HORAS</small>
-                            </div>
-                            <div class="bg-dark p-2 rounded border border-secondary text-center" style="min-width: 60px;">
-                                <div class="h4 mb-0 text-info fw-bold" id="popup-mins">45</div>
-                                <small class="text-muted" style="font-size: 10px;">MIN</small>
-                            </div>
-                            <div class="bg-dark p-2 rounded border border-secondary text-center" style="min-width: 60px;">
-                                <div class="h4 mb-0 text-info fw-bold" id="popup-secs">20</div>
-                                <small class="text-muted" style="font-size: 10px;">SEG</small>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if(!empty($popupButtonText))
-                        <a href="{{ $popupButtonUrl ?: route('products.index') }}" class="btn btn-electric w-100 py-3 mt-2 font-weight-bold">
-                            {{ $popupButtonText }} <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-
-    <!-- 6. Footer -->
-    <footer class="rodo-footer">
-        <div class="container">
-            <div class="row g-4 mb-5">
-                <!-- Col 1: Brand & Bio -->
-                <div class="col-lg-4 col-md-6">
-                    <img src="{{ asset(\App\Models\Setting::get('logo_path', 'images/logo/RODO.png')) }}" alt="{{ $siteName }}" height="50" class="mb-3">
-                    <p class="text-muted" style="font-size: 0.92rem; line-height: 1.6;">
-                        <strong>{{ $siteName }}</strong> es la empresa líder en soluciones de transporte en el Perú, fusionando la más avanzada tecnología automotriz de <strong>vehículos 100% eléctricos</strong> con la durabilidad de <strong>implementos rodoviarios y semirremolques</strong> de clase mundial.
+    <!-- FOOTER -->
+    <footer class="w-full bg-[#051125] text-white mt-20 border-t border-slate-800" style="background: linear-gradient(135deg, #051125 0%, #0d1b33 60%, #15274d 100%);">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Col 1: Brand & Credentials -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('images/logo/RODO.png') }}" alt="RODOPERU" class="h-10 w-auto object-contain brightness-0 invert" onerror="this.style.display='none'">
+                        <span class="font-headline text-2xl text-white uppercase tracking-tight font-bold">RODOPERU S.A.C.</span>
+                    </div>
+                    <p class="font-body text-sm text-slate-300 max-w-md leading-relaxed">
+                        Líderes estratégicos en transporte sostenible e implementos de alta resistencia para minería, agroindustria y logística pesada en todo el Perú. Representantes oficiales de Facchini y pioneros en flotas comerciales 100% eléctricas JMEV.
                     </p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="{{ \App\Models\Setting::get('social_facebook', '#') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="fab fa-facebook-f text-white"></i></a>
-                        <a href="{{ \App\Models\Setting::get('social_instagram', '#') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="fab fa-instagram text-white"></i></a>
-                        <a href="{{ \App\Models\Setting::get('social_linkedin', '#') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="fab fa-linkedin-in text-white"></i></a>
-                        <a href="{{ \App\Models\Setting::get('social_youtube', '#') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="fab fa-youtube text-white"></i></a>
-                        <a href="{{ \App\Models\Setting::get('social_tiktok', '#') }}" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="fab fa-tiktok text-white"></i></a>
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <span class="px-2.5 py-1 rounded bg-white/10 text-[#ffdea6] font-metric text-xs border border-[#ffdea6]/30">FACCHINI PERÚ</span>
+                        <span class="px-2.5 py-1 rounded bg-white/10 text-[#ffdea6] font-metric text-xs border border-[#ffdea6]/30">JMEV ELECTROMOVILIDAD</span>
+                        <span class="px-2.5 py-1 rounded bg-white/10 text-[#ffdea6] font-metric text-xs border border-[#ffdea6]/30">ISO 9001:2015</span>
                     </div>
                 </div>
 
-                <!-- Col 2: Navigation Links -->
-                <div class="col-lg-2 col-md-6 col-6">
-                    <h5>Enlaces</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('home') }}"><i class="fas fa-angle-right me-1 text-info"></i> Inicio</a></li>
-                        <li class="mb-2"><a href="{{ route('empresa') }}"><i class="fas fa-angle-right me-1 text-info"></i> Empresa</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index') }}"><i class="fas fa-angle-right me-1 text-info"></i> Productos</a></li>
-                        <li class="mb-2"><a href="{{ route('products.destacados') }}"><i class="fas fa-angle-right me-1 text-info"></i> Destacados</a></li>
-                        <li class="mb-2"><a href="{{ route('novedades.index') }}"><i class="fas fa-angle-right me-1 text-info"></i> Novedades</a></li>
-                        <li class="mb-2"><a href="{{ route('contacto') }}"><i class="fas fa-angle-right me-1 text-info"></i> Contacto</a></li>
+                <!-- Col 2: Modelos Eléctricos -->
+                <div class="space-y-3">
+                    <h4 class="font-headline text-white uppercase tracking-wider text-sm font-bold text-[#ffdea6]">Modelos Eléctricos</h4>
+                    <ul class="space-y-2 font-body text-xs text-slate-300">
+                        <li><a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="hover:text-white transition-colors">JMEV EV-2 Urban Delivery</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="hover:text-white transition-colors">RODO EV-600 Grand SUV</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="hover:text-white transition-colors">Cargo E-Van 1.5T Utilitario</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}" class="hover:text-white transition-colors">Camiones BYD Commercial</a></li>
+                        <li><a href="{{ route('simulador') }}" class="hover:text-white transition-colors">Simulador de Ahorro y ROI</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Categories -->
-                <div class="col-lg-3 col-md-6 col-6">
-                    <h5>Líneas de Producto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'vehiculos-electricos']) }}"><i class="fas fa-bolt text-info me-1"></i> Vehículos Eléctricos</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'suvs-electricos']) }}"><i class="fas fa-car-side text-info me-1"></i> SUVs Eléctricos</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'camiones-utilitarios-electricos']) }}"><i class="fas fa-truck text-info me-1"></i> Camiones & Flotas EV</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'semirremolques-furgon']) }}"><i class="fas fa-trailer text-warning me-1"></i> Semirremolques Furgón</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'tolvas-y-basculantes']) }}"><i class="fas fa-mountain text-warning me-1"></i> Tolvas Basculantes</a></li>
-                        <li class="mb-2"><a href="{{ route('products.index', ['categoria' => 'cisternas-y-tanques']) }}"><i class="fas fa-tint text-warning me-1"></i> Cisternas de Combustible</a></li>
+                <!-- Col 3: Implementos Facchini -->
+                <div class="space-y-3">
+                    <h4 class="font-headline text-white uppercase tracking-wider text-sm font-bold text-[#ffdea6]">Implementos Facchini</h4>
+                    <ul class="space-y-2 font-body text-xs text-slate-300">
+                        <li><a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="hover:text-white transition-colors">Semirremolques Furgón 3 Ejes</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="hover:text-white transition-colors">Tolvas Mineras Acero Hardox 450</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="hover:text-white transition-colors">Plataformas Multimodal Porta-Contenedor</a></li>
+                        <li><a href="{{ route('products.index', ['categoria' => 'implementos-rodoviarios']) }}" class="hover:text-white transition-colors">Cisternas Combustible 10,000 Gal</a></li>
+                        <li><a href="{{ route('contacto') }}" class="hover:text-white transition-colors">Repuestos y Soporte Postventa</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 4: Contact & Locations -->
-                <div class="col-lg-3 col-md-6">
-                    <h5>Contacto Directo</h5>
-                    <p class="mb-2"><i class="fas fa-map-marker-alt text-info me-2"></i> {{ \App\Models\Setting::get('company_address', 'Av. Evitamiento Km 8.5, Ate - Lima, Perú') }}</p>
-                    <p class="mb-2"><i class="fas fa-phone-alt text-info me-2"></i> {{ $companyPhone }}</p>
-                    <p class="mb-2"><i class="fab fa-whatsapp text-success me-2"></i> {{ $whatsappNumber }}</p>
-                    <p class="mb-3"><i class="fas fa-envelope text-info me-2"></i> {{ $supportEmail }}</p>
-                    <div class="p-3 bg-dark rounded border border-secondary">
-                        <small class="text-white d-block mb-1 font-weight-bold">Medios de Pago Seguros:</small>
-                        <div class="d-flex gap-2 align-items-center">
-                            <span class="badge bg-primary">BCP</span>
-                            <span class="badge bg-info text-white">BBVA</span>
-                            <span class="badge bg-purple" style="background:#702082;">YAPE</span>
-                            <span class="badge bg-cyan" style="background:#00a3e0;">PLIN</span>
-                            <span class="badge bg-secondary"><i class="fab fa-cc-visa"></i></span>
-                            <span class="badge bg-secondary"><i class="fab fa-cc-mastercard"></i></span>
+                <!-- Col 4: Sede Central -->
+                <div class="space-y-3">
+                    <h4 class="font-headline text-white uppercase tracking-wider text-sm font-bold text-[#ffdea6]">Contacto &amp; Planta</h4>
+                    <div class="space-y-2.5 font-body text-xs text-slate-300">
+                        <div class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">location_on</span>
+                            <span>Av. Evitamiento Km 8.5, Zona Industrial, Ate - Lima, Perú</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">call</span>
+                            <a href="tel:{{ preg_replace('/[^0-9]/', '', $companyPhone) }}" class="hover:text-white transition-colors">{{ $companyPhone }}</a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">mail</span>
+                            <a href="mailto:{{ $supportEmail }}" class="hover:text-white transition-colors">{{ $supportEmail }}</a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">schedule</span>
+                            <span>Lun - Vie: 08:30 - 18:00 | Sáb: 09:00 - 13:00</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <hr class="border-secondary mb-4">
-
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <small class="text-muted">
-                    &copy; {{ date('Y') }} <strong>RODOPERU S.A.C.</strong> Todos los derechos reservados. RUC 20601234567.
-                </small>
-                <div class="d-flex gap-3 mt-2 mt-md-0" style="font-size: 0.8rem;">
-                    <a href="{{ route('seo.sitemap') }}" target="_blank">Mapa de Sitio (Sitemap)</a>
-                    <span>•</span>
-                    <a href="{{ route('empresa') }}">Políticas de Garantía</a>
-                    <span>•</span>
-                    <a href="{{ route('contacto') }}">Libro de Reclamaciones</a>
+            <!-- Bottom Legal Bar -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body text-xs text-slate-400">
+                <div class="flex flex-wrap items-center gap-4">
+                    <span class="font-metric text-[#ffdea6] font-semibold">RUC: 20601234567</span>
+                    <span>&copy; {{ date('Y') }} RODOPERU S.A.C. Todos los derechos reservados.</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{{ route('contacto') }}" class="hover:text-white transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">menu_book</span>
+                        <span>Libro de Reclamaciones</span>
+                    </a>
+                    <span>|</span>
+                    <a href="{{ route('admin.login') }}" class="hover:text-white transition-colors">Acceso Administrativo</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts: Bootstrap 5.3 + Live Search + Chatbot JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Floating WhatsApp Action Button -->
+    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20inmediata" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center group" aria-label="WhatsApp Directo">
+        <i class="fab fa-whatsapp text-2xl group-hover:rotate-12 transition-transform"></i>
+    </a>
+
+    <!-- QUICK QUOTE MODAL (Cotizar en Línea) -->
+    <div id="quickQuoteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
+        <div class="relative w-full max-w-lg bg-white rounded-2xl p-6 sm:p-8 shadow-2xl font-body">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                    <span class="font-metric text-xs uppercase text-[#B39255] font-bold">Atención Comercial B2B</span>
+                    <h3 class="font-headline text-xl font-bold text-[#051125]">Cotizar Unidades &amp; Flotas</h3>
+                </div>
+                <button type="button" onclick="closeQuickQuoteModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <form onsubmit="handleQuickQuote(event)" class="mt-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Nombre o Razón Social *</label>
+                    <input type="text" id="quoteName" required class="w-full h-11 px-3.5 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm" placeholder="Ej. Transportes Los Andes S.A.C.">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Teléfono / WhatsApp *</label>
+                        <input type="tel" id="quotePhone" required class="w-full h-11 px-3.5 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm" placeholder="Ej. 987654321">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Correo Electrónico</label>
+                        <input type="email" id="quoteEmail" class="w-full h-11 px-3.5 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm" placeholder="contacto@empresa.pe">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Equipo de Interés *</label>
+                    <select id="quoteEquipment" required class="w-full h-11 px-3.5 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm bg-white">
+                        <option value="JMEV EV-2 Urban City Car">JMEV EV-2 Urban City Car (100% Eléctrico)</option>
+                        <option value="RODO EV-600 Grand SUV">RODO EV-600 Grand SUV Ejecutivo</option>
+                        <option value="Cargo E-Van 1.5T Utilitario">RODO Cargo E-Van 1.5T Utilitario</option>
+                        <option value="Camión Ligero BYD 4.5T">Camión Ligero RODO E-Truck / BYD 4.5T</option>
+                        <option value="Semirremolque Furgón Facchini 3 Ejes">Semirremolque Furgón Facchini 3 Ejes (105 m³)</option>
+                        <option value="Tolva Basculante Media Caña 35m3 Facchini">Tolva Basculante Media Caña 35m³ Facchini Hardox</option>
+                        <option value="Plataforma Multimodal Porta Contenedor Facchini">Plataforma Multimodal Porta Contenedor Facchini</option>
+                        <option value="Cisterna Combustible 10,000 Gal Facchini">Cisterna Combustible 10,000 Gal Facchini</option>
+                        <option value="Otra configuración o flota personalizada">Otra Consulta o Flota Personalizada</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Detalle o Cantidad de Unidades</label>
+                    <textarea id="quoteMessage" rows="2" class="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none text-sm" placeholder="Indíquenos ruta de operación o número de unidades..."></textarea>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="submit" class="flex-1 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Enviar a Asesor por WhatsApp</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TECHNICAL SPECIFICATION MODAL (Ficha Técnica) -->
+    <div id="specModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
+        <div class="relative w-full max-w-2xl bg-white rounded-2xl p-6 sm:p-8 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto font-body">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div>
+                    <span class="font-metric text-xs uppercase text-[#B39255] font-bold" id="specModalSku">SKU: ---</span>
+                    <h3 class="font-headline text-xl sm:text-2xl font-bold text-[#051125]" id="specModalTitle">Modelo Vehicular</h3>
+                </div>
+                <button type="button" onclick="closeSpecModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <p class="text-slate-600 text-sm leading-relaxed" id="specModalDesc">
+                Especificaciones homologadas para el mercado peruano.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100" id="specModalGrid">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="pt-3 flex flex-col sm:flex-row justify-end gap-3 border-t border-slate-100">
+                <button type="button" onclick="closeSpecModal()" class="px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">
+                    Cerrar
+                </button>
+                <a href="#" id="specModalWhatsAppBtn" target="_blank" class="px-5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm">
+                    <i class="fab fa-whatsapp text-sm"></i>
+                    <span>Solicitar Cotización Formal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-        // 1. Auto Show Promotional Popup once per session
-        document.addEventListener('DOMContentLoaded', function () {
-            const promoModalEl = document.getElementById('rodoPromoModal');
-            if (promoModalEl && !sessionStorage.getItem('rodo_promo_seen')) {
-                setTimeout(function () {
-                    const promoModal = new bootstrap.Modal(promoModalEl);
-                    promoModal.show();
-                    sessionStorage.setItem('rodo_promo_seen', '1');
-                }, 1500);
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('hidden');
+        }
+
+        function openQuickQuoteModal(prefillEquipment) {
+            if (prefillEquipment) {
+                const select = document.getElementById('quoteEquipment');
+                if (select) select.value = prefillEquipment;
             }
+            document.getElementById('quickQuoteModal').classList.remove('hidden');
+        }
 
-            // 2. Countdown Timer Logic
-            const countdownTarget = "{{ $popupCountdown }}";
-            if (countdownTarget) {
-                const targetDate = new Date(countdownTarget).getTime();
-                setInterval(function () {
-                    const now = new Date().getTime();
-                    const distance = targetDate - now;
-                    if (distance > 0) {
-                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const secs = Math.floor((distance % (1000 * 60)) / 1000);
+        function closeQuickQuoteModal() {
+            document.getElementById('quickQuoteModal').classList.add('hidden');
+        }
 
-                        const dEl = document.getElementById('popup-days');
-                        const hEl = document.getElementById('popup-hours');
-                        const mEl = document.getElementById('popup-mins');
-                        const sEl = document.getElementById('popup-secs');
-                        if (dEl) dEl.innerText = days;
-                        if (hEl) hEl.innerText = hours < 10 ? '0' + hours : hours;
-                        if (mEl) mEl.innerText = mins < 10 ? '0' + mins : mins;
-                        if (sEl) sEl.innerText = secs < 10 ? '0' + secs : secs;
-                    }
-                }, 1000);
+        function handleQuickQuote(e) {
+            e.preventDefault();
+            const name = document.getElementById('quoteName').value.trim();
+            const phone = document.getElementById('quotePhone').value.trim();
+            const email = document.getElementById('quoteEmail').value.trim();
+            const equipment = document.getElementById('quoteEquipment').value;
+            const msg = document.getElementById('quoteMessage').value.trim();
+
+            let waText = `¡Hola RODOPERU! 👋 Mi nombre / empresa es *${name}* (Teléfono: ${phone}${email ? ', Email: ' + email : ''}).\n\n`;
+            waText += `Deseo cotizar el equipo: *${equipment}*.\n`;
+            if (msg) {
+                waText += `Detalles del requerimiento: ${msg}\n`;
             }
+            waText += `\nSolicito disponibilidad y proforma oficial. ¡Muchas gracias!`;
 
-            // 3. Live Search Auto-Suggest
-            const searchInput = document.getElementById('global-search-input');
-            const searchDropdown = document.getElementById('search-results-dropdown');
-            let debounceTimer;
+            const url = `https://wa.me/{{ $whatsappClean }}?text=${encodeURIComponent(waText)}`;
+            window.open(url, '_blank');
+            closeQuickQuoteModal();
+        }
 
-            if (searchInput && searchDropdown) {
-                searchInput.addEventListener('input', function () {
-                    const query = this.value.trim();
-                    clearTimeout(debounceTimer);
-                    if (query.length < 2) {
-                        searchDropdown.style.display = 'none';
-                        searchDropdown.innerHTML = '';
-                        return;
-                    }
+        function openSpecModalData(sku, title, desc, specsArray) {
+            document.getElementById('specModalSku').innerText = 'SKU: ' + sku;
+            document.getElementById('specModalTitle').innerText = title;
+            document.getElementById('specModalDesc').innerText = desc;
 
-                    debounceTimer = setTimeout(() => {
-                        fetch("{{ route('api.search-suggest') }}?q=" + encodeURIComponent(query))
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.length === 0) {
-                                    searchDropdown.innerHTML = '<div class="p-3 text-muted text-center" style="font-size:0.85rem;">No se encontraron productos. Presione Enter para ver catálogo completo.</div>';
-                                    searchDropdown.style.display = 'block';
-                                    return;
-                                }
-
-                                let html = '<div class="p-2">';
-                                data.forEach(item => {
-                                    html += `
-                                        <a href="${item.url}" class="d-flex align-items-center gap-3 p-2 text-decoration-none border-bottom border-dark" style="color:#ffffff;">
-                                            <img src="${item.image}" alt="${item.name}" width="42" height="42" style="object-fit:contain; background:#0b1323; border-radius:4px;">
-                                            <div class="flex-grow-1 overflow-hidden">
-                                                <div class="fw-bold text-truncate" style="font-size:0.88rem;">${item.name}</div>
-                                                <small class="text-muted">SKU: ${item.sku}</small>
-                                            </div>
-                                            <div class="text-end">
-                                                <span class="badge bg-dark border border-info text-info">${item.price}</span>
-                                            </div>
-                                        </a>
-                                    `;
-                                });
-                                html += `<a href="{{ route('products.index') }}?buscar=${encodeURIComponent(query)}" class="d-block text-center p-2 text-info fw-bold" style="font-size:0.82rem;">Ver todos los resultados &rarr;</a></div>`;
-                                searchDropdown.innerHTML = html;
-                                searchDropdown.style.display = 'block';
-                            });
-                    }, 300);
-                });
-
-                document.addEventListener('click', function (e) {
-                    if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-                        searchDropdown.style.display = 'none';
-                    }
+            const grid = document.getElementById('specModalGrid');
+            grid.innerHTML = '';
+            
+            if (Array.isArray(specsArray)) {
+                specsArray.forEach(s => {
+                    const el = document.createElement('div');
+                    el.className = 'py-1.5 px-3 bg-white rounded-lg border border-slate-100';
+                    el.innerHTML = `
+                        <span class="block font-metric text-[11px] text-slate-500 uppercase">${s.key || s[0]}</span>
+                        <span class="font-headline text-xs font-bold text-[#051125]">${s.value || s[1]}</span>
+                    `;
+                    grid.appendChild(el);
                 });
             }
 
-            // 4. Floating Chatbot Interactions
-            const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-            const chatbotBox = document.getElementById('rodo-chatbot-box');
-            const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const chatbotUserInput = document.getElementById('chatbot-user-input');
-            const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+            const waBtn = document.getElementById('specModalWhatsAppBtn');
+            waBtn.href = `https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20cotizacion%20y%20ficha%20tecnica%20de%20${encodeURIComponent(title)}%20(SKU:%20${encodeURIComponent(sku)})`;
 
-            if (chatbotToggleBtn && chatbotBox) {
-                chatbotToggleBtn.addEventListener('click', () => {
-                    chatbotBox.style.display = (chatbotBox.style.display === 'flex') ? 'none' : 'flex';
-                });
-                chatbotCloseBtn.addEventListener('click', () => {
-                    chatbotBox.style.display = 'none';
-                });
+            document.getElementById('specModal').classList.remove('hidden');
+        }
 
-                const botFaqs = {
-                    'autonomía': 'Nuestros vehículos 100% eléctricos ofrecen autonomías que van desde 300 km (en modelos urbanos como JMEV EV-2) hasta más de 520 km (en SUVs como el RODO EV-600). Cuentan con sistema de frenado regenerativo.',
-                    'facchini': 'Somos distribuidores e integradores oficiales de Facchini en Perú. Contamos con furgones de carga seca de 14.6m, tolvas basculantes Hardox de 35m³ y plataformas multimodales para entrega inmediata.',
-                    'pago': 'Aceptamos transferencias bancarias en Soles y Dólares (BCP, BBVA, Interbank), Yape, Plin, tarjetas de crédito/débito y opciones de financiamiento leasing vehicular.',
-                    'asesor': '¡Excelente! Puedes contactar de inmediato a nuestro equipo de ventas haciendo clic en el botón verde de WhatsApp o llamando al {{ $companyPhone }}.'
-                };
-
-                function sendChatbotMessage(text) {
-                    if (!text) return;
-                    // Append user bubble
-                    const userBubble = document.createElement('div');
-                    userBubble.className = 'chatbot-bubble user';
-                    userBubble.innerText = text;
-                    chatbotMessages.appendChild(userBubble);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-                    // Compute response
-                    setTimeout(() => {
-                        let answer = 'Gracias por escribirnos. Un asesor de RODOPERU puede profundizar en esta información. Te recomendamos cotizar por WhatsApp para enviarte ficha técnica completa.';
-                        const lower = text.toLowerCase();
-
-                        if (lower.includes('autonom') || lower.includes('bater') || lower.includes('km')) {
-                            answer = botFaqs['autonomía'];
-                        } else if (lower.includes('facchini') || lower.includes('furgon') || lower.includes('tolva') || lower.includes('semirremolque')) {
-                            answer = botFaqs['facchini'];
-                        } else if (lower.includes('pago') || lower.includes('precio') || lower.includes('cuota') || lower.includes('bcp')) {
-                            answer = botFaqs['pago'];
-                        } else if (lower.includes('asesor') || lower.includes('humano') || lower.includes('contacto') || lower.includes('telefono')) {
-                            answer = botFaqs['asesor'];
-                        }
-
-                        const botBubble = document.createElement('div');
-                        botBubble.className = 'chatbot-bubble bot';
-                        botBubble.innerHTML = answer;
-                        chatbotMessages.appendChild(botBubble);
-                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                    }, 400);
-                }
-
-                if (chatbotSendBtn) {
-                    chatbotSendBtn.addEventListener('click', () => {
-                        const val = chatbotUserInput.value.trim();
-                        if (val) {
-                            sendChatbotMessage(val);
-                            chatbotUserInput.value = '';
-                        }
-                    });
-                    chatbotUserInput.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter') {
-                            const val = chatbotUserInput.value.trim();
-                            if (val) {
-                                sendChatbotMessage(val);
-                                chatbotUserInput.value = '';
-                            }
-                        }
-                    });
-                }
-
-                document.querySelectorAll('.chatbot-quick-q').forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        sendChatbotMessage(this.dataset.q);
-                    });
-                });
-            }
-        });
+        function closeSpecModal() {
+            document.getElementById('specModal').classList.add('hidden');
+        }
     </script>
-
-    <!-- Theme Switcher Core Handler (Light / Dark / System) -->
-    <script>
-        function updateThemeUI(pref, resolved) {
-            // Update checkmark indicators in dropdown
-            document.querySelectorAll('.theme-check').forEach(function(el) {
-                if (el.getAttribute('data-theme-check') === pref) {
-                    el.classList.remove('d-none');
-                } else {
-                    el.classList.add('d-none');
-                }
-            });
-
-            // Update main navbar theme button icon and label
-            var icon = document.getElementById('theme-btn-icon');
-            var label = document.getElementById('theme-btn-label');
-            if (icon) {
-                if (pref === 'system') {
-                    icon.className = 'fas fa-desktop me-1 text-secondary';
-                    if (label) label.textContent = 'Auto (' + (resolved === 'dark' ? 'Osc' : 'Clar') + ')';
-                } else if (pref === 'light') {
-                    icon.className = 'fas fa-sun me-1 text-warning';
-                    if (label) label.textContent = 'Claro';
-                } else {
-                    icon.className = 'fas fa-moon me-1 text-info';
-                    if (label) label.textContent = 'Oscuro';
-                }
-            }
-        }
-
-        function setRodoTheme(pref) {
-            localStorage.setItem('rodo_theme', pref);
-            var resolved = pref;
-            if (pref === 'system') {
-                resolved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-            }
-            document.documentElement.setAttribute('data-bs-theme', resolved);
-            document.documentElement.setAttribute('data-rodo-theme-pref', pref);
-            updateThemeUI(pref, resolved);
-        }
-
-        // Listen for OS scheme change if user is on system mode
-        if (window.matchMedia) {
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-                var currentPref = localStorage.getItem('rodo_theme') || 'system';
-                if (currentPref === 'system') {
-                    var newResolved = e.matches ? 'dark' : 'light';
-                    document.documentElement.setAttribute('data-bs-theme', newResolved);
-                    updateThemeUI('system', newResolved);
-                }
-            });
-        }
-
-        // Initialize UI icons & checkmarks on page load
-        (function() {
-            var currentPref = localStorage.getItem('rodo_theme') || 'system';
-            var currentResolved = document.documentElement.getAttribute('data-bs-theme') || 'dark';
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() {
-                    updateThemeUI(currentPref, currentResolved);
-                });
-            } else {
-                updateThemeUI(currentPref, currentResolved);
-            }
-        })();
-    </script>
-    <!-- GSAP & ScrollTrigger CDN for high-performance animations & parallax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     @stack('scripts')
 </body>

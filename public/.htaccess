@@ -1,4 +1,4 @@
-DirectoryIndex en-construccion.html index.php
+DirectoryIndex index.php en-construccion.html
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>

@@ -1,0 +1,647 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#0D1B2A",
+        "primary-dark": "#051125",
+        "primary-container": "#1B263B",
+        "secondary": "#B39255",
+        "secondary-dark": "#765a23",
+        "secondary-light": "#FED894",
+        "surface": "#f8fafc",
+        "surface-container": "#f1f5f9",
+        "whatsapp": "#25D366",
+        "whatsapp-hover": "#20ba59"
+      },
+      fontFamily: {
+        "display": ["Space Grotesk", "sans-serif"],
+        "heading": ["Space Grotesk", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"]
+      }
+    }
+  }
+};
+</script></head><body class="bg-[#f8fafc] text-slate-800 font-body antialiased selection:bg-[#B39255] selection:text-white">
+<!-- 1. Topbar Corporativo superior (#0D1B2A) -->
+<aside class="w-full bg-[#155dfc] text-white text-xs py-2 px-4 sm:px-8 border-b border-blue-700/60 relative z-50">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5">
+<div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-slate-300 font-mono text-[12px]">
+<a class="flex items-center gap-1.5 hover:text-[#B39255] transition-colors" href="tel:+51017198900">
+<span class="material-symbols-outlined text-[15px] text-[#B39255]">call</span>
+<span class="">+51 (01) 719-8900</span>
+</a>
+<span class="hidden sm:inline text-slate-600">|</span>
+<a class="flex items-center gap-1.5 hover:text-[#B39255] transition-colors" href="https://wa.me/51987654321" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[15px] text-[#25D366]">chat</span>
+<span class="">+51 987 654 321</span>
+</a>
+<span class="hidden sm:inline text-slate-600">|</span>
+<a class="flex items-center gap-1.5 hover:text-[#B39255] transition-colors" href="mailto:ventas@rodoperu.com">
+<span class="material-symbols-outlined text-[15px] text-[#B39255]">mail</span>
+<span class="">ventas@rodoperu.com</span>
+</a>
+<span class="hidden md:inline text-slate-600">|</span>
+<span class="hidden md:flex items-center gap-1 text-slate-300 font-sans font-medium text-[11px] tracking-wide">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B39255] inline-block animate-pulse"></span>
+          Líderes en Electromovilidad y Carga Pesada Perú
+        </span>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 rounded text-[11px] font-mono tracking-wider uppercase font-semibold bg-[#0047cc] text-[#FED894] border border-[#FED894]/40 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-[#B39255]">verified</span>
+          DISTRIBUIDOR OFICIAL FACCHINI &amp; JMEV
+        </span>
+</div>
+</div>
+</aside>
+<!-- 2. Header / Barra de Navegación principal blanca con borde inferior -->
+<header class="sticky top-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/90 z-40 shadow-sm transition-all">
+<div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
+<!-- Logo RODOPERU con isotipo montañoso dorado -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="h-11 w-11 rounded-lg bg-[#0D1B2A] flex items-center justify-center p-1.5 border border-[#B39255]/30 shadow-sm group-hover:border-[#B39255] transition-all">
+<svg class="w-full h-full text-[#B39255] fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<!-- Mountainous Peak Stylized Isotype -->
+<polygon opacity="0.95" points="50,15 15,75 35,75 50,48 65,75 85,75"></polygon>
+<polygon fill="#fed894" opacity="0.8" points="50,30 28,70 38,70 50,50 62,70 72,70"></polygon>
+<circle cx="50" cy="85" fill="#B39255" r="4"></circle>
+</svg>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-heading text-xl font-bold tracking-tight text-[#0D1B2A]">RODO<span class="text-[#B39255]">PERU</span></span>
+</div>
+<span class="font-mono text-[9.5px] uppercase tracking-widest text-[#B39255] font-bold leading-none">Electromovilidad &amp; Carga</span>
+</div>
+</a>
+<!-- Menú Desktop -->
+<nav class="hidden xl:flex items-center gap-1.5">
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Inicio</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Vehículos Eléctricos</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Implementos Rodoviarios</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Simulador de Ahorro</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Empresa</a>
+<a class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-[#0D1B2A] hover:bg-slate-100 transition-colors" href="#">Novedades</a>
+<!-- Destacado Activo: Contacto -->
+<a class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-[#155dfc] text-white border border-[#FED894]/60 flex items-center gap-1.5 shadow-sm" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B39255] animate-ping"></span>
+<span class="">Contacto</span>
+</a>
+</nav>
+<!-- Botones de Acción Derecha -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg border-2 border-[#1B263B] text-[#1B263B] font-heading font-semibold text-xs tracking-wider uppercase hover:bg-[#1B263B] hover:text-white transition-all shadow-sm" href="#">
+          Cotizar en Línea
+        </a>
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white font-heading font-semibold text-xs tracking-wide shadow-sm hover:shadow transition-all" href="https://wa.me/51987654321?text=Hola%20RODOPERU,%20deseo%20asesoria%20tecnica%20de%20flotas." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span class="">Asesor WhatsApp</span>
+</a>
+</div>
+</div>
+</header>
+<!-- 3. Breadcrumb / Contexto Institucional -->
+<section class="bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+<nav class="flex items-center gap-2 text-slate-500 font-medium">
+<a class="hover:text-[#0D1B2A] transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[15px]">home</span>
+<span class="">Inicio</span>
+</a>
+<span class="text-slate-300">/</span>
+<span class="font-bold text-[#0D1B2A] uppercase tracking-wide">CONTACTO Y SEDES CORPORATIVAS</span>
+</nav>
+<div class="flex items-center gap-4 text-slate-500 font-mono text-[11.5px]">
+<span class="flex items-center gap-1.5 text-slate-700 font-semibold">
+<span class="material-symbols-outlined text-[15px] text-[#B39255]">badge</span>
+          Atención Comercial &amp; Postventa B2B
+        </span>
+<span class="hidden md:inline text-slate-300">|</span>
+<span class="hidden md:inline bg-slate-100 px-2 py-0.5 rounded border border-slate-200 text-slate-700">RUC: 20601234567</span>
+</div>
+</div>
+</section>
+<!-- 4. Hero de Contacto & Asesoría Inmediata -->
+<section class="relative bg-gradient-to-b from-[#155dfc] via-[#0047cc] to-[#1B263B] text-white py-14 lg:py-18 overflow-hidden">
+<!-- Subtle technical grid background -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="absolute -right-24 -top-24 w-96 h-96 bg-[#B39255]/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+<div class="max-w-3xl space-y-4 mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#B39255]/20 text-[#FED894] border border-[#B39255]/40 text-xs font-mono font-semibold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[15px]">hub</span>
+          Canales Oficiales Perú 2025
+        </div>
+<h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight uppercase leading-tight text-white">
+          Canales de Atención, Showroom y Patio de Maniobras
+        </h1>
+<p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+          Conecte directamente con la gerencia técnica y comercial de RODOPERU para cotizaciones corporativas de vehículos eléctricos, semirremolques Facchini y servicio postventa especializado.
+        </p>
+</div>
+<!-- 3 tarjetas rápidas de contacto -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Tarjeta 1 -->
+<div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl p-5 hover:border-[#B39255]/60 hover:bg-white/[0.14] transition-all group">
+<div class="flex items-center gap-3.5 mb-3">
+<div class="w-11 h-11 rounded-lg bg-[#B39255] text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">phone_in_talk</span>
+</div>
+<div>
+<span class="text-[11px] font-mono uppercase text-[#FED894] tracking-wider block font-semibold">Respuesta &lt; 15 min</span>
+<h3 class="font-heading text-base font-bold text-white leading-tight">Ventas y Cotización de Flotas</h3>
+</div>
+</div>
+<p class="text-xs text-slate-300 mb-3 leading-relaxed">
+            Ingenieros comerciales dedicados a estructuración de proyectos de transporte y flotas.
+          </p>
+<div class="space-y-1 font-mono text-xs">
+<div class="text-white font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-[#B39255]">call</span>
+              +51 (01) 719-8900 Anexo 104
+            </div>
+<a class="text-[#25D366] hover:underline flex items-center gap-1.5 font-semibold" href="https://wa.me/51987654321" target="_blank">
+<span class="material-symbols-outlined text-[14px]">chat</span>
+              WhatsApp: +51 987 654 321
+            </a>
+</div>
+</div>
+<!-- Tarjeta 2 -->
+<div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl p-5 hover:border-[#B39255]/60 hover:bg-white/[0.14] transition-all group">
+<div class="flex items-center gap-3.5 mb-3">
+<div class="w-11 h-11 rounded-lg bg-[#1B263B] border border-white/20 text-[#FED894] flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">build_circle</span>
+</div>
+<div>
+<span class="text-[11px] font-mono uppercase text-[#FED894] tracking-wider block font-semibold">Taller Certificado</span>
+<h3 class="font-heading text-base font-bold text-white leading-tight">Soporte Técnico &amp; Homologado</h3>
+</div>
+</div>
+<p class="text-xs text-slate-300 mb-3 leading-relaxed">
+            Diagnóstico computarizado de baterías EV, calibración de ejes e inspección para ITV.
+          </p>
+<div class="space-y-1 text-xs">
+<div class="text-white font-mono flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-[#B39255] mt-0.5">location_on</span>
+<span class="">Av. Evitamiento Km 8.5 Ate, Lima</span>
+</div>
+<div class="text-slate-300 font-mono text-[11px] pl-5">
+              Horario: Lun - Vie 08:30 a 18:00
+            </div>
+</div>
+</div>
+<!-- Tarjeta 3 -->
+<div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl p-5 hover:border-[#B39255]/60 hover:bg-white/[0.14] transition-all group">
+<div class="flex items-center gap-3.5 mb-3">
+<div class="w-11 h-11 rounded-lg bg-[#B39255] text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+<div>
+<span class="text-[11px] font-mono uppercase text-[#FED894] tracking-wider block font-semibold">Distribución Original</span>
+<h3 class="font-heading text-base font-bold text-white leading-tight">Postventa &amp; Repuestos Facchini</h3>
+</div>
+</div>
+<p class="text-xs text-slate-300 mb-3 leading-relaxed">
+            Almacén central con más de 4,000 ítems en stock permanente y despacho a todo el país.
+          </p>
+<div class="space-y-1 font-mono text-xs">
+<a class="text-white hover:text-[#FED894] flex items-center gap-1.5" href="mailto:repuestos@rodoperu.com">
+<span class="material-symbols-outlined text-[14px] text-[#B39255]">mail</span>
+              repuestos@rodoperu.com
+            </a>
+<div class="text-slate-300 text-[11px] pl-5">
+              Stock inmediato en almacén central
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Sección Principal de 2 Columnas (Formulario B2B + Información de Sede) -->
+<main class="max-w-7xl mx-auto px-4 sm:px-8 py-12 lg:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Columna Izquierda: Formulario B2B con diseño elegante de alto contraste -->
+<section class="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+<!-- Header del Formulario -->
+<div class="bg-gradient-to-r from-[#155dfc] to-[#0047cc] text-white p-6 sm:p-8 flex items-center justify-between border-b border-blue-800">
+<div>
+<div class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#FED894] uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[14px]">contract_edit</span>
+              Formulario de Ingeniería Comercial
+            </div>
+<h2 class="font-heading text-xl sm:text-2xl font-bold text-white">Solicitud de Propuesta Técnica B2B</h2>
+<p class="text-xs text-slate-300 mt-1">Complete los datos de su empresa para asignación con un especialista colegiado.</p>
+</div>
+<div class="hidden sm:flex w-12 h-12 rounded-xl bg-white/10 items-center justify-center text-[#FED894] shrink-0 border border-white/20">
+<span class="material-symbols-outlined text-[28px]">electric_truck</span>
+</div>
+</div>
+<!-- Formulario -->
+<form class="p-6 sm:p-8 space-y-6" id="contactB2BForm" onsubmit="event.preventDefault(); document.getElementById('b2bSuccess').classList.remove('hidden'); this.reset();">
+<!-- Nombres + Razón Social / RUC -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+<div>
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                Nombre y Apellidos completos <span class="text-amber-600">*</span>
+</label>
+<input class="w-full h-11 px-3.5 text-sm rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-[#0D1B2A] focus:ring-1 focus:ring-[#0D1B2A] text-slate-900 transition-all placeholder:text-slate-400" placeholder="Ej. Ing. Carlos Mendoza Ruiz" required="" type="text">
+</div>
+<div>
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                Razón Social y RUC de la Empresa <span class="text-amber-600">*</span>
+</label>
+<input class="w-full h-11 px-3.5 text-sm rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-[#0D1B2A] focus:ring-1 focus:ring-[#0D1B2A] text-slate-900 transition-all placeholder:text-slate-400" placeholder="Ej. TransLogística Perú S.A.C. / 2060..." required="" type="text">
+</div>
+</div>
+<!-- Correo Corporativo + Teléfono / Celular -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+<div>
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                Correo Corporativo <span class="text-amber-600">*</span>
+</label>
+<input class="w-full h-11 px-3.5 text-sm rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-[#0D1B2A] focus:ring-1 focus:ring-[#0D1B2A] text-slate-900 transition-all placeholder:text-slate-400" placeholder="carlos.mendoza@empresa.com.pe" required="" type="email">
+</div>
+<div>
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                Teléfono / Celular de Contacto <span class="text-amber-600">*</span>
+</label>
+<input class="w-full h-11 px-3.5 text-sm rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-[#0D1B2A] focus:ring-1 focus:ring-[#0D1B2A] text-slate-900 transition-all placeholder:text-slate-400" placeholder="+51 900 000 000" required="" type="tel">
+</div>
+</div>
+<!-- Tipo de Solución de Interés (Checkboxes estilizados) -->
+<div class="pt-1">
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 mb-2.5">
+              Tipo de Solución de Interés <span class="text-slate-400 font-normal lowercase">(marque una o varias)</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Opción 1: marcada por defecto -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors">
+<input checked="" class="mt-1 h-4 w-4 rounded border-slate-300 text-[#0D1B2A] focus:ring-[#B39255]" type="checkbox">
+<div class="text-xs">
+<span class="font-semibold text-slate-900 block">Vehículos Eléctricos</span>
+<span class="text-slate-500 font-mono text-[11px]">JMEV EV-2 / RODO EV-600 / Vans E-Cargo</span>
+</div>
+</label>
+<!-- Opción 2 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors">
+<input class="mt-1 h-4 w-4 rounded border-slate-300 text-[#0D1B2A] focus:ring-[#B39255]" type="checkbox">
+<div class="text-xs">
+<span class="font-semibold text-slate-900 block">Semirremolques Facchini</span>
+<span class="text-slate-500 font-mono text-[11px]">Furgones, Tolvas Hardox, Plataformas</span>
+</div>
+</label>
+<!-- Opción 3 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors">
+<input class="mt-1 h-4 w-4 rounded border-slate-300 text-[#0D1B2A] focus:ring-[#B39255]" type="checkbox">
+<div class="text-xs">
+<span class="font-semibold text-slate-900 block">Cisternas de Combustible</span>
+<span class="text-slate-500 font-mono text-[11px]">DOT 406 / Certificación OSINERGMIN</span>
+</div>
+</label>
+<!-- Opción 4 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors">
+<input class="mt-1 h-4 w-4 rounded border-slate-300 text-[#0D1B2A] focus:ring-[#B39255]" type="checkbox">
+<div class="text-xs">
+<span class="font-semibold text-slate-900 block">Simulación Financiera y Asesoría TCO</span>
+<span class="text-slate-500 font-mono text-[11px]">Retorno de inversión en electrificación</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Cantidad estimada de unidades requeridas y detalles de la ruta -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
+                Cantidad estimada de unidades requeridas y detalles de la ruta
+              </label>
+<span class="text-[11px] font-mono text-slate-400">Especificación técnica</span>
+</div>
+<textarea class="w-full p-3.5 text-sm rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:border-[#0D1B2A] focus:ring-1 focus:ring-[#0D1B2A] text-slate-900 transition-all placeholder:text-slate-400" placeholder="Indique: volumen aproximado de unidades, tonelaje/volumen de carga útil, ruta habitual (urbana o interprovincial, altitud msnm) y si cuenta con patio de recarga..." rows="4"></textarea>
+</div>
+<!-- Botón principal CTA -->
+<div class="space-y-3 pt-2">
+<button class="w-full h-13 py-3.5 px-6 rounded-lg bg-[#155dfc] hover:bg-[#0047cc] text-white font-heading font-bold text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all border border-[#FED894]/40" type="submit">
+<span class="">Enviar Solicitud y Recibir Asesoría Inmediata por WhatsApp</span>
+<span class="material-symbols-outlined text-[18px] text-[#FED894]">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+<span class="material-symbols-outlined text-[16px] text-[#B39255]">verified_user</span>
+<span class="">Atención respaldada por ingenieros colegiados. Garantía de respuesta inmediata.</span>
+</div>
+</div>
+<!-- Notification feedback -->
+<div class="hidden p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3" id="b2bSuccess">
+<span class="material-symbols-outlined text-emerald-600 text-[22px] shrink-0 mt-0.5">check_circle</span>
+<div class="text-xs">
+<strong class="font-bold">¡Solicitud B2B enviada con éxito!</strong>
+<p class="mt-0.5 text-emerald-800">Un ingeniero de flotas asignado se comunicará por WhatsApp o llamada en menos de 15 minutos en horario comercial.</p>
+</div>
+</div>
+</form>
+</section>
+<!-- Columna Derecha: Sede Principal Ate, Horarios y Mapa -->
+<section class="lg:col-span-5 space-y-6">
+<!-- Tarjeta con fotos e información del Showroom Principal y Taller de Ensayos Técnicos -->
+<div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-6 sm:p-7 space-y-5">
+<div class="flex items-start gap-3.5">
+<div class="w-11 h-11 rounded-lg bg-[#0D1B2A] text-[#FED894] flex items-center justify-center shrink-0 border border-[#B39255]/30">
+<span class="material-symbols-outlined text-[24px]">domain</span>
+</div>
+<div>
+<span class="text-[11px] font-mono uppercase tracking-wider text-[#B39255] font-bold block">Sede Central y Showroom</span>
+<h3 class="font-heading text-lg font-bold text-[#0D1B2A]">Patio Industrial y Showroom Ate</h3>
+</div>
+</div>
+<div class="space-y-3 text-xs border-y border-slate-100 py-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[18px] text-[#B39255] shrink-0 mt-0.5">location_on</span>
+<div>
+<strong class="text-slate-800 font-semibold block">Dirección Oficial:</strong>
+<span class="text-slate-600">Av. Evitamiento Km 8.5, Ate - Lima, Perú.</span>
+<span class="block text-[11px] text-[#765a23] font-medium mt-0.5">(Acceso directo para transporte pesado sin restricción de tonelaje).</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[18px] text-[#B39255] shrink-0 mt-0.5">schedule</span>
+<div>
+<strong class="text-slate-800 font-semibold block">Horario de Atención:</strong>
+<span class="text-slate-600 block">Lunes a Viernes: 08:30 a 18:00 hrs</span>
+<span class="text-slate-600 block">Sábados: 09:00 a 13:00 hrs</span>
+<span class="text-slate-400 font-mono text-[11px]">Domingos y Feriados: Guardia de emergencia flotas</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[18px] text-[#B39255] shrink-0 mt-0.5">call</span>
+<div>
+<strong class="text-slate-800 font-semibold block">Teléfono Central:</strong>
+<span class="text-slate-700 font-mono">+51 (01) 719-8900</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[18px] text-[#25D366] shrink-0 mt-0.5">chat</span>
+<div>
+<strong class="text-slate-800 font-semibold block">WhatsApp Ventas 24/7:</strong>
+<a class="text-[#25D366] font-mono font-bold hover:underline" href="https://wa.me/51987654321" target="_blank">+51 987 654 321</a>
+</div>
+</div>
+</div>
+<!-- Mini Galería de Fotos de la Sede -->
+<div class="grid grid-cols-3 gap-2">
+<div class="h-20 rounded-lg overflow-hidden border border-slate-200 relative group">
+<img alt="Showroom Camiones Eléctricos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJAd_0Vh7PaMR1okjdAUsH5wYlqcB9mcSHtMPSflp6lO7vwyoMX00h9g0NmJEn-VNvYvI5iX_GxaJnq4PHULHpOrd8UNHbL9FpcuPDnSb85V_7OtNjTQYSjtTH2FLL2VPgs5MYUNscSVqBxQoqwR_XbwT6YekmRKlFSKXtQJDEhyQcoq9_axTen2K_Q1_wo9rkPjG_2N1TNrUpoZnPo9wi6Yv9SjrN2C0n5JQMF6A3uKC6FxdFydMw">
+<div class="absolute inset-0 bg-[#0D1B2A]/40 flex items-end p-1 text-[9px] font-mono text-white">Showroom</div>
+</div>
+<div class="h-20 rounded-lg overflow-hidden border border-slate-200 relative group">
+<img alt="Patio Semirremolques" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6A9WWyH_QBhAB4I3uLSfdS0-72nTn6BrVXDU7l7qoe3P8wC6msWD7I49O_Yzc_SpVONXBy9UUhNymzb5cq6jon-ZD_qYegytO9uGIFqXFkkIUQve57zOjy9TFxFrt1VF4bs4ekpp7HozwTF5_Zak9ZYWnFSAbgtzlwBKcIyCa5lJXRxNby7bZgrII2PRp7EmgZcNEuIG5s-RHQJgCwNpxgycNY96Z1bFmZpJScQ7Paad02gyFAEh3">
+<div class="absolute inset-0 bg-[#0D1B2A]/40 flex items-end p-1 text-[9px] font-mono text-white">Patio Ate</div>
+</div>
+<div class="h-20 rounded-lg overflow-hidden border border-slate-200 relative group">
+<img alt="Taller de Servicio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8SXWR2VYIifSsrOh9QfU-NQIjxCsw68WRVRZAEBdqZ-OcQueK5Gqh_03EocyN1PCimgzYbmXr217GhJv4QwZSlM_4GeFjtcDbKA-GUeRxcxf0zfg273ilqPGc93ls7dT8uWtJJBOQYWDepvB8t4-GPnRl-G6DWKRuBIVlpo9IsOg9PIeFVocb_WuA5p95TgdHDNz2K_oUwh0uZ9zm6FPU72c-JJbZcrmrs7thw-Qn-eyZOClrbNpn">
+<div class="absolute inset-0 bg-[#0D1B2A]/40 flex items-end p-1 text-[9px] font-mono text-white">Taller Postventa</div>
+</div>
+</div>
+<!-- Botón de Navegación Google Maps / Waze -->
+<a class="w-full h-11 px-4 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#0D1B2A] font-heading font-semibold text-xs tracking-wider uppercase flex items-center justify-center gap-2 border border-slate-300 transition-colors" href="https://maps.google.com/?q=Av.+Evitamiento+Km+8.5+Ate+Lima+Peru" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px] text-[#B39255]">directions</span>
+<span class="">Abrir en Google Maps / Waze</span>
+</a>
+</div>
+<!-- Mapa visual interactivo/estilizado de ubicación en Ate, Lima con indicador de patio de maniobras -->
+<div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+<div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs font-mono font-semibold text-slate-800">
+<span class="material-symbols-outlined text-[16px] text-red-600">location_on</span>
+<span class="">Georreferencia Showroom &amp; Patio Ate</span>
+</div>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-medium">Acceso Pesado Habilitado</span>
+</div>
+<div class="relative h-64 bg-slate-200">
+<!-- Map background image -->
+<img alt="Mapa Ubicación RODOPERU Ate" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV9FT6UVvH2qTH5r28sXt7KM9LfQ2xvt_9NFcVtRWlq_qKiR2gUMJO_36tSgKa3BLS-f2EyX5jmo796dXY8Id8a1IIyvAFZkOcdzwpUOQO5MD05c1DWAvr9dVZ6jmrw-sHCqnfrW-j8RyaQMBiRVfcqxkBm5LXtq-FdaRqx4h2F25FCFkVUPKRqJD5CORHT-dApv3fhgYYsv9PAE18SWx1zGH0o5GhTFLmuIjBio4xSm9EthigesXy">
+<!-- Pin Callout Overlay -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0D1B2A] text-white p-3 rounded-xl shadow-xl border border-[#B39255] max-w-[260px] text-center pointer-events-none">
+<div class="w-2.5 h-2.5 rounded-full bg-[#25D366] mx-auto mb-1 animate-ping"></div>
+<strong class="font-heading text-xs font-bold text-[#FED894] block uppercase">RODOPERU HQ ATE</strong>
+<span class="text-[10px] text-slate-200 font-mono block">Av. Evitamiento Km 8.5 (Trébol Javier Prado)</span>
+</div>
+</div>
+<!-- Facilidades de la sede -->
+<div class="p-5 bg-white border-t border-slate-100 space-y-2.5">
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-700 block">
+              Facilidades Industriales de la Sede:
+            </span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[20px] text-[#B39255] mb-1">ev_charger</span>
+<strong class="text-[11px] font-semibold text-slate-800">Cargador Rápido DC</strong>
+<span class="text-[10px] font-mono text-slate-500">CCS2 120kW</span>
+</div>
+<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[20px] text-[#B39255] mb-1">scale</span>
+<strong class="text-[11px] font-semibold text-slate-800">Balanza de Ejes</strong>
+<span class="text-[10px] font-mono text-slate-500">Certificada INACAL</span>
+</div>
+<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[20px] text-[#B39255] mb-1">local_shipping</span>
+<strong class="text-[11px] font-semibold text-slate-800">Entrega 0 km</strong>
+<span class="text-[10px] font-mono text-slate-500">Patio de maniobras</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- 6. Compromisos de Servicio RODOPERU: 4 pilares -->
+<section class="border-t border-slate-200 bg-white py-14">
+<div class="max-w-7xl mx-auto px-4 sm:px-8">
+<div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+<span class="text-xs font-mono font-bold text-[#B39255] uppercase tracking-wider">Estándares B2B de Excelencia</span>
+<h2 class="font-heading text-2xl sm:text-3xl font-bold text-[#0D1B2A]">Compromisos de Servicio RODOPERU</h2>
+<p class="text-slate-600 text-sm">Respaldo contractual y operativo diseñado para maximizar la continuidad de su flota.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pilar 1 -->
+<div class="p-5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-[#B39255] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-[#0D1B2A] text-[#FED894] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">request_quote</span>
+</div>
+<h3 class="font-heading text-base font-bold text-[#0D1B2A] mb-1.5">Cotización Formal en 24 Horas</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Pliegos técnicos estructurados, datasheets, cálculo de amortización y planillas de carga emitidas por ingenieros.
+          </p>
+</div>
+<!-- Pilar 2 -->
+<div class="p-5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-[#B39255] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-[#0D1B2A] text-[#FED894] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">support_agent</span>
+</div>
+<h3 class="font-heading text-base font-bold text-[#0D1B2A] mb-1.5">Soporte Postventa en Todo el Perú</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Red de talleres asociados en Lima, Arequipa, Trujillo y Huancayo con mecánicos formados en planta Facchini.
+          </p>
+</div>
+<!-- Pilar 3 -->
+<div class="p-5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-[#B39255] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-[#0D1B2A] text-[#FED894] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">assignment_turned_in</span>
+</div>
+<h3 class="font-heading text-base font-bold text-[#0D1B2A] mb-1.5">Homologación MTC y Llave en Mano</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Entrega con placa de rodaje, tarjeta de propiedad, certificados de pesaje y registro ante el MTC totalmente saneados.
+          </p>
+</div>
+<!-- Pilar 4 -->
+<div class="p-5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-[#B39255] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-[#0D1B2A] text-[#FED894] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">account_balance</span>
+</div>
+<h3 class="font-heading text-base font-bold text-[#0D1B2A] mb-1.5">Financiamiento y Leasing Bancario</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Convenios directos con BCP, BBVA, Interbank y entidades de renting vehicular con tasas corporativas preferenciales.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Footer Oficial Institucional (#0D1B2A) idéntico a SCREEN_3 y SCREEN_15 -->
+<footer class="w-full text-white font-sans border-t border-blue-400/30 relative overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(37, 99, 235) 100%);">
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-8 py-14 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+<!-- Columna 1 y 2: Identidad Corporativa -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center gap-3">
+<div class="h-11 w-11 rounded-lg bg-[#0D1B2A] flex items-center justify-center p-1.5 border border-[#B39255]/60 shadow-md">
+<svg class="w-full h-full text-[#B39255] fill-current" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<polygon opacity="0.95" points="50,15 15,75 35,75 50,48 65,75 85,75"></polygon>
+<polygon fill="#fed894" opacity="0.8" points="50,30 28,70 38,70 50,50 62,70 72,70"></polygon>
+<circle cx="50" cy="85" fill="#B39255" r="4"></circle>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-heading text-xl font-bold uppercase tracking-tight text-white">RODO<span class="text-[#FED894]">PERU</span></span>
+<span class="font-mono text-[9px] text-[#FED894] uppercase tracking-widest font-semibold">Electromovilidad &amp; Carga Pesada</span>
+</div>
+</div>
+<p class="text-xs text-blue-100 leading-relaxed pr-4 font-normal">
+Soluciones de alta ingeniería en electromovilidad pesada e implementos rodoviarios de alto tonelaje para minería, logística, hidrocarburos y distribución urbana. Distribuidor y soporte técnico oficial autorizado de Facchini y JMEV en el territorio peruano.
+</p>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-2.5 py-1 rounded bg-white/10 backdrop-blur-md text-[#FED894] font-mono text-[11px] uppercase tracking-wider font-semibold border border-white/20 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-[#FED894]">verified</span>Facchini Perú ISO 9001:2015
+</span>
+<span class="px-2.5 py-1 rounded bg-white/10 backdrop-blur-md text-[#FED894] font-mono text-[11px] uppercase tracking-wider font-semibold border border-white/20 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-[#25D366]">bolt</span>JMEV EV Certified
+</span>
+</div>
+<div class="space-y-1.5 pt-2 text-xs text-blue-100 font-mono">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#FED894]">badge</span>
+<span class="font-medium">RUC: 20601234567 - RODO PERÚ S.A.C.</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#FED894]">location_on</span>
+<span class="font-medium">Av. Evitamiento Km 8.5, Ate - Lima, Perú</span>
+</div>
+</div>
+</div>
+<!-- Columna 3: Modelos Eléctricos -->
+<div class="space-y-3">
+<h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider border-b border-blue-400/40 pb-2 flex items-center justify-between">
+<span class="">Modelos Eléctricos</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#FED894]"></span>
+</h4>
+<ul class="space-y-2 text-xs text-blue-100 font-medium">
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Camiones Livianos JMEV</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Furgones Eléctricos Urbanos</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Tracto Camión 100% EV</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Simulador TCO y Autonomía</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Cargadores Rápidos CCS2</a></li>
+</ul>
+</div>
+<!-- Columna 4: Implementos Facchini -->
+<div class="space-y-3">
+<h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider border-b border-blue-400/40 pb-2 flex items-center justify-between">
+<span class="">Implementos Facchini</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#FED894]"></span>
+</h4>
+<ul class="space-y-2 text-xs text-blue-100 font-medium">
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Semirremolques Plataforma</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Tolvas y Volquetes Hardox</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Furgones de Carga Seca</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Cisternas de Combustible</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Repuestos Genuinos Facchini</a></li>
+</ul>
+</div>
+<!-- Columna 5: Contacto & Legal -->
+<div class="space-y-3">
+<h4 class="font-heading text-sm font-bold text-white uppercase tracking-wider border-b border-blue-400/40 pb-2 flex items-center justify-between">
+<span class="">Contacto &amp; Legal</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#FED894]"></span>
+</h4>
+<ul class="space-y-2 text-xs text-blue-100 font-medium">
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Showroom Industrial Ate</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Patio de Maniobras Facchini</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Acerca de RODOPERU</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Políticas de Privacidad</a></li>
+<li class=""><a class="hover:text-white hover:underline transition-colors flex items-center gap-1" href="#"><span class="text-[#FED894]">›</span> Términos y Condiciones</a></li>
+<li class="pt-2">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white border border-white/25 text-xs font-semibold shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[15px] text-[#FED894]">menu_book</span>
+<span class="">Libro de Reclamaciones</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Copyright Bar -->
+<div class="mt-12 pt-6 border-t border-blue-400/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-100 font-mono">
+<p class="">© 2025 RODO PERÚ S.A.C. Todos los derechos reservados. RUC 20601234567.</p>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[15px] text-[#FED894]">verified_user</span>
+Garantía de Fábrica Oficial
+</span>
+<span class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[15px] text-[#25D366]">bolt</span>
+Tecnología Cero Emisiones
+</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Botón Flotante Oficial WhatsApp -->
+<a aria-label="Chatea con un asesor por WhatsApp" class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 h-13 py-3 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-white/30" href="https://wa.me/51987654321?text=Hola%20RODOPERU,%20deseo%20asesoria%20tecnica%20sobre%20su%20portafolio%20de%20flotas." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+<span class="font-heading text-xs font-bold hidden md:inline">Chatea con un asesor</span>
+</a>
+
+
+
+
+</body></html>

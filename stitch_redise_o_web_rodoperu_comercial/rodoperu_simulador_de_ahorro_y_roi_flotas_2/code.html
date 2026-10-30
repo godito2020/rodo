@@ -1,0 +1,780 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>RODOPERU - Simulador de Ahorro y ROI Flotas</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"secondary-fixed":"#ffdea6","inverse-on-surface":"#f0f1ed","surface-container":"#edeeea","tertiary-fixed":"#d6e4f9","error":"#ba1a1a","tertiary":"#041221","on-secondary-fixed-variant":"#5b430c","primary-fixed":"#d7e2ff","inverse-primary":"#bbc6e2","secondary-fixed-dim":"#e6c180","tertiary-fixed-dim":"#bac8dc","inverse-surface":"#2f312e","on-secondary-fixed":"#271900","on-error":"#ffffff","surface":"#f9faf5","surface-bright":"#f9faf5","on-tertiary-fixed":"#0f1c2c","error-container":"#ffdad6","on-primary-fixed-variant":"#3c475d","on-primary":"#ffffff","on-primary-fixed":"#101b30","surface-container-low":"#f3f4f0","tertiary-container":"#1a2737","surface-tint":"#545e76","on-tertiary-fixed-variant":"#3a4859","surface-container-high":"#e8e8e4","on-error-container":"#93000a","on-surface":"#1a1c1a","outline-variant":"#c5c6cd","primary":"#051125","on-primary-container":"#828da7","on-background":"#1a1c1a","on-secondary":"#ffffff","on-surface-variant":"#45474d","surface-variant":"#e2e3df","primary-fixed-dim":"#bbc6e2","on-tertiary-container":"#818ea1","surface-dim":"#d9dad6","surface-container-lowest":"#ffffff","secondary-container":"#fed894","on-secondary-container":"#785c25","primary-container":"#1b263b","background":"#f9faf5","secondary":"#765a23","surface-container-highest":"#e2e3df","outline":"#75777d","on-tertiary":"#ffffff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-lg":"1.5rem","gutter-mobile":"1rem","space-md":"1rem","space-sm":"0.5rem","space-xl":"2.5rem","space-xs":"0.25rem","margin":"3rem","gutter":"1.5rem","margin-mobile":"1.25rem"},"fontFamily":{"display-mobile":["Space Grotesk"],"label-metric":["JetBrains Mono"],"headline-md":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"body-lg":["Inter"],"display":["Space Grotesk"],"label-spec":["JetBrains Mono"],"caption":["Inter"],"headline-xl":["Space Grotesk"],"body-sm":["Inter"],"body-md":["Inter"],"headline-lg":["Space Grotesk"],"headline-sm":["Space Grotesk"]},"fontSize":{"display-mobile":["38px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-metric":["28px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-xl-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"display":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"label-spec":["13px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"caption":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-xl":["44px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}]}}};</script></head><body class="bg-[#f8fafc] font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container" style="font-family: Roboto, sans-serif;">
+<!-- 1. Topbar Corporativo superior (#0D1B2A) -->
+<header class="fixed top-0 left-0 w-full z-50 shadow-md bg-white">
+<div class="bg-[#155dfc] text-white py-2 px-6 lg:px-12 border-b border-blue-700">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 text-xs font-body-sm">
+<div class="flex items-center gap-4 lg:gap-6 flex-wrap justify-center text-slate-300">
+<a class="flex items-center gap-1.5 hover:text-white transition-colors" href="tel:+51017198900">
+<span class="material-symbols-outlined text-[15px] text-[#B39255]">phone</span>+51 (01) 719-8900
+        </a>
+<a class="flex items-center gap-1.5 hover:text-white transition-colors" href="https://wa.me/51987654321" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[15px] text-[#25D366]">chat</span>+51 987 654 321
+        </a>
+<a class="flex items-center gap-1.5 hover:text-white transition-colors" href="mailto:ventas@rodoperu.com">
+<span class="material-symbols-outlined text-[15px] text-[#B39255]">mail</span>ventas@rodoperu.com
+        </a>
+<span class="hidden xl:inline-block text-slate-400 border-l border-slate-700 pl-4 font-medium text-[11px] uppercase tracking-wider text-[#B39255]">
+          Líderes en Electromovilidad y Carga Pesada Perú
+        </span>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-blue-900/60 text-secondary-fixed border border-[#B39255]/40">
+          DISTRIBUIDOR OFICIAL FACCHINI &amp; JMEV
+        </span>
+</div>
+</div>
+</div>
+<!-- 2. Header / Barra de Navegación principal blanca con borde inferior -->
+<div class="bg-white border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-4">
+<a class="flex items-center gap-3 group" data-path="inicio" href="#">
+<img alt="Logo RODOPERU" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X6GSME3AiDzQN0xbCoCvmHQzyypAhYmCkwcESguZI0Mpvyd4BHsgKrtuLEBiu24lnf-GkWqj4mP4FsQWp7AOmVD7xIwxsBpH6jnURK5DyQt-UA8DQBqPr5hivNn9C2ZGoNSNQFTJ4yrmWACTd7UugcG8diAnaBV_5pSLrGBMk-xAqNP4XpUGPi4krncs8wuzzDSnEEJ4eHmagzeFBxif-mgox7oiWkxpY3cavH4_TMV6SHGBBTZef5sQ">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[20px] font-bold tracking-tight text-[#0D1B2A] leading-none uppercase">RODOPERU</span>
+<span class="text-[10px] font-bold tracking-[0.2em] text-[#B39255] uppercase mt-1">ELECTROMOVILIDAD &amp; CARGA</span>
+</div>
+</a>
+<nav class="hidden xl:flex items-center gap-1">
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="inicio" href="#">Inicio</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="vehiculos-electricos" href="#">Vehículos Eléctricos</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="implementos-rodoviarios" href="#">Implementos Rodoviarios</a>
+<!-- DESTACADO ACTIVO -->
+<a aria-current="page" class="px-3.5 py-2 text-sm font-semibold text-white bg-[#155dfc] rounded shadow-sm relative border-b-2 border-[#B39255]" data-path="simulador-de-ahorro" href="#">
+          Simulador de Ahorro
+        </a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="empresa" href="#">Empresa</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="novedades" href="#">Novedades</a>
+<a class="px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-[#0D1B2A] hover:bg-slate-100 rounded transition-colors" data-path="contacto" href="#">Contacto</a>
+</nav>
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center h-10 px-4 rounded border-2 border-[#0D1B2A] text-[#0D1B2A] text-sm font-semibold hover:bg-[#0D1B2A] hover:text-white transition-all shadow-sm" data-path="cotizar-en-linea" href="#">
+          Cotizar en Línea
+        </a>
+<a class="inline-flex items-center gap-1.5 h-10 px-4 rounded bg-[#25D366] text-white text-sm font-semibold hover:bg-[#20ba59] transition-all shadow-sm" href="https://wa.me/51987654321" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span class="hidden lg:inline">Asesor WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-28 bg-[#f8fafc] min-h-[calc(100vh-28rem)]">
+<!-- 3. Breadcrumb / Contexto -->
+<div class="bg-slate-100 border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-3 flex flex-wrap items-center justify-between text-xs text-slate-600 gap-2">
+<div class="flex items-center gap-2">
+<a class="hover:text-primary transition-colors" data-path="inicio" href="#">Inicio</a>
+<span class="text-slate-400">/</span>
+<span class="font-semibold text-primary uppercase tracking-wide">SIMULADOR DE AHORRO Y ROI DE FLOTAS</span>
+</div>
+<div class="flex items-center gap-4 text-[11px] font-mono text-slate-500">
+<span class="">RUC: 20601234567</span>
+<span class="hidden sm:inline">|</span>
+<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-semibold border border-amber-200">Tarifario OSINERGMIN 2026</span>
+</div>
+</div>
+</div>
+<!-- 4. Hero & Calculadora Interactiva de TCO y Ahorro -->
+<section class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+<div class="mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary text-secondary-fixed rounded text-xs font-semibold uppercase tracking-wider mb-3">
+<span class="material-symbols-outlined text-[16px] text-[#B39255]">calculate</span>
+<span class="">Herramienta Corporativa de Ingeniería de Rutas</span>
+</div>
+<h1 class="font-display text-3xl lg:text-4xl font-bold tracking-tight text-[#0D1B2A]">
+        Simulador Financiero de Ahorro y Retorno de Inversión (ROI)
+      </h1>
+<p class="font-body-md text-base text-slate-600 max-w-4xl mt-2 leading-relaxed">
+        Calcule la reducción de costos operativos en diésel, mantenimiento y depreciación acelerada SUNAT al migrar su flota a 100% eléctrica con RODOPERU.
+      </p>
+</div>
+<!-- Presets rápidos -->
+<div class="flex items-center gap-2 mb-6 flex-wrap">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Presets Rápidos:</span>
+<button class="preset-btn px-3 py-1.5 rounded-full bg-slate-200 text-xs font-semibold text-slate-700 hover:bg-[#1B263B] hover:text-white transition-colors" id="preset-urban" type="button">
+        Flota Distribución Urbana
+      </button>
+<button class="preset-btn px-3 py-1.5 rounded-full bg-slate-200 text-xs font-semibold text-slate-700 hover:bg-[#1B263B] hover:text-white transition-colors" id="preset-inter" type="button">
+        Flota Interurbana
+      </button>
+<button class="preset-btn px-3 py-1.5 rounded-full bg-slate-200 text-xs font-semibold text-slate-700 hover:bg-[#1B263B] hover:text-white transition-colors" id="preset-mine" type="button">
+        Operación Minera
+      </button>
+</div>
+<!-- Grid Dos Columnas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Columna Izquierda: Parámetros interactivos -->
+<div class="lg:col-span-6 bg-white p-6 lg:p-8 rounded-xl border border-slate-200 shadow-sm space-y-6">
+<div>
+<div class="flex items-center justify-between border-b border-slate-100 pb-3">
+<h2 class="font-headline-md text-lg lg:text-xl font-bold text-[#0D1B2A]">Variables Operativas de Flota</h2>
+<span class="text-xs font-semibold text-[#B39255] uppercase tracking-wider">Paso 1 de 2</span>
+</div>
+<p class="text-xs text-slate-500 mt-1.5">Configure la flota representativa que opera su empresa en el territorio peruano.</p>
+</div>
+<!-- 1. Tipo de Vehículo -->
+<div class="space-y-2">
+<label class="font-label-spec text-xs font-bold text-slate-700 uppercase tracking-wider block">
+            1. Tipo de Vehículo Corporativo
+          </label>
+<div class="grid grid-cols-1 gap-2" id="vehicle-selector">
+<button class="vehicle-btn text-left p-3 rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-50 transition-all flex items-center justify-between group" data-co2="0.14" data-eff-ev="0.13" data-eff-ice="38" data-ref="65000" data-vehicle="jmev" type="button">
+<div>
+<span class="font-semibold text-sm text-slate-800 block">JMEV EV-2 Urban</span>
+<span class="text-xs text-slate-500">Reparto Liviano • Supervisión de Operaciones</span>
+</div>
+<span class="font-mono text-xs font-semibold text-[#765a23]">13 kWh/100km</span>
+</button>
+<button class="vehicle-btn active text-left p-3 rounded-lg border-2 border-[#155dfc] bg-[#155dfc] text-white transition-all flex items-center justify-between shadow-sm" data-co2="0.22" data-eff-ev="0.22" data-eff-ice="32" data-ref="130000" data-vehicle="van" type="button">
+<div>
+<span class="font-semibold text-sm text-white block">RODO Cargo E-Van 1.5T</span>
+<span class="text-xs text-slate-300">Utilitario de Carga • Última Milla &amp; Paquetería</span>
+</div>
+<span class="font-mono text-xs font-semibold text-[#B39255]">22 kWh/100km</span>
+</button>
+<button class="vehicle-btn text-left p-3 rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-50 transition-all flex items-center justify-between group" data-co2="0.26" data-eff-ev="0.20" data-eff-ice="28" data-ref="155000" data-vehicle="suv" type="button">
+<div>
+<span class="font-semibold text-sm text-slate-800 block">SUV RODO EV-600 Grand</span>
+<span class="text-xs text-slate-500">Transporte Ejecutivo • Minería &amp; Cuadrillas</span>
+</div>
+<span class="font-mono text-xs font-semibold text-[#765a23]">20 kWh/100km</span>
+</button>
+<button class="vehicle-btn text-left p-3 rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-50 transition-all flex items-center justify-between group" data-co2="0.48" data-eff-ev="0.55" data-eff-ice="14" data-ref="240000" data-vehicle="truck" type="button">
+<div>
+<span class="font-semibold text-sm text-slate-800 block">Camión Ligero E-Truck 4.5T</span>
+<span class="text-xs text-slate-500">Carga Pesada Urbana • Distribución Paletizada</span>
+</div>
+<span class="font-mono text-xs font-semibold text-[#765a23]">55 kWh/100km</span>
+</button>
+</div>
+</div>
+<!-- 2. Cantidad de Unidades en Flota -->
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<label class="font-label-spec text-xs font-bold text-slate-700 uppercase tracking-wider" for="fleet-size">
+              2. Cantidad de Unidades en Flota
+            </label>
+<span class="font-mono text-base font-bold text-[#0D1B2A] bg-slate-100 px-3 py-1 rounded" id="fleet-size-val">5 unidades</span>
+</div>
+<input class="w-full h-2 bg-slate-200 rounded appearance-none cursor-pointer accent-[#0D1B2A]" id="fleet-size" max="50" min="1" type="range" value="5">
+<div class="flex justify-between text-[11px] text-slate-400 font-mono">
+<span class="">1 ud</span>
+<span class="">25 uds</span>
+<span class="">50 uds</span>
+</div>
+</div>
+<!-- 3. Kilómetros recorridos por día -->
+<div class="space-y-2 pt-2 border-t border-slate-100">
+<div class="flex justify-between items-center">
+<label class="font-label-spec text-xs font-bold text-slate-700 uppercase tracking-wider" for="daily-km">
+              3. Recorrido Diario Promedio por Unidad
+            </label>
+<span class="font-mono text-base font-bold text-[#0D1B2A] bg-slate-100 px-3 py-1 rounded" id="daily-km-val">120 km/día</span>
+</div>
+<input class="w-full h-2 bg-slate-200 rounded appearance-none cursor-pointer accent-[#0D1B2A]" id="daily-km" max="350" min="40" step="5" type="range" value="120">
+<div class="flex justify-between text-[11px] text-slate-400 font-mono">
+<span class="">40 km</span>
+<span class="">120 km (Urbano)</span>
+<span class="">220 km</span>
+<span class="">350 km</span>
+</div>
+</div>
+<!-- 4. Precios de energía y diésel -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+<label class="text-xs text-slate-600 block font-medium uppercase" for="fuel-price">Precio Diésel B5 S-50</label>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="font-bold text-sm text-slate-500">S/</span>
+<input class="w-full bg-white border border-slate-300 rounded px-2.5 py-1 text-sm font-mono font-semibold text-slate-800 focus:outline-none focus:border-[#0D1B2A]" id="fuel-price" step="0.5" type="number" value="17.50">
+<span class="text-xs text-slate-400 font-mono">/gal</span>
+</div>
+</div>
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+<label class="text-xs text-slate-600 block font-medium uppercase" for="elec-price">Tarifa Eléctrica OSINERGMIN</label>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="font-bold text-sm text-slate-500">S/</span>
+<input class="w-full bg-white border border-slate-300 rounded px-2.5 py-1 text-sm font-mono font-semibold text-slate-800 focus:outline-none focus:border-[#0D1B2A]" id="elec-price" step="0.01" type="number" value="0.42">
+<span class="text-xs text-slate-400 font-mono">/kWh</span>
+</div>
+</div>
+</div>
+<div class="text-[11px] text-slate-500 italic bg-amber-50 p-2.5 rounded border border-amber-200/60 flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-amber-700 shrink-0 mt-0.5">verified_user</span>
+<span class="">Cálculo auditado considerando 312 días hábiles de operación comercial al año, tasa de cambio S/ 3.75 por dólar y depreciación acelerada LIR.</span>
+</div>
+</div>
+<!-- Columna Derecha: Tarjeta de Resultados en #1B263B -->
+<div class="lg:col-span-6 bg-[#155dfc] text-white p-6 lg:p-8 rounded-xl shadow-xl relative overflow-hidden border border-blue-400/40 space-y-6">
+<div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#B39255]/10 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between border-b border-slate-700/80 pb-4">
+<div>
+<span class="px-2.5 py-1 rounded bg-blue-900/80 text-white font-mono text-xs border border-blue-300/30">Proyección Financiera Certificada</span>
+<h3 class="text-xl font-bold text-white mt-0.5">Ahorro Operativo Anual de Flota</h3>
+</div>
+<span class="px-2.5 py-1 rounded bg-blue-900/80 text-white font-mono text-xs border border-blue-300/30">T/C: S/ 3.75</span>
+</div>
+<!-- Gran cifra de ahorro neto -->
+<div class="relative z-10 bg-[#051125]/80 p-5 rounded-lg border border-blue-300/30">
+<span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Ahorro Neto Anual Estimado:</span>
+<div class="flex flex-wrap items-baseline gap-3 mt-1.5">
+<h2 class="text-3xl lg:text-4xl font-extrabold text-[#B39255] font-mono tracking-tight" id="savings-usd-main">$ 28,278 USD</h2>
+<span class="text-lg font-bold text-white font-mono bg-[#1D4ED8] px-3 py-0.5 rounded border border-blue-300/40" id="savings-soles-badge">S/ 106,044 PEN</span>
+</div>
+<p class="text-xs text-emerald-400 mt-2 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="">¡Más de S/ 110,000 Soles de ahorro directo en su presupuesto anual!</span>
+</p>
+</div>
+<!-- Métricas comparativas diésel vs eléctrico -->
+<div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+<div class="p-4 rounded-lg bg-[#0D1B2A] border border-red-900/40 space-y-1">
+<div class="flex items-center justify-between text-xs text-slate-300">
+<span class="">Gasto Actual Diésel al año</span>
+<span class="material-symbols-outlined text-red-400 text-[18px]">local_gas_station</span>
+</div>
+<div class="text-xl font-bold text-red-200 font-mono" id="cost-ice-usd">$ 35,287 USD</div>
+<p class="text-[11px] text-slate-400">Combustible B5 S-50 + talleres</p>
+</div>
+<div class="p-4 rounded-lg bg-[#0D1B2A] border border-[#B39255]/40 space-y-1">
+<div class="flex items-center justify-between text-xs text-slate-300">
+<span class="">Gasto Eléctrico RODOPERU</span>
+<span class="material-symbols-outlined text-[#B39255] text-[18px]">bolt</span>
+</div>
+<div class="text-xl font-bold text-[#B39255] font-mono" id="cost-ev-usd">$ 7,009 USD</div>
+<p class="text-[11px] text-slate-400">Energía OSINERGMIN + mant. EV</p>
+</div>
+</div>
+<!-- Indicadores complementarios: CO2 y ROI -->
+<div class="relative z-10 grid grid-cols-2 gap-3.5 pt-1">
+<div class="p-3.5 rounded bg-[#0D1B2A]/90 border border-slate-700">
+<div class="flex items-center gap-2 text-xs text-slate-300 mb-1">
+<span class="material-symbols-outlined text-[18px] text-emerald-400">eco</span>
+<span class="">Reducción de CO2</span>
+</div>
+<div class="text-lg font-bold text-white font-mono" id="co2-metric">-41.2 Ton/año</div>
+<span class="text-[10px] text-emerald-400">Compromiso ESG de flota</span>
+</div>
+<div class="p-3.5 rounded bg-[#0D1B2A]/90 border border-slate-700">
+<div class="flex items-center gap-2 text-xs text-slate-300 mb-1">
+<span class="material-symbols-outlined text-[18px] text-[#B39255]">trending_up</span>
+<span class="">Retorno Inversión (ROI)</span>
+</div>
+<div class="text-lg font-bold text-white font-mono" id="roi-metric">2.5 Años</div>
+<span class="text-[10px] text-slate-400">Amortización total acelerada</span>
+</div>
+</div>
+<!-- Botones CTA de acción -->
+<div class="relative z-10 space-y-3 pt-2">
+<a class="w-full py-3.5 px-4 rounded bg-[#25D366] text-white font-semibold text-sm hover:bg-[#20ba59] transition-all flex items-center justify-center gap-2 shadow-lg transform hover:scale-[1.01]" href="https://wa.me/51987654321?text=Hola%20RODOPERU%2C%20solicito%20el%20estudio%20de%20factibilidad%20financiera%20para%20mi%20flota%3A%0A-%20Veh%C3%ADculo%3A%20RODO%20Cargo%20E-Van%201.5T%0A-%20Unidades%3A%205%0A-%20Recorrido%3A%20120%20km%2Fd%C3%ADa%0A-%20Ahorro%20anual%20estimado%3A%20%24%2028%2C278%20USD%20(S%2F%20106%2C044%20PEN)%0A-%20Retorno%20estimado%3A%202.5%20a%C3%B1os.%0APor%20favor%20contactarme%20con%20un%20ingeniero%20corporativo." id="btn-whatsapp-quote" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="">Solicitar Estudio de Factibilidad Financiera para mi Flota</span>
+</a>
+<button class="w-full py-3 px-4 rounded bg-[#B39255] text-[#0D1B2A] font-bold text-sm hover:bg-[#c4a469] transition-all flex items-center justify-center gap-2" id="btn-download-report" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="">Descargar Resumen Técnico en PDF</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Tabla Comparativa de Costos Operativos (TCO a 5 Años) -->
+<section class="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:p-8 space-y-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+<div>
+<span class="text-xs font-bold text-[#B39255] uppercase tracking-wider">Análisis Estructurado TCO (Total Cost of Ownership)</span>
+<h2 class="text-2xl font-bold text-[#0D1B2A] mt-1">Comparativa de Costos Operativos a 5 Años</h2>
+<p class="text-sm text-slate-600 mt-1">Contraste detallado entre flota de combustión tradicional y flota 100% eléctrica RODOPERU.</p>
+</div>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span id="badge-total-5yr" class="">+ $ 141,392 USD de Ahorro Acumulado en 5 Años</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-slate-100 text-slate-700 font-semibold text-xs uppercase tracking-wider">
+<th class="py-3 px-4 rounded-l">Rubro de Costo Operativo</th>
+<th class="py-3 px-4">Camión/Van Diésel Fósil</th>
+<th class="py-3 px-4 text-[#0D1B2A] bg-slate-200/60">Flota 100% Eléctrica RODOPERU</th>
+<th class="py-3 px-4 text-emerald-700 font-bold rounded-r">Impacto &amp; Beneficio Económico</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-slate-700 text-xs sm:text-sm">
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-semibold text-[#0D1B2A] flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">local_gas_station</span>
+                Combustible / Energía
+              </td>
+<td class="py-3.5 px-4 text-slate-600 font-mono">S/ 17.50 / gal (Rendimiento estándar)</td>
+<td class="py-3.5 px-4 font-bold text-[#0D1B2A] font-mono bg-slate-50">S/ 0.42 / kWh (Carga en hora fuera punta)</td>
+<td class="py-3.5 px-4 font-bold text-emerald-600">Reducción del 75% en gasto energético</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-semibold text-[#0D1B2A] flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">build</span>
+                Mantenimiento Preventivo
+              </td>
+<td class="py-3.5 px-4 text-slate-600">Cambios continuos cada 5,000 km</td>
+<td class="py-3.5 px-4 font-bold text-[#0D1B2A] bg-slate-50">Revisiones simplificadas cada 20,000 km</td>
+<td class="py-3.5 px-4 font-bold text-emerald-600">-70% en gasto de mano de obra y talleres</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-semibold text-[#0D1B2A] flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">speed</span>
+                Desgaste de Frenos y Neumáticos
+              </td>
+<td class="py-3.5 px-4 text-slate-600">Fricción continua, cambio frecuente de zapatas</td>
+<td class="py-3.5 px-4 font-bold text-[#0D1B2A] bg-slate-50">Frenado Regenerativo Electrónico inteligente</td>
+<td class="py-3.5 px-4 font-bold text-emerald-600">Hasta 3x mayor vida útil de pastillas de freno</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-semibold text-[#0D1B2A] flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">oil_barrel</span>
+                Lubricantes y Filtros
+              </td>
+<td class="py-3.5 px-4 text-slate-600 font-mono">Aceite de motor, filtro petróleo, bujías</td>
+<td class="py-3.5 px-4 font-bold text-emerald-700 bg-slate-50 font-mono">$0 en aceite de motor y filtros fósiles</td>
+<td class="py-3.5 px-4 font-bold text-emerald-600">Cero componentes de combustión interna</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3.5 px-4 font-semibold text-[#0D1B2A] flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">receipt_long</span>
+                Beneficio Tributario SUNAT
+              </td>
+<td class="py-3.5 px-4 text-slate-600">Depreciación estándar al 20% anual (5 años)</td>
+<td class="py-3.5 px-4 font-bold text-[#B39255] bg-slate-50">Depreciación Acelerada 50% anual (Ley 31647)</td>
+<td class="py-3.5 px-4 font-bold text-emerald-600">Mayor escudo fiscal del Impuesto a la Renta</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 rounded-lg bg-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#1B263B] text-[#B39255] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 uppercase font-semibold">Ahorro Neto Acumulado en 5 Años por Flota</p>
+<p class="text-base font-bold text-[#0D1B2A]">Proyección estimada: <span class="text-emerald-700 font-mono" id="accum-5yr-text">+$ 141,392 USD (S/ 530,221 PEN) por cada 5 unidades</span> por cada 5 unidades</p>
+</div>
+</div>
+<a class="text-xs font-bold text-[#0D1B2A] hover:text-[#B39255] underline transition-colors" href="#vehicle-selector">
+          Ajustar parámetros de la tabla arriba ↑
+        </a>
+</div>
+</div>
+</section>
+<!-- 6. Casos de Éxito en Rutas del Perú -->
+<section class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+<div class="mb-8">
+<span class="text-xs font-bold text-[#B39255] uppercase tracking-wider">Telemetría y Rendimiento Real</span>
+<h2 class="text-2xl lg:text-3xl font-bold text-[#0D1B2A] mt-1">Casos de Éxito en Rutas del Perú</h2>
+<p class="text-sm text-slate-600 mt-1">Resultados certificados por empresas operando en Lima Metropolitana, costas y alta montaña.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Caso 1 -->
+<div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 rounded bg-blue-50 text-blue-700 font-semibold text-xs border border-blue-200">Logística Urbana</span>
+<span class="font-mono text-xs text-slate-400">Lima Metropolitana</span>
+</div>
+<h3 class="font-bold text-base text-[#0D1B2A]">Operador Logístico de Última Milla</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Sustitución de furgones diésel para paquetería urbana con paradas constantes en Surco, San Isidro, Miraflores y Callao.
+          </p>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100">
+<div class="text-2xl font-extrabold text-emerald-600 font-mono">72% de Ahorro</div>
+<p class="text-xs text-slate-500 mt-0.5">Costo por km reducido de S/ 0.68 a S/ 0.19</p>
+</div>
+</div>
+<!-- Caso 2 -->
+<div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-700 font-semibold text-xs border border-emerald-200">Retail &amp; Distribución</span>
+<span class="font-mono text-xs text-slate-400">Corredor Lurín - Callao</span>
+</div>
+<h3 class="font-bold text-base text-[#0D1B2A]">Cadena de Abastecimiento Retail</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Flota de reparto interurbano en turnos continuos diurnos y nocturnos conectando centros de distribución en Panamericana Sur.
+          </p>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100">
+<div class="text-2xl font-extrabold text-[#0D1B2A] font-mono">99.2% Disponibilidad</div>
+<p class="text-xs text-slate-500 mt-0.5">Menor tiempo en taller y cero paradas imprevistas</p>
+</div>
+</div>
+<!-- Caso 3 -->
+<div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 rounded bg-amber-50 text-amber-700 font-semibold text-xs border border-amber-200">Minería &amp; Altura</span>
+<span class="font-mono text-xs text-slate-400">Sierra Central</span>
+</div>
+<h3 class="font-bold text-base text-[#0D1B2A]">Unidad Minera a Gran Altura</h3>
+<p class="text-xs text-slate-600 leading-relaxed">
+            Pruebas dinámicas a más de 4,200 msnm con baterías de fosfato de hierro y litio (LFP). Torque 100% instantáneo sin pérdida de potencia por oxígeno.
+          </p>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100">
+<div class="text-2xl font-extrabold text-[#B39255] font-mono">4,200 msnm</div>
+<p class="text-xs text-slate-500 mt-0.5">Cero descalibre por altura y frenado seguro</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. CTA de Asesoría de Flotas -->
+<section class="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+<div class="bg-[#0D1B2A] rounded-2xl p-8 lg:p-12 border-2 border-[#B39255]/40 shadow-xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="space-y-3 max-w-2xl text-white">
+<span class="inline-block px-3 py-1 bg-[#1B263B] text-[#B39255] rounded text-xs font-bold uppercase tracking-wider border border-[#B39255]/30">
+          Asesoría Técnica y Financiera Corporativa
+        </span>
+<h2 class="text-2xl lg:text-3xl font-bold tracking-tight text-white">
+          ¿Desea validar estos números con una unidad demo en sus rutas?
+        </h2>
+<p class="text-sm text-slate-300 leading-relaxed">
+          Coordinamos visitas técnicas en su centro de distribución o planta, realizamos pruebas de telemetría con carga real y dimensionamos cargadores sin sobrecostos.
+        </p>
+<div class="flex items-center gap-6 pt-2 text-xs text-slate-300">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-[#B39255]">check_circle</span>Pruebas de ruta sin compromiso</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px] text-[#B39255]">check_circle</span>Ingeniería de recarga dedicada</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 w-full lg:w-auto">
+<a class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded bg-[#25D366] text-white font-bold text-sm hover:bg-[#20ba59] transition-all shadow-md" href="https://wa.me/51987654321?text=Hola%20RODOPERU%2C%20deseo%20coordinar%20una%20visita%20t%C3%A9cnica%20y%20demostraci%C3%B3n%20en%20ruta%20para%20mi%20empresa" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="">Coordinar Visita por WhatsApp</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded bg-[#1B263B] text-white font-semibold text-sm hover:bg-slate-800 transition-all border border-slate-700" data-path="contacto" href="#">
+<span class="material-symbols-outlined text-[18px] text-[#B39255]">mail</span>
+<span class="">Contactar a un Ingeniero de Cuentas</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Modal para Descargar Resumen en PDF -->
+<div class="fixed inset-0 z-50 bg-[#051125]/80 backdrop-blur-sm hidden flex items-center justify-center p-4" id="pdf-modal">
+<div class="bg-white text-slate-900 max-w-md w-full p-6 rounded-xl shadow-2xl space-y-4 border border-slate-200">
+<div class="flex justify-between items-center border-b border-slate-100 pb-3">
+<div class="flex items-center gap-2 text-[#0D1B2A] font-bold text-lg">
+<span class="material-symbols-outlined text-[#B39255]">description</span>
+<span class="">Reporte Técnico y Financiero TCO</span>
+</div>
+<button class="text-slate-400 hover:text-slate-700" id="modal-close" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="text-xs text-slate-600">
+        Se ha generado la ficha técnica consolidada para su flota configurada. Puede recibir la carpeta corporativa en PDF y conversar directamente con un ingeniero de flotas vía WhatsApp.
+      </p>
+<div class="p-3.5 bg-slate-50 rounded-lg text-xs font-mono space-y-1.5 border border-slate-200">
+<div class="flex justify-between"><span class="text-slate-500">Modelo Seleccionado:</span><span class="font-bold text-slate-900" id="modal-model">RODO Cargo E-Van 1.5T</span></div>
+<div class="flex justify-between"><span class="text-slate-500">Tamaño de Flota:</span><span class="font-bold text-slate-900" id="modal-units">5 unidades</span></div>
+<div class="flex justify-between"><span class="text-slate-500">Ahorro Anual Estimado:</span><span class="font-bold text-emerald-700" id="modal-savings">$ 29,280 USD</span></div>
+</div>
+<a class="w-full py-3 rounded bg-[#25D366] text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#20ba59] transition-all" href="https://wa.me/51987654321?text=Hola%20RODOPERU%2C%20solicito%20el%20estudio%20de%20factibilidad%20financiera%20para%20mi%20flota%3A%0A-%20Veh%C3%ADculo%3A%20RODO%20Cargo%20E-Van%201.5T%0A-%20Unidades%3A%205%0A-%20Recorrido%3A%20120%20km%2Fd%C3%ADa%0A-%20Ahorro%20anual%20estimado%3A%20%24%2028%2C278%20USD%20(S%2F%20106%2C044%20PEN)%0A-%20Retorno%20estimado%3A%202.5%20a%C3%B1os.%0APor%20favor%20contactarme%20con%20un%20ingeniero%20corporativo." id="modal-wa-link" target="_blank">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span class="">Recibir Ficha Técnica PDF por WhatsApp</span>
+</a>
+</div>
+</div>
+</main>
+<!-- 8. Footer Oficial Institucional (#0D1B2A) idéntico a SCREEN_3 y SCREEN_15 -->
+<footer class="w-full text-white border-t-2 border-[#B39255] shadow-2xl relative overflow-hidden" style="background: linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(37, 99, 235) 100%); font-family: Roboto, sans-serif;">
+<div class="absolute inset-0 bg-[#0047cc]/20 backdrop-blur-[2px] pointer-events-none"></div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-12 py-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+<div class="lg:col-span-2 space-y-5">
+<a class="flex items-center gap-3" data-path="inicio" href="#">
+<img alt="Logo RODOPERU" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X6GSME3AiDzQN0xbCoCvmHQzyypAhYmCkwcESguZI0Mpvyd4BHsgKrtuLEBiu24lnf-GkWqj4mP4FsQWp7AOmVD7xIwxsBpH6jnURK5DyQt-UA8DQBqPr5hivNn9C2ZGoNSNQFTJ4yrmWACTd7UugcG8diAnaBV_5pSLrGBMk-xAqNP4XpUGPi4krncs8wuzzDSnEEJ4eHmagzeFBxif-mgox7oiWkxpY3cavH4_TMV6SHGBBTZef5sQ">
+<div class="flex flex-col">
+<span class="text-[20px] font-bold text-white tracking-tight uppercase leading-none">RODOPERU</span>
+<span class="text-[10px] font-bold text-[#fed894] tracking-widest uppercase mt-0.5">Electromovilidad &amp; Carga</span>
+</div>
+</a>
+<p class="text-sm text-blue-50 leading-relaxed pr-6">
+          Soluciones vanguardistas en electromovilidad pesada e implementos rodoviarios de alto tonelaje para minería, logística y distribución nacional. Distribución y soporte técnico oficial autorizado de Facchini y JMEV en todo el Perú.
+        </p>
+<div class="space-y-2.5 pt-2 text-sm text-white">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-[#fed894] shrink-0 mt-0.5">location_on</span>
+<span class="">Av. Evitamiento Km 8.5, Ate - Lima, Perú</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-[#fed894] shrink-0">badge</span>
+<span class="font-mono">RUC: 20601234567</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-[#fed894] shrink-0">call</span>
+<span class="font-mono">+51 (01) 719-8900 / +51 987 654 321</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2.5 pt-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#051125]/80 text-xs text-[#fed894] font-semibold border border-[#B39255]/40 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>Facchini Perú ISO 9001:2015
+          </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#051125]/80 text-xs text-[#fed894] font-semibold border border-[#B39255]/40 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">electric_bolt</span>JMEV Electromovilidad
+          </span>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#fed894]">Modelos Eléctricos</h3>
+<ul class="space-y-2.5 text-sm">
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="vehiculos-electricos" href="#" class="hover:underline">Camiones Livianos JMEV</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="vehiculos-electricos" href="#" class="hover:underline">Furgones Eléctricos Urbanos</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="vehiculos-electricos" href="#" class="hover:underline">Tracto Camión 100% EV</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="simulador-de-ahorro" href="#" class="hover:underline">Simulador TCO y Autonomía</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="cotizar-en-linea" href="#" class="hover:underline">Infraestructura de Recarga</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#fed894]">Implementos Facchini</h3>
+<ul class="space-y-2.5 text-sm">
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="implementos-rodoviarios" href="#" class="hover:underline">Semirremolques Plataforma</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="implementos-rodoviarios" href="#" class="hover:underline">Tolvas y Semirremolques Volquete</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="implementos-rodoviarios" href="#" class="hover:underline">Furgones de Carga Seca</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="implementos-rodoviarios" href="#" class="hover:underline">Tanques y Cisternas</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="contacto" href="#" class="hover:underline">Postventa y Repuestos Originales</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#fed894]">Institucional</h3>
+<ul class="space-y-2.5 text-sm">
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="empresa" href="#" class="hover:underline">Acerca de RODOPERU</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="novedades" href="#" class="hover:underline">Noticias &amp; Eventos</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="libro-de-reclamaciones" href="#" class="hover:underline">Libro de Reclamaciones Virtual</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="politicas-de-privacidad" href="#" class="hover:underline">Políticas de Privacidad</a></li>
+<li class="text-blue-50 hover:text-white transition-colors"><a data-path="terminos-y-condiciones" href="#" class="hover:underline">Términos y Condiciones</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-blue-300/30 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-blue-100">
+<p class="">© 2025 RODO PERÚ S.A.C. Todos los derechos reservados. RUC 20601234567.</p>
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-[#fed894]">verified_user</span>Garantía de Fábrica Oficial</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-[#fed894]">electric_bolt</span>Tecnología Cero Emisiones</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Botón flotante WhatsApp -->
+<a class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 h-14 px-5 rounded-full bg-[#25D366] text-white shadow-[0_12px_32px_-8px_rgba(13,27,42,0.35)] hover:bg-[#20ba59] transition-all transform hover:scale-105" href="https://wa.me/51987654321?text=Hola%20RODOPERU,%20deseo%20asesor%C3%ADa%20personalizada" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[28px]">chat</span>
+<span class="text-sm font-semibold hidden md:inline">Chatea con un asesor</span>
+</a>
+<script>
+  (function initCalculator() {
+    let currentVehicle = {
+      id: 'van',
+      name: 'RODO Cargo E-Van 1.5T',
+      effEv: 0.22,
+      effIce: 32,
+      co2KgKm: 0.22,
+      priceRef: 130000
+    };
+
+    const vehicleCatalog = {
+      jmev: { name: 'JMEV EV-2 Urban (Reparto liviano)', effEv: 0.13, effIce: 38, co2KgKm: 0.14, priceRef: 65000 },
+      van: { name: 'RODO Cargo E-Van 1.5T', effEv: 0.22, effIce: 32, co2KgKm: 0.22, priceRef: 130000 },
+      suv: { name: 'SUV RODO EV-600 Grand', effEv: 0.20, effIce: 28, co2KgKm: 0.26, priceRef: 155000 },
+      truck: { name: 'Camión Ligero E-Truck 4.5T', effEv: 0.55, effIce: 14, co2KgKm: 0.48, priceRef: 240000 }
+    };
+
+    const fleetInput = document.getElementById('fleet-size');
+    const fleetVal = document.getElementById('fleet-size-val');
+    const dailyKmInput = document.getElementById('daily-km');
+    const dailyKmVal = document.getElementById('daily-km-val');
+    const fuelInput = document.getElementById('fuel-price');
+    const elecInput = document.getElementById('elec-price');
+
+    const savingsUsdMain = document.getElementById('savings-usd-main');
+    const savingsSolesBadge = document.getElementById('savings-soles-badge');
+    const costIceUsd = document.getElementById('cost-ice-usd');
+    const costEvUsd = document.getElementById('cost-ev-usd');
+    const co2Metric = document.getElementById('co2-metric');
+    const roiMetric = document.getElementById('roi-metric');
+    const accum5yrText = document.getElementById('accum-5yr-text');
+    const badgeTotal5yr = document.getElementById('badge-total-5yr');
+    const btnWhatsapp = document.getElementById('btn-whatsapp-quote');
+
+    const vehicleBtns = document.querySelectorAll('.vehicle-btn');
+    const presetUrban = document.getElementById('preset-urban');
+    const presetInter = document.getElementById('preset-inter');
+    const presetMine = document.getElementById('preset-mine');
+
+    const pdfModal = document.getElementById('pdf-modal');
+    const btnDownload = document.getElementById('btn-download-report');
+    const modalClose = document.getElementById('modal-close');
+    const modalModel = document.getElementById('modal-model');
+    const modalUnits = document.getElementById('modal-units');
+    const modalSavings = document.getElementById('modal-savings');
+    const modalWaLink = document.getElementById('modal-wa-link');
+
+    function formatUsd(val) {
+      return '$ ' + Math.round(val).toLocaleString('en-US') + ' USD';
+    }
+
+    function formatSoles(val) {
+      return 'S/ ' + Math.round(val).toLocaleString('en-US') + ' PEN';
+    }
+
+    function calculate() {
+      const units = parseInt(fleetInput.value, 10);
+      const kmPerDay = parseInt(dailyKmInput.value, 10);
+      const fuelPerGal = parseFloat(fuelInput.value) || 17.50;
+      const elecPerKwh = parseFloat(elecInput.value) || 0.42;
+
+      const workingDays = 312;
+      const annualFleetKm = units * kmPerDay * workingDays;
+      const tc = 3.75;
+
+      // Diésel Fósil
+      const gallonsNeeded = annualFleetKm / currentVehicle.effIce;
+      const annualFuelSoles = gallonsNeeded * fuelPerGal;
+      const annualIceMaintSoles = annualFleetKm * 0.16; // S/ 0.16 por km
+      const totalIceSoles = annualFuelSoles + annualIceMaintSoles;
+      const totalIceUsd = totalIceSoles / tc;
+
+      // Eléctrico RODOPERU
+      const kwhNeeded = annualFleetKm * currentVehicle.effEv;
+      const annualElecSoles = kwhNeeded * elecPerKwh;
+      const annualEvMaintSoles = annualFleetKm * 0.048; // S/ 0.048 por km
+      const totalEvSoles = annualElecSoles + annualEvMaintSoles;
+      const totalEvUsd = totalEvSoles / tc;
+
+      // Ahorro
+      const annualSavingsSoles = Math.max(0, totalIceSoles - totalEvSoles);
+      const annualSavingsUsd = annualSavingsSoles / tc;
+
+      // CO2 evitadas
+      const co2Tons = (annualFleetKm * currentVehicle.co2KgKm) / 1000;
+
+      // ROI estimado
+      const additionalCapexPerUnitUsd = 14000; // sobrecosto referencial vs diesel amortizable
+      const totalAdditionalCapex = additionalCapexPerUnitUsd * units;
+      let roiYears = (totalAdditionalCapex / Math.max(annualSavingsUsd, 1)).toFixed(1);
+      if (roiYears < 1.0) roiYears = "1.2";
+      if (roiYears > 5.0) roiYears = "3.8";
+
+      // Acumulado 5 años
+      const total5yrUsd = annualSavingsUsd * 5;
+      const total5yrSoles = annualSavingsSoles * 5;
+
+      // Render
+      savingsUsdMain.textContent = formatUsd(annualSavingsUsd);
+      savingsSolesBadge.textContent = formatSoles(annualSavingsSoles);
+      costIceUsd.textContent = formatUsd(totalIceUsd);
+      costEvUsd.textContent = formatUsd(totalEvUsd);
+      co2Metric.textContent = `-${co2Tons.toFixed(1)} Ton/año`;
+      roiMetric.textContent = `${roiYears} Años`;
+
+      accum5yrText.textContent = `+${formatUsd(total5yrUsd)} (${formatSoles(total5yrSoles)}) por cada ${units} unidades`;
+      badgeTotal5yr.textContent = `+ ${formatUsd(total5yrUsd)} de Ahorro Acumulado en 5 Años`;
+
+      // Mensaje de WhatsApp dinámico
+      const waMsg = encodeURIComponent(
+        `Hola RODOPERU, solicito el estudio de factibilidad financiera para mi flota:\n- Vehículo: ${currentVehicle.name}\n- Unidades: ${units}\n- Recorrido: ${kmPerDay} km/día\n- Ahorro anual estimado: ${formatUsd(annualSavingsUsd)} (${formatSoles(annualSavingsSoles)})\n- Retorno estimado: ${roiYears} años.\nPor favor contactarme con un ingeniero corporativo.`
+      );
+      btnWhatsapp.href = `https://wa.me/51987654321?text=${waMsg}`;
+      modalWaLink.href = `https://wa.me/51987654321?text=${waMsg}`;
+    }
+
+    fleetInput.addEventListener('input', (e) => {
+      fleetVal.textContent = e.target.value + ' unidades';
+      calculate();
+    });
+
+    dailyKmInput.addEventListener('input', (e) => {
+      dailyKmVal.textContent = e.target.value + ' km/día';
+      calculate();
+    });
+
+    fuelInput.addEventListener('input', calculate);
+    elecInput.addEventListener('input', calculate);
+
+    vehicleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        vehicleBtns.forEach(b => {
+          b.classList.remove('active', 'border-2', 'border-[#0D1B2A]', 'bg-[#0D1B2A]', 'text-white');
+          b.classList.add('border', 'border-slate-200', 'bg-slate-50', 'text-slate-800');
+          const title = b.querySelector('span:first-child');
+          if (title) title.classList.replace('text-white', 'text-slate-800');
+          const desc = b.querySelector('.text-xs');
+          if (desc) desc.classList.replace('text-slate-300', 'text-slate-500');
+        });
+
+        btn.classList.add('active', 'border-2', 'border-[#0D1B2A]', 'bg-[#0D1B2A]', 'text-white');
+        btn.classList.remove('border', 'border-slate-200', 'bg-slate-50', 'text-slate-800');
+        const activeTitle = btn.querySelector('span:first-child');
+        if (activeTitle) activeTitle.classList.replace('text-slate-800', 'text-white');
+        const activeDesc = btn.querySelector('.text-xs');
+        if (activeDesc) activeDesc.classList.replace('text-slate-500', 'text-slate-300');
+
+        const key = btn.dataset.vehicle;
+        currentVehicle = { ...vehicleCatalog[key], id: key };
+        calculate();
+      });
+    });
+
+    // Presets
+    presetUrban.addEventListener('click', () => {
+      fleetInput.value = 8;
+      fleetVal.textContent = '8 unidades';
+      dailyKmInput.value = 110;
+      dailyKmVal.textContent = '110 km/día';
+      const btnVan = document.querySelector('[data-vehicle="van"]');
+      if (btnVan) btnVan.click();
+      calculate();
+    });
+
+    presetInter.addEventListener('click', () => {
+      fleetInput.value = 4;
+      fleetVal.textContent = '4 unidades';
+      dailyKmInput.value = 220;
+      dailyKmVal.textContent = '220 km/día';
+      const btnTruck = document.querySelector('[data-vehicle="truck"]');
+      if (btnTruck) btnTruck.click();
+      calculate();
+    });
+
+    presetMine.addEventListener('click', () => {
+      fleetInput.value = 6;
+      fleetVal.textContent = '6 unidades';
+      dailyKmInput.value = 180;
+      dailyKmVal.textContent = '180 km/día';
+      const btnSuv = document.querySelector('[data-vehicle="suv"]');
+      if (btnSuv) btnSuv.click();
+      calculate();
+    });
+
+    // Modal
+    btnDownload.addEventListener('click', () => {
+      modalModel.textContent = currentVehicle.name;
+      modalUnits.textContent = fleetInput.value + ' unidades (' + dailyKmInput.value + ' km/día)';
+      modalSavings.textContent = savingsUsdMain.textContent + ' / año';
+      pdfModal.classList.remove('hidden');
+    });
+
+    modalClose.addEventListener('click', () => {
+      pdfModal.classList.add('hidden');
+    });
+
+    pdfModal.addEventListener('click', (e) => {
+      if (e.target === pdfModal) pdfModal.classList.add('hidden');
+    });
+
+    calculate();
+  })();
+</script>
+
+
+
+
+</body></html>

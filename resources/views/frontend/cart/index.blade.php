@@ -1,140 +1,203 @@
 @extends('layouts.app')
 
-@section('title', 'Carrito de Compras | RODOPERU')
+@section('title', 'Carrito de Compras Corporativo | RODOPERU')
 
 @php
     $currency = \App\Models\Setting::get('currency_symbol', 'USD $');
     $taxRate = (float)\App\Models\Setting::get('tax_rate', 18);
     $tax = round($total * ($taxRate / 100), 2);
     $grandTotal = $total + $tax;
+    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '+51987654321');
+    $whatsappClean = preg_replace('/[^0-9]/', '', $whatsappNumber);
 @endphp
 
 @section('content')
-<div class="py-4" style="background: #091022; border-bottom: 1px solid var(--border-dark);">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-2" style="font-size: 0.85rem;">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-info text-decoration-none">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('products.index') }}" class="text-info text-decoration-none">Productos</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">Carrito de Compras</li>
-            </ol>
-        </nav>
-        <h1 class="h2 fw-bold text-white mb-0"><i class="fas fa-shopping-cart text-info me-2"></i> Mi Carrito de Compras</h1>
-    </div>
-</div>
 
-<div class="py-5">
-    <div class="container">
-        @if(count($cart) > 0)
-            <div class="row g-4">
-                <!-- Cart Items Table -->
-                <div class="col-lg-8">
-                    <div class="card-custom overflow-hidden">
-                        <div class="table-responsive">
-                            <table class="table table-dark table-striped align-middle mb-0" style="font-size: 0.95rem;">
-                                <thead>
-                                    <tr class="border-bottom border-secondary">
-                                        <th style="width: 100px;">Producto</th>
-                                        <th>Descripción</th>
-                                        <th class="text-center" style="width: 120px;">Precio</th>
-                                        <th class="text-center" style="width: 140px;">Cantidad</th>
-                                        <th class="text-end" style="width: 120px;">Subtotal</th>
-                                        <th style="width: 50px;"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($cart as $id => $item)
-                                        <tr class="border-bottom border-dark">
-                                            <td>
-                                                <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" width="70" height="70" class="rounded p-1 bg-dark" style="object-fit: contain;">
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('products.show', $item['slug']) }}" class="text-white text-decoration-none fw-bold hover-cyan">
-                                                    {{ $item['name'] }}
-                                                </a>
-                                                <small class="text-muted d-block font-monospace">SKU: {{ $item['sku'] }}</small>
-                                            </td>
-                                            <td class="text-center text-white fw-semibold">
-                                                {{ $currency }} {{ number_format($item['price'], 2) }}
-                                            </td>
-                                            <td class="text-center">
-                                                <form action="{{ route('cart.update') }}" method="POST" class="d-flex align-items-center justify-content-center gap-1">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $id }}">
-                                                    <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" max="99" class="form-control form-control-sm bg-dark text-white border-secondary text-center" style="width: 65px;" onchange="this.form.submit()">
-                                                </form>
-                                            </td>
-                                            <td class="text-end text-info fw-bold">
-                                                {{ $currency }} {{ number_format($item['price'] * $item['quantity'], 2) }}
-                                            </td>
-                                            <td class="text-center">
-                                                <form action="{{ route('cart.remove') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $id }}">
-                                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0" title="Eliminar del carrito">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="p-3 bg-dark border-top border-secondary d-flex justify-content-between align-items-center">
-                            <a href="{{ route('products.index') }}" class="btn btn-outline-secondary text-white btn-sm">
-                                <i class="fas fa-arrow-left me-1"></i> Seguir Comprando
-                            </a>
-                            <form action="{{ route('cart.clear') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Seguro que deseas vaciar el carrito?')">
-                                    <i class="fas fa-trash-alt me-1"></i> Vaciar Carrito
-                                </button>
-                            </form>
-                        </div>
+<!-- Masthead Breadcrumb & Title -->
+<section class="w-full bg-[#051125] text-white py-10 px-4 sm:px-6 lg:px-12 border-b border-slate-800">
+    <div class="max-w-[1440px] mx-auto">
+        <nav class="flex items-center gap-2 font-metric text-xs text-slate-400 mb-3" aria-label="Breadcrumb">
+            <a href="{{ route('home') }}" class="hover:text-[#ffdea6] transition-colors">Inicio</a>
+            <span>/</span>
+            <a href="{{ route('products.index') }}" class="hover:text-[#ffdea6] transition-colors">Flota &amp; Equipos</a>
+            <span>/</span>
+            <span class="text-[#ffdea6]">Carrito de Adquisición</span>
+        </nav>
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="font-headline text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white flex items-center gap-3">
+                    <span class="material-symbols-outlined text-3xl sm:text-4xl text-[#ffdea6]">shopping_cart</span>
+                    <span>Carrito de Cotización &amp; Adquisición</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                    Gestiona las unidades seleccionadas para compra directa o emisión de proforma corporativa oficial.
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#1b263b] border border-slate-700 text-xs font-metric text-slate-300">
+                    <span class="material-symbols-outlined text-[16px] text-emerald-400">verified</span>
+                    <span>Facturación Electrónica SUNAT</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Section -->
+<section class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-10 font-body">
+    @if(count($cart) > 0)
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Cart Items List (8 cols) -->
+            <div class="lg:col-span-8 space-y-4">
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+                        <span class="font-headline font-bold text-sm text-[#051125] uppercase tracking-wider">
+                            Equipos en Lista ({{ count($cart) }})
+                        </span>
+                        <form action="{{ route('cart.clear') }}" method="POST">
+                            @csrf
+                            <button type="submit" onclick="return confirm('¿Seguro que deseas vaciar la lista de equipos?')" class="font-metric text-xs text-red-600 hover:text-red-700 font-bold flex items-center gap-1 transition-colors">
+                                <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+                                <span>Vaciar Carrito</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="divide-y divide-slate-100">
+                        @foreach($cart as $id => $item)
+                            <div class="p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5 hover:bg-slate-50/60 transition-colors">
+                                <!-- Image -->
+                                <div class="w-24 h-24 bg-slate-100 rounded-xl overflow-hidden shrink-0 border border-slate-200 p-2 flex items-center justify-center">
+                                    <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-full object-contain">
+                                </div>
+
+                                <!-- Info -->
+                                <div class="flex-1 text-center sm:text-left space-y-1">
+                                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                                        <span class="font-metric text-[11px] text-slate-400 uppercase">SKU: {{ $item['sku'] }}</span>
+                                    </div>
+                                    <a href="{{ route('products.show', $item['slug']) }}" class="font-headline font-bold text-base text-[#051125] hover:text-blue-700 transition-colors block">
+                                        {{ $item['name'] }}
+                                    </a>
+                                    <div class="font-metric text-xs text-slate-500">
+                                        Precio Unitario: <strong class="text-slate-800">{{ $currency }} {{ number_format($item['price'], 2) }}</strong>
+                                    </div>
+                                </div>
+
+                                <!-- Quantity Controller -->
+                                <div class="flex flex-col items-center gap-1 shrink-0">
+                                    <span class="font-metric text-[10px] text-slate-400 uppercase">Cantidad</span>
+                                    <form action="{{ route('cart.update') }}" method="POST" class="flex items-center border border-slate-300 rounded-lg overflow-hidden bg-white shadow-sm">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $id }}">
+                                        <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" max="99" class="w-16 py-1.5 px-2 text-center font-metric text-xs font-bold text-[#051125] focus:outline-none" onchange="this.form.submit()">
+                                    </form>
+                                </div>
+
+                                <!-- Subtotal & Remove -->
+                                <div class="flex flex-col items-center sm:items-end justify-between self-stretch shrink-0">
+                                    <div class="text-right">
+                                        <span class="font-metric text-[10px] text-slate-400 uppercase block">Subtotal</span>
+                                        <span class="font-metric text-base font-bold text-[#051125]">
+                                            {{ $currency }} {{ number_format($item['price'] * $item['quantity'], 2) }}
+                                        </span>
+                                    </div>
+                                    <form action="{{ route('cart.remove') }}" method="POST" class="mt-2 sm:mt-0">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $id }}">
+                                        <button type="submit" class="text-slate-400 hover:text-red-600 transition-colors p-1" title="Quitar equipo">
+                                            <span class="material-symbols-outlined text-[20px]">delete</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                        <a href="{{ route('products.index') }}" class="font-metric text-xs font-bold text-[#051125] hover:text-blue-700 flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                            <span>Continuar Explorando Catálogo</span>
+                        </a>
+                        <span class="font-metric text-xs text-slate-500">
+                            Precios no incluyen flete fuera de Lima Metropolitana
+                        </span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Order Summary -->
-                <div class="col-lg-4">
-                    <div class="p-4 rounded-4 border border-secondary" style="background: #0f182e; position: sticky; top: 100px;">
-                        <h4 class="text-white fw-bold mb-4 pb-2 border-bottom border-secondary">Resumen del Pedido</h4>
+            <!-- Summary Card (4 cols) -->
+            <div class="lg:col-span-4 sticky top-28">
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 space-y-6">
+                    <h3 class="font-headline text-lg font-bold text-[#051125] pb-3 border-b border-slate-200">
+                        Resumen de Cotización
+                    </h3>
 
-                        <div class="d-flex justify-content-between mb-3 text-light">
-                            <span>Subtotal:</span>
-                            <span class="fw-bold">{{ $currency }} {{ number_format($total, 2) }}</span>
+                    <div class="space-y-3 font-metric text-sm">
+                        <div class="flex items-center justify-between text-slate-600">
+                            <span>Subtotal Equipos:</span>
+                            <span class="font-bold text-slate-900">{{ $currency }} {{ number_format($total, 2) }}</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-3 text-light">
-                            <span>IGV ({{ $taxRate }}%):</span>
-                            <span>{{ $currency }} {{ number_format($tax, 2) }}</span>
+                        <div class="flex items-center justify-between text-slate-600">
+                            <span>IGV Ley ({{ $taxRate }}%):</span>
+                            <span class="font-bold text-slate-900">{{ $currency }} {{ number_format($tax, 2) }}</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-4 pt-3 border-top border-secondary text-white fs-5 fw-bold">
-                            <span>Total Estimado:</span>
-                            <span class="text-info">{{ $currency }} {{ number_format($grandTotal, 2) }}</span>
+                        <div class="pt-3 border-t border-slate-200 flex items-baseline justify-between">
+                            <span class="font-headline font-bold text-base text-[#051125]">Total Liquidación:</span>
+                            <span class="font-metric text-2xl font-bold text-blue-700">
+                                {{ $currency }} {{ number_format($grandTotal, 2) }}
+                            </span>
                         </div>
+                    </div>
 
-                        <a href="{{ route('checkout.index') }}" class="btn btn-electric btn-lg w-100 py-3 fw-bold mb-3">
-                            Continuar al Checkout <i class="fas fa-arrow-right ms-2"></i>
+                    <div class="space-y-3 pt-2">
+                        <a href="{{ route('checkout.index') }}" class="w-full py-3.5 px-6 rounded-xl bg-[#051125] hover:bg-[#1b263b] text-[#ffdea6] font-headline text-sm font-bold tracking-wide flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all">
+                            <span>Finalizar Pedido / Checkout</span>
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </a>
 
-                        <div class="p-3 rounded bg-dark border border-secondary text-muted small">
-                            <i class="fas fa-shield-alt text-success me-1"></i> Compra segura garantizada por RODOPERU S.A.C.
+                        <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20emitir%20orden%20formal%20para%20los%20equipos%20seleccionados%20por%20valor%20total%20de%20{{ urlencode($currency . ' ' . number_format($grandTotal, 2)) }}" target="_blank" class="w-full py-3 px-6 rounded-xl border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-metric text-xs font-bold tracking-wide flex items-center justify-center gap-2 transition-colors">
+                            <i class="fab fa-whatsapp text-[16px]"></i>
+                            <span>Validar con Asesor Corporativo</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="pt-4 border-t border-slate-200 space-y-2 font-metric text-xs text-slate-500">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-emerald-600 text-[18px]">shield</span>
+                            <span>Garantía de Fábrica: Hasta 5 años o 150,000 km</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-blue-600 text-[18px]">local_shipping</span>
+                            <span>Entrega inmediata en Patio Central Ate Km 8.5</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[#765a23] text-[18px]">description</span>
+                            <span>Emisión de Factura, Guía y Ficha Homologada</span>
                         </div>
                     </div>
                 </div>
             </div>
-        @else
-            <div class="py-5 text-center">
-                <div class="p-5 rounded-4 border border-secondary bg-dark mx-auto" style="max-width: 600px;">
-                    <i class="fas fa-shopping-cart fs-1 text-muted mb-3"></i>
-                    <h3 class="text-white fw-bold">Tu carrito de compras está vacío</h3>
-                    <p class="text-muted">Explora nuestro catálogo para encontrar el vehículo eléctrico o semirremolque que tu negocio necesita.</p>
-                    <a href="{{ route('products.index') }}" class="btn btn-electric px-4 py-2 mt-2">
-                        Ver Catálogo de Productos
-                    </a>
-                </div>
+
+        </div>
+    @else
+        <!-- Empty Cart -->
+        <div class="max-w-xl mx-auto text-center py-16 px-4">
+            <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+                <span class="material-symbols-outlined text-4xl">shopping_cart</span>
             </div>
-        @endif
-    </div>
-</div>
+            <h2 class="font-headline text-2xl font-bold text-[#051125] mb-2">Tu lista de equipos está vacía</h2>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                Aún no has agregado unidades al carrito. Explora nuestro catálogo de electromovilidad JMEV e implementos rodoviarios pesados Facchini.
+            </p>
+            <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#051125] text-[#ffdea6] font-headline font-bold text-sm shadow hover:bg-[#1b263b] transition-all">
+                <span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+                <span>Explorar Catálogo Completo</span>
+            </a>
+        </div>
+    @endif
+</section>
+
 @endsection
