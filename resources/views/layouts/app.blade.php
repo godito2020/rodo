@@ -219,9 +219,8 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#25D366] hover:text-white transition-colors font-semibold">
-                        <i class="fab fa-whatsapp text-[15px]"></i>
-                        <span>WhatsApp: {{ $whatsappNumber }}</span>
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center text-[#25D366] hover:text-white transition-all hover:scale-110" title="WhatsApp: {{ $whatsappNumber }}" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp text-[18px]"></i>
                     </a>
                     <span class="hidden md:inline text-white/30">|</span>
                     <span class="hidden md:inline px-2.5 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-[#1B263B] text-[#B39255] border border-[#B39255]/40">
