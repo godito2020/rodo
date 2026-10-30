@@ -462,6 +462,7 @@
                 <div class="flex flex-wrap items-center gap-4">
                     <span class="font-metric text-[#ffdea6] font-semibold">RUC: 20601234567</span>
                     <span>&copy; {{ date('Y') }} RODOPERU S.A.C. Todos los derechos reservados.</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-metric text-[10px] font-semibold border border-slate-700">v2.0</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <a href="{{ route('contacto') }}" class="hover:text-white transition-colors flex items-center gap-1">
