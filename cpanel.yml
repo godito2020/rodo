@@ -1,6 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/rodope021026/public_html/
-    - /bin/cp -R * $DEPLOYPATH
-    - /bin/cp -f public/.htaccess $DEPLOYPATH/public/.htaccess
+    - /bin/mkdir -p /home/rodope021026/public_html/
+    - /bin/cp -R * /home/rodope021026/public_html/
+    - /bin/cp -f public/.htaccess /home/rodope021026/public_html/public/.htaccess
+    - /bin/chmod -R 775 /home/rodope021026/public_html/storage /home/rodope021026/public_html/bootstrap/cache 2>/dev/null || true
+    - /bin/rm -f /home/rodope021026/public_html/bootstrap/cache/*.php 2>/dev/null || true
