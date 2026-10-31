@@ -30,6 +30,8 @@ use App\Http\Controllers\Admin\AdminChatController;
 use App\Http\Controllers\Admin\AdminInquiryController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminClaimController;
+use App\Http\Controllers\ClaimController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,12 @@ Route::get('/novedades', [PageController::class, 'novedades'])->name('novedades.
 Route::get('/novedades/{slug}', [PageController::class, 'novedadShow'])->name('novedades.show');
 Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 Route::post('/contacto', [PageController::class, 'submitContacto'])->name('contacto.submit');
+
+// Libro de Reclamaciones Virtual (Normativa INDECOPI - Ley N° 29571)
+Route::get('/libro-de-reclamaciones', [ClaimController::class, 'index'])->name('libro_reclamaciones');
+Route::post('/libro-de-reclamaciones', [ClaimController::class, 'store'])->name('libro_reclamaciones.store');
+Route::get('/libro-de-reclamaciones/constancia/{claim_number}', [ClaimController::class, 'constancia'])->name('libro_reclamaciones.constancia');
+Route::get('/libro-de-reclamaciones/imprimir/{claim_number}', [ClaimController::class, 'printHoja'])->name('libro_reclamaciones.print');
 
 Route::get('/en-construccion', function() {
     return response()->file(public_path('en-construccion.html'));
@@ -175,6 +183,12 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::get('inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');
     Route::get('inquiries/{id}', [AdminInquiryController::class, 'show'])->name('inquiries.show');
     Route::delete('inquiries/{id}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
+
+    // Libro de Reclamaciones (INDECOPI)
+    Route::get('claims', [AdminClaimController::class, 'index'])->name('claims.index');
+    Route::get('claims/{id}', [AdminClaimController::class, 'show'])->name('claims.show');
+    Route::post('claims/{id}/status', [AdminClaimController::class, 'updateStatus'])->name('claims.update_status');
+    Route::get('claims/{id}/imprimir', [AdminClaimController::class, 'print'])->name('claims.print');
 
     // System Settings (Branding, SMTP, Gateways, WhatsApp, Social, SEO)
     Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');

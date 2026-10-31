@@ -542,6 +542,20 @@
                     @endif
                 </a>
             </li>
+            <li class="nav-item">
+                @php
+                    $pendingClaims = \App\Models\Claim::where('status', 'pendiente')->count();
+                @endphp
+                <a class="nav-link {{ request()->routeIs('admin.claims.*') ? 'active' : '' }} d-flex justify-content-between align-items-center" href="{{ route('admin.claims.index') }}">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="material-symbols-outlined text-warning" style="font-size: 19px;">menu_book</span>
+                        <span>Reclamaciones INDECOPI</span>
+                    </div>
+                    @if($pendingClaims > 0)
+                        <span class="badge bg-danger font-metric">{{ $pendingClaims }}</span>
+                    @endif
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-heading">Marketing & Contenido</div>

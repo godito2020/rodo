@@ -522,13 +522,13 @@
             <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body text-xs text-slate-400">
                 <div class="flex flex-wrap items-center gap-4">
                     <span class="font-metric text-[#ffdea6] font-semibold">RUC: 20601234567</span>
-                    <span>&copy; {{ date('Y') }} RODOPERU S.A.C. Todos los derechos reservados.</span>
+                    <span>&copy; {{ date('Y') }} RODOPERU S.A.C. Todos los derechos reservados. | Disegn by GCC.</span>
                     <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-metric text-[10px] font-semibold border border-slate-700">v2.0</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('contacto') }}" class="hover:text-white transition-colors flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[16px]">menu_book</span>
-                        <span>Libro de Reclamaciones</span>
+                    <a href="{{ route('libro_reclamaciones') }}" class="hover:text-white transition-colors flex items-center gap-1.5 group">
+                        <span class="material-symbols-outlined text-[17px] text-[#ffdea6] group-hover:scale-110 transition-transform">menu_book</span>
+                        <span class="font-semibold text-slate-300 group-hover:text-white">Libro de Reclamaciones</span>
                     </a>
                     <span>|</span>
                     <a href="{{ route('admin.login') }}" class="hover:text-white transition-colors">Acceso Administrativo</a>
