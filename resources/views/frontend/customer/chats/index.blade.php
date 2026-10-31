@@ -30,12 +30,12 @@
                     @php
                         $unread = $conv->unreadCountForCustomer();
                     @endphp
-                    <a href="{{ route('customer.chat_show', $conv->id) }}" class="d-flex flex-column flex-md-row justify-content-between align-items-md-center p-3 rounded border border-dark bg-dark mb-3 text-decoration-none hover-glow">
+                    <a href="{{ route('customer.chat_show', $conv->id) }}" class="d-flex flex-column flex-md-row justify-content-between align-items-md-center p-3 rounded mb-3 text-decoration-none hover-glow" style="background-color: #061122; border: 1px solid #1e3150;">
                         <div class="d-flex align-items-center gap-3">
                             @if($conv->product)
-                                <img src="{{ $conv->product->main_image_url }}" alt="{{ $conv->product->name }}" width="55" height="55" class="rounded p-1 bg-dark border border-secondary" style="object-fit: contain;">
+                                <img src="{{ $conv->product->main_image_url }}" alt="{{ $conv->product->name }}" width="55" height="55" class="rounded p-1" style="object-fit: contain; background-color: #0b172d; border: 1px solid #1e3150;">
                             @else
-                                <div class="p-3 bg-secondary rounded text-white"><i class="fas fa-comment-dots fs-4"></i></div>
+                                <div class="p-3 rounded text-white" style="background-color: #1b263b; border: 1px solid #2d456d;"><i class="fas fa-comment-dots fs-4"></i></div>
                             @endif
                             <div>
                                 <div class="text-white fw-bold fs-6">
@@ -44,7 +44,7 @@
                                         <span class="badge bg-danger ms-2">{{ $unread }} nuevo(s)</span>
                                     @endif
                                 </div>
-                                <small class="text-muted">
+                                <small style="color: #cbd5e1;">
                                     {{ $conv->latestMessage ? Str::limit($conv->latestMessage->message, 90) : 'Sin mensajes aún' }}
                                 </small>
                             </div>
@@ -53,14 +53,14 @@
                             <span class="badge {{ $conv->status === 'open' ? 'pill-badge-cyan' : ($conv->status === 'resolved' ? 'bg-success' : 'bg-secondary') }}">
                                 {{ ucfirst($conv->status) }}
                             </span>
-                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">
+                            <small class="d-block mt-1 font-metric" style="font-size: 0.75rem; color: #cbd5e1;">
                                 {{ $conv->last_message_at ? $conv->last_message_at->diffForHumans() : '' }}
                             </small>
                         </div>
                     </a>
                 @empty
-                    <div class="text-center text-muted py-5">
-                        <i class="fas fa-comments fs-1 mb-3 d-block"></i>
+                    <div class="text-center py-5" style="color: #cbd5e1;">
+                        <i class="fas fa-comments fs-1 mb-3 d-block text-warning"></i>
                         No tienes conversaciones abiertas con nuestros vendedores. Puedes iniciar un chat directamente desde la ficha de cualquier producto.
                     </div>
                 @endforelse

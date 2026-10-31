@@ -26,7 +26,7 @@
             <small class="text-info fw-bold text-uppercase" style="font-size: 0.75rem;">
                 {{ $product->brand->name ?? 'RODOPERU' }}
             </small>
-            <small class="text-muted" style="font-size: 0.72rem;">
+            <small style="font-size: 0.72rem; color: #cbd5e1;">
                 SKU: {{ $product->sku }}
             </small>
         </div>
@@ -56,7 +56,7 @@
                         {{ $currency }} {{ number_format($product->effective_price, 2) }}
                     </span>
                     @if($product->has_discount)
-                        <span class="text-decoration-line-through text-muted small">
+                        <span class="text-decoration-line-through small" style="color: #cbd5e1;">
                             {{ $currency }} {{ number_format($product->price, 2) }}
                         </span>
                     @endif
@@ -67,7 +67,7 @@
                     <span class="badge bg-dark border border-secondary text-light px-3 py-2">
                         <i class="fas fa-lock text-warning me-1"></i> Precio a Cotizar
                     </span>
-                    <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">Consulte disponibilidad y plazos de entrega</small>
+                    <small class="d-block mt-1" style="font-size: 0.72rem; color: #cbd5e1;">Consulte disponibilidad y plazos de entrega</small>
                 </div>
             @endif
         </div>

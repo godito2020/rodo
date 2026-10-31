@@ -31,10 +31,10 @@
                                         {!! $cat->parent_id ? '<i class="fas fa-level-up-alt fa-rotate-90 me-1"></i>' : '<i class="fas fa-folder text-warning me-1"></i>' !!}
                                         {{ $cat->name }}
                                     </div>
-                                    <small class="text-muted font-monospace">{{ $cat->slug }}</small>
+                                    <small class="font-monospace" style="color: #38bdf8;">{{ $cat->slug }}</small>
                                 </td>
                                 <td>
-                                    <span class="text-muted small">{{ $cat->parent ? $cat->parent->name : 'Principal' }}</span>
+                                    <span class="small" style="color: #cbd5e1;">{{ $cat->parent ? $cat->parent->name : 'Principal' }}</span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-dark border border-secondary">{{ $cat->products_count }}</span>

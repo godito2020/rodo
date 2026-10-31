@@ -8,7 +8,7 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
             <h5 class="text-white mb-0"><i class="fas fa-images text-info me-2"></i> Sliders del Encabezado Principal</h5>
-            <small class="text-muted">Imágenes y llamadas a la acción en la portada de RODOPERU</small>
+            <small style="color: #cbd5e1;">Imágenes y llamadas a la acción en la portada de RODOPERU</small>
         </div>
         <a href="{{ route('admin.sliders.create') }}" class="btn btn-electric btn-sm">
             <i class="fas fa-plus me-1"></i> Nuevo Slider
@@ -36,17 +36,17 @@
                         </td>
                         <td>
                             <div class="text-white fw-bold">{{ $s->title }}</div>
-                            <small class="text-muted">{{ $s->subtitle }}</small>
+                            <small style="color: #cbd5e1;">{{ $s->subtitle }}</small>
                         </td>
                         <td>
                             <span class="badge bg-dark border border-info text-info">{{ $s->badge ?: '—' }}</span>
                         </td>
                         <td>
                             <span class="text-light small fw-bold">{{ $s->button_text ?: 'Sin botón' }}</span>
-                            <small class="text-muted d-block font-monospace" style="font-size: 0.72rem;">{{ $s->button_url }}</small>
+                            <small class="d-block font-monospace" style="font-size: 0.72rem; color: #38bdf8;">{{ $s->button_url }}</small>
                         </td>
                         <td class="text-center">
-                            <span class="badge bg-secondary">{{ $s->order }}</span>
+                            <span class="badge" style="background-color: #1a2a44; border: 1px solid #2d456d; color: #cbd5e1;">{{ $s->order }}</span>
                         </td>
                         <td class="text-center">
                             <span class="badge {{ $s->is_active ? 'bg-success' : 'bg-danger' }}">

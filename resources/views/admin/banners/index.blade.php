@@ -82,14 +82,14 @@
                             <tr>
                                 <td>
                                     <div class="text-white fw-bold">{{ $b->title }}</div>
-                                    <small class="text-muted">{{ Str::limit($b->subtitle, 45) }}</small>
+                                    <small style="color: #cbd5e1;">{{ Str::limit($b->subtitle, 45) }}</small>
                                 </td>
                                 <td>
                                     <span class="badge bg-dark border border-secondary text-uppercase">{{ $b->type }}</span>
                                 </td>
                                 <td>
                                     <span class="text-light small">{{ $b->button_text ?: 'Sin botón' }}</span>
-                                    <small class="text-muted d-block font-monospace" style="font-size: 0.72rem;">{{ $b->button_url }}</small>
+                                    <small class="d-block font-monospace" style="font-size: 0.72rem; color: #38bdf8;">{{ $b->button_url }}</small>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge {{ $b->is_active ? 'bg-success' : 'bg-danger' }}">

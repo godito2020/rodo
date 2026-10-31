@@ -29,10 +29,10 @@
                             <tr>
                                 <td>
                                     <div class="text-white fw-bold">{{ $b->name }}</div>
-                                    <small class="text-muted font-monospace">{{ $b->slug }}</small>
+                                    <small class="font-monospace" style="color: #38bdf8;">{{ $b->slug }}</small>
                                 </td>
                                 <td>
-                                    <small class="text-muted">{{ Str::limit($b->description, 50) ?: 'Sin descripción' }}</small>
+                                    <small style="color: #cbd5e1;">{{ Str::limit($b->description, 50) ?: 'Sin descripción' }}</small>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge bg-dark border border-info text-info">{{ $b->products_count }}</span>

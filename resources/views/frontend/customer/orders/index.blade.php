@@ -41,9 +41,9 @@
                         @forelse($orders as $ord)
                             <tr>
                                 <td class="font-monospace fw-bold text-info">{{ $ord->order_number }}</td>
-                                <td class="text-muted small">{{ $ord->created_at?->format('d/m/Y H:i') }}</td>
+                                <td class="small" style="color: #cbd5e1;">{{ $ord->created_at?->format('d/m/Y H:i') }}</td>
                                 <td>
-                                    <span class="badge bg-dark border border-secondary">{{ $ord->items->count() }} unidad(es)</span>
+                                    <span class="badge" style="background-color: #061122; border: 1px solid #1e3150; color: #cbd5e1;">{{ $ord->items->count() }} unidad(es)</span>
                                 </td>
                                 <td>
                                     <span class="text-light small text-uppercase">{{ $ord->payment_method }}</span>
@@ -59,8 +59,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center text-muted py-5">
-                                    <i class="fas fa-box-open fs-2 mb-2 d-block"></i>
+                                <td colspan="8" class="text-center py-5" style="color: #cbd5e1;">
+                                    <i class="fas fa-box-open fs-2 mb-2 d-block text-warning"></i>
                                     Aún no has registrado ningún pedido.
                                 </td>
                             </tr>

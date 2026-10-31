@@ -36,20 +36,20 @@
                         </td>
                         <td>
                             <div class="text-white fw-bold">{{ $art->title }}</div>
-                            <small class="text-muted font-monospace">{{ $art->slug }}</small>
+                            <small class="font-monospace" style="color: #38bdf8;">{{ $art->slug }}</small>
                         </td>
                         <td>
                             <span class="badge bg-dark border border-info text-info">{{ $art->category }}</span>
                         </td>
                         <td class="text-center">
-                            <span class="badge bg-secondary">{{ $art->views_count }}</span>
+                            <span class="badge" style="background-color: #1a2a44; border: 1px solid #2d456d; color: #cbd5e1;">{{ $art->views_count }}</span>
                         </td>
                         <td class="text-center">
                             <span class="badge {{ $art->is_published ? 'bg-success' : 'bg-danger' }}">
                                 {{ $art->is_published ? 'Publicado' : 'Borrador' }}
                             </span>
                         </td>
-                        <td class="text-muted small">
+                        <td class="small" style="color: #cbd5e1;">
                             {{ $art->created_at->format('d/m/Y') }}
                         </td>
                         <td class="text-end">

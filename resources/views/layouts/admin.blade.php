@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,14 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        :root {
+        :root, [data-bs-theme="dark"] {
             /* Stitch Executive Palette */
             --admin-navy-dark: #030c1c;
             --admin-navy-primary: #051125;
             --admin-navy-card: #0b172d;
             --admin-navy-surface: #0f1e3a;
-            --admin-border: #1a2a44;
-            --admin-border-light: #25395c;
+            --admin-border: #1e3150;
+            --admin-border-light: #2d456d;
             --gold-primary: #B39255;
             --gold-light: #ffdea6;
             --gold-hover: #c4a466;
@@ -35,6 +35,19 @@
             --electric-cyan: #38bdf8;
             --success-green: #10b981;
             --warning-amber: #f59e0b;
+
+            /* Bootstrap 5.3 high-contrast overrides */
+            --bs-body-color: #f8fafc;
+            --bs-body-bg: #030c1c;
+            --bs-secondary-color: #cbd5e1;
+            --bs-secondary-bg: #0b172d;
+            --bs-tertiary-color: #94a3b8;
+            --bs-tertiary-bg: #061122;
+            --bs-emphasis-color: #ffffff;
+            --bs-border-color: #1e3150;
+            --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
+            --bs-link-color: #38bdf8;
+            --bs-link-hover-color: #7dd3fc;
         }
 
         body {
@@ -90,13 +103,13 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--gold-primary);
+            color: var(--gold-light);
             padding: 18px 22px 6px 22px;
             font-weight: 700;
         }
 
         .admin-sidebar .nav-link {
-            color: #94a3b8;
+            color: #cbd5e1;
             font-size: 0.86rem;
             font-weight: 500;
             padding: 10px 22px;
@@ -109,13 +122,13 @@
 
         .admin-sidebar .nav-link:hover {
             color: #ffffff;
-            background-color: #0b172d;
-            border-left-color: rgba(179, 146, 85, 0.4);
+            background-color: #0f1f3a;
+            border-left-color: var(--gold-primary);
         }
 
         .admin-sidebar .nav-link.active {
             color: var(--gold-light);
-            background: linear-gradient(90deg, rgba(179,146,85,0.15) 0%, rgba(11,23,45,0.7) 100%);
+            background: linear-gradient(90deg, rgba(179,146,85,0.2) 0%, rgba(15,31,58,0.85) 100%);
             border-left-color: var(--gold-primary);
             font-weight: 600;
         }
@@ -126,7 +139,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: radial-gradient(circle at 80% 10%, rgba(11,23,45,0.6) 0%, rgba(3,12,28,1) 70%);
+            background: radial-gradient(circle at 80% 10%, rgba(15,31,58,0.7) 0%, rgba(3,12,28,1) 70%);
         }
 
         .admin-header {
@@ -159,42 +172,198 @@
             letter-spacing: -0.01em;
         }
 
+        /* HIGH-CONTRAST ACCESSIBILITY OVERRIDES (WCAG AAA >= 7:1) */
+        .text-muted,
+        [class*="text-muted"],
+        .text-secondary,
+        [class*="text-secondary"],
+        .text-white-50,
+        .text-body-secondary {
+            color: #cbd5e1 !important; /* Crisp Slate-300: 11.5:1 contrast against dark background */
+        }
+
+        small, .small {
+            color: #cbd5e1;
+        }
+
+        /* Stat Card Metric Headers & Gold Labels */
+        .card-custom .text-muted.text-uppercase,
+        .card-custom span.text-muted,
+        .card-custom .card-header .text-muted,
+        .text-gold-highlight {
+            color: #ffdea6 !important; /* Bright Gold */
+            font-weight: 700 !important;
+            letter-spacing: 0.8px;
+        }
+
+        /* Section Headings in Forms */
+        .section-header-stitch {
+            color: #ffdea6 !important;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-size: 0.9rem;
+        }
+
+        /* Containers inside cards (filters, nested blocks) */
+        .bg-dark, .bg-dark-custom {
+            background-color: #061122 !important;
+            border-color: #1e3150 !important;
+        }
+        .bg-secondary {
+            background-color: #1a2a44 !important;
+            color: #ffffff !important;
+            border: 1px solid #2d456d !important;
+        }
+        .border-secondary, .border-dark {
+            border-color: #1e3150 !important;
+        }
+
+        /* Badges */
+        .badge.bg-secondary {
+            background-color: #1a2a44 !important;
+            color: #e2e8f0 !important;
+            border: 1px solid #2d456d !important;
+        }
+        .badge.bg-dark {
+            background-color: #061122 !important;
+            color: #cbd5e1 !important;
+            border: 1px solid #1e3150 !important;
+        }
+        .badge.bg-info.text-dark {
+            background-color: #38bdf8 !important;
+            color: #051125 !important;
+            font-weight: 700 !important;
+        }
+
+        /* Tables High Contrast */
         .table-dark-custom {
             --bs-table-bg: transparent;
-            --bs-table-striped-bg: rgba(255, 255, 255, 0.015);
-            --bs-table-hover-bg: rgba(179, 146, 85, 0.06);
-            color: #e2e8f0;
+            --bs-table-striped-bg: rgba(255, 255, 255, 0.02);
+            --bs-table-hover-bg: rgba(179, 146, 85, 0.08);
+            color: #f8fafc !important;
             border-color: var(--admin-border);
         }
 
         .table-dark-custom th {
-            color: var(--gold-primary);
+            color: #ffdea6 !important;
+            background-color: #071326 !important;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 2px solid var(--admin-border);
+            border-bottom: 2px solid #233758 !important;
             padding: 14px 16px;
+            font-weight: 700;
         }
 
         .table-dark-custom td {
+            color: #f8fafc !important;
             padding: 14px 16px;
             border-bottom: 1px solid var(--admin-border);
         }
 
+        .table-dark-custom td small,
+        .table-dark-custom td .text-muted {
+            color: #cbd5e1 !important;
+        }
+
+        /* Nav Tabs in Admin Settings */
+        .nav-tabs {
+            border-bottom: 1px solid #1e3150 !important;
+        }
+        .nav-tabs .nav-link {
+            color: #cbd5e1 !important;
+            border: none !important;
+            border-bottom: 2px solid transparent !important;
+            background: transparent !important;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .nav-tabs .nav-link:hover {
+            color: #ffffff !important;
+            border-bottom-color: var(--gold-primary) !important;
+        }
+        .nav-tabs .nav-link.active {
+            color: #ffdea6 !important;
+            background: transparent !important;
+            border-bottom: 2px solid var(--gold-primary) !important;
+        }
+
+        /* Pagination in Admin Tables */
+        .pagination {
+            --bs-pagination-bg: #061122;
+            --bs-pagination-border-color: #1e3150;
+            --bs-pagination-color: #cbd5e1;
+            --bs-pagination-hover-bg: #1b263b;
+            --bs-pagination-hover-color: #ffffff;
+            --bs-pagination-hover-border-color: var(--gold-primary);
+            --bs-pagination-active-bg: var(--gold-primary);
+            --bs-pagination-active-border-color: var(--gold-primary);
+            --bs-pagination-active-color: #051125;
+            --bs-pagination-disabled-bg: #040c18;
+            --bs-pagination-disabled-color: #64748b;
+            --bs-pagination-disabled-border-color: #132238;
+            gap: 4px;
+        }
+        .pagination .page-link {
+            border-radius: 8px !important;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+
+        /* Form Labels & Controls */
+        .form-label, label, .form-check-label {
+            color: #f8fafc !important;
+            font-weight: 600;
+        }
+
         .form-control, .form-select {
-            background-color: #060f1e;
-            border: 1px solid var(--admin-border-light);
-            color: #ffffff;
+            background-color: #060f1e !important;
+            border: 1px solid #233758 !important;
+            color: #ffffff !important;
             border-radius: 10px;
             font-size: 0.88rem;
         }
 
         .form-control:focus, .form-select:focus {
-            background-color: #09152b;
-            border-color: var(--gold-primary);
-            color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(179, 146, 85, 0.25);
+            background-color: #09152b !important;
+            border-color: var(--gold-primary) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 0 3px rgba(179, 146, 85, 0.3) !important;
+        }
+
+        .form-control::placeholder, .form-select::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1 !important;
+        }
+
+        option {
+            background-color: #0b172d !important;
+            color: #ffffff !important;
+        }
+
+        /* Modals & Dropdowns */
+        .modal-content {
+            background-color: #0b172d !important;
+            border: 1px solid #1e3150 !important;
+            color: #f8fafc !important;
+        }
+        .modal-header, .modal-footer {
+            border-color: #1e3150 !important;
+        }
+        .dropdown-menu {
+            background-color: #0b172d !important;
+            border-color: #1e3150 !important;
+        }
+        .dropdown-item {
+            color: #cbd5e1 !important;
+        }
+        .dropdown-item:hover {
+            background-color: #152542 !important;
+            color: #ffffff !important;
         }
 
         /* Stitch Buttons */
@@ -227,14 +396,14 @@
         }
 
         .btn-outline-secondary {
-            border-color: var(--admin-border-light);
-            color: #cbd5e1;
+            border-color: #2d456d !important;
+            color: #cbd5e1 !important;
             border-radius: 10px;
         }
         .btn-outline-secondary:hover {
-            background-color: #1b263b;
-            color: #ffffff;
-            border-color: var(--gold-primary);
+            background-color: #1b263b !important;
+            color: #ffffff !important;
+            border-color: var(--gold-primary) !important;
         }
 
         /* Custom Scrollbar */

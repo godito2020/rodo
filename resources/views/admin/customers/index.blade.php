@@ -52,11 +52,11 @@
                     <tr>
                         <td>
                             <div class="text-white fw-bold">{{ $c->name }}</div>
-                            <small class="text-muted">{{ $c->company_name ?: 'Particular' }}</small>
+                            <small style="color: #cbd5e1;">{{ $c->company_name ?: 'Particular' }}</small>
                         </td>
                         <td>
                             <div class="small text-light">{{ $c->email }}</div>
-                            <small class="text-muted">{{ $c->phone ?: 'Sin teléfono' }}</small>
+                            <small style="color: #cbd5e1;">{{ $c->phone ?: 'Sin teléfono' }}</small>
                         </td>
                         <td>
                             <span class="font-monospace small text-light">{{ $c->dni_ruc ?: '—' }}</span>

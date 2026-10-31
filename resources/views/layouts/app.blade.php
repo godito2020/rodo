@@ -191,6 +191,44 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.15); }
         }
+
+        /* High-contrast support for customer portal & dark sections */
+        .text-muted {
+            color: #cbd5e1 !important;
+        }
+        .bg-dark {
+            background-color: #061122 !important;
+        }
+        .border-secondary {
+            border-color: #1e3150 !important;
+        }
+        .border-dark {
+            border-color: #1a2a44 !important;
+        }
+        .card-custom {
+            background-color: #0b172d;
+            border: 1px solid #1e3150;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+        .card-custom .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid #1e3150;
+            padding: 16px 20px;
+        }
+        .table-dark {
+            background-color: transparent !important;
+            color: #f8fafc !important;
+        }
+        .table-dark th {
+            color: #ffdea6 !important;
+            background-color: #071326 !important;
+            border-bottom: 2px solid #233758 !important;
+        }
+        .table-dark td {
+            color: #f8fafc !important;
+            border-bottom: 1px solid #1e3150 !important;
+        }
     </style>
 
     @stack('styles')
@@ -206,14 +244,14 @@
                         <span class="material-symbols-outlined text-[16px]">electric_bolt</span>
                         <span>Líderes en Electromovilidad Perú</span>
                     </span>
-                    <span class="hidden lg:inline text-white/30">|</span>
-                    <a href="tel:{{ preg_replace('/[^0-9]/', '', $companyPhone) }}" class="flex items-center gap-1 text-slate-200 hover:text-white transition-colors">
-                        <span class="material-symbols-outlined text-[15px] text-[#B39255]">call</span>
+                    <span class="hidden lg:inline text-white/60">|</span>
+                    <a href="tel:{{ preg_replace('/[^0-9]/', '', $companyPhone) }}" class="flex items-center gap-1 text-white hover:text-[#ffdea6] font-medium transition-colors">
+                        <span class="material-symbols-outlined text-[15px] text-[#ffdea6]">call</span>
                         <span>{{ $companyPhone }}</span>
                     </a>
-                    <span class="hidden sm:inline text-white/30">|</span>
-                    <a href="mailto:{{ $supportEmail }}" class="hidden sm:flex items-center gap-1 text-slate-200 hover:text-white transition-colors">
-                        <span class="material-symbols-outlined text-[15px] text-[#B39255]">mail</span>
+                    <span class="hidden sm:inline text-white/60">|</span>
+                    <a href="mailto:{{ $supportEmail }}" class="hidden sm:flex items-center gap-1 text-white hover:text-[#ffdea6] font-medium transition-colors">
+                        <span class="material-symbols-outlined text-[15px] text-[#ffdea6]">mail</span>
                         <span>{{ $supportEmail }}</span>
                     </a>
                 </div>
@@ -222,7 +260,7 @@
                     <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center text-[#25D366] hover:text-white transition-all hover:scale-110" title="WhatsApp: {{ $whatsappNumber }}" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp text-[18px]"></i>
                     </a>
-                    <span class="hidden md:inline text-white/30">|</span>
+                    <span class="hidden md:inline text-white/60">|</span>
                     <span class="hidden md:inline px-2.5 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-[#1B263B] text-[#B39255] border border-[#B39255]/40">
                         DISTRIBUIDOR OFICIAL FACCHINI &amp; JMEV
                     </span>

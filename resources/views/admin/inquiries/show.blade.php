@@ -19,25 +19,25 @@
 
             <div class="row g-3 mb-4">
                 <div class="col-md-6">
-                    <label class="text-muted small fw-bold text-uppercase">Correo Electrónico</label>
+                    <label class="small fw-bold text-uppercase font-metric" style="color: #ffdea6; letter-spacing: 0.8px;">Correo Electrónico</label>
                     <div class="text-white">{{ $inquiry->email }}</div>
                 </div>
                 <div class="col-md-6">
-                    <label class="text-muted small fw-bold text-uppercase">Teléfono</label>
+                    <label class="small fw-bold text-uppercase font-metric" style="color: #ffdea6; letter-spacing: 0.8px;">Teléfono</label>
                     <div class="text-white">{{ $inquiry->phone ?: 'No especificado' }}</div>
                 </div>
                 <div class="col-md-6">
-                    <label class="text-muted small fw-bold text-uppercase">Producto de Interés</label>
+                    <label class="small fw-bold text-uppercase font-metric" style="color: #ffdea6; letter-spacing: 0.8px;">Producto de Interés</label>
                     <div><span class="badge bg-dark border border-info text-info">{{ $inquiry->product_interest ?: 'General' }}</span></div>
                 </div>
                 <div class="col-md-6">
-                    <label class="text-muted small fw-bold text-uppercase">Asunto</label>
+                    <label class="small fw-bold text-uppercase font-metric" style="color: #ffdea6; letter-spacing: 0.8px;">Asunto</label>
                     <div class="text-white">{{ $inquiry->subject ?: 'Sin asunto' }}</div>
                 </div>
             </div>
 
             <div class="p-4 rounded-3 border border-secondary bg-dark mb-4">
-                <label class="text-muted small fw-bold text-uppercase mb-2 d-block">Mensaje / Requerimiento del Cliente:</label>
+                <label class="small fw-bold text-uppercase font-metric mb-2 d-block" style="color: #ffdea6; letter-spacing: 0.8px;">Mensaje / Requerimiento del Cliente:</label>
                 <div class="text-light" style="font-size: 1rem; line-height: 1.8; white-space: pre-line;">{{ $inquiry->message }}</div>
             </div>
 

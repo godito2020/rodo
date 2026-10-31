@@ -33,30 +33,30 @@
 <div class="row g-3 mb-4">
     <div class="col-md-6 col-xl-3">
         <div class="p-3 rounded-3 border border-secondary bg-dark text-center">
-            <span class="text-muted small text-uppercase">Búsquedas Realizadas</span>
+            <span class="small text-uppercase font-metric fw-bold d-block" style="color: #ffdea6; letter-spacing: 0.8px;">Búsquedas Realizadas</span>
             <div class="display-6 fw-bold text-info my-1">{{ number_format($totalSearches) }}</div>
-            <small class="text-light">En el periodo seleccionado</small>
+            <small style="color: #cbd5e1;">En el periodo seleccionado</small>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="p-3 rounded-3 border border-secondary bg-dark text-center">
-            <span class="text-muted small text-uppercase">Usuarios Únicos (IPs)</span>
+            <span class="small text-uppercase font-metric fw-bold d-block" style="color: #ffdea6; letter-spacing: 0.8px;">Usuarios Únicos (IPs)</span>
             <div class="display-6 fw-bold text-success my-1">{{ number_format($uniqueUsers) }}</div>
-            <small class="text-light">Interesados activos</small>
+            <small style="color: #cbd5e1;">Interesados activos</small>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="p-3 rounded-3 border border-secondary bg-dark text-center">
-            <span class="text-muted small text-uppercase">Palabras Clave Analizadas</span>
+            <span class="small text-uppercase font-metric fw-bold d-block" style="color: #ffdea6; letter-spacing: 0.8px;">Palabras Clave Analizadas</span>
             <div class="display-6 fw-bold text-warning my-1">{{ $topKeywords->count() }}</div>
-            <small class="text-light">Tendencias detectadas</small>
+            <small style="color: #cbd5e1;">Tendencias detectadas</small>
         </div>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="p-3 rounded-3 border border-secondary bg-dark text-center">
-            <span class="text-muted small text-uppercase">Oportunidades sin Stock</span>
+            <span class="small text-uppercase font-metric fw-bold d-block" style="color: #ffdea6; letter-spacing: 0.8px;">Oportunidades sin Stock</span>
             <div class="display-6 fw-bold text-danger my-1">{{ $zeroResultSearches->count() }}</div>
-            <small class="text-light">Búsquedas con 0 resultados</small>
+            <small style="color: #cbd5e1;">Búsquedas con 0 resultados</small>
         </div>
     </div>
 </div>

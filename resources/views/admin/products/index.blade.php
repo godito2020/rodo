@@ -12,18 +12,19 @@
     <!-- Header & Action -->
     <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
-            <h5 class="text-white mb-0"><i class="fas fa-boxes text-info me-2"></i> Inventario de Productos</h5>
-            <small class="text-muted">Total: {{ $products->total() }} productos registrados</small>
+            <h5 class="text-white mb-0 font-headline"><i class="fas fa-boxes text-warning me-2"></i> Inventario de Productos</h5>
+            <small style="color: #cbd5e1;">Total: {{ $products->total() }} productos registrados en el catálogo</small>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.products.create') }}" class="btn btn-electric btn-sm px-3">
-                <i class="fas fa-plus me-1"></i> Nuevo Producto
+            <a href="{{ route('admin.products.create') }}" class="btn btn-electric btn-sm px-3 d-inline-flex align-items-center gap-1.5">
+                <i class="fas fa-plus"></i>
+                <span>Nuevo Producto</span>
             </a>
         </div>
     </div>
 
     <!-- Filters Strip -->
-    <div class="p-3 border-bottom border-secondary bg-dark">
+    <div class="p-3 border-bottom" style="background-color: #061122; border-color: #1e3150 !important;">
         <form action="{{ route('admin.products.index') }}" method="GET" class="row g-2">
             <div class="col-md-4">
                 <input type="text" name="buscar" class="form-control form-control-sm" placeholder="Buscar por nombre o SKU..." value="{{ request('buscar') }}">
@@ -71,18 +72,18 @@
                 @forelse($products as $prod)
                     <tr>
                         <td>
-                            <img src="{{ $prod->main_image_url }}" alt="{{ $prod->name }}" width="50" height="50" class="rounded p-1 bg-dark border border-secondary" style="object-fit: contain;">
+                            <img src="{{ $prod->main_image_url }}" alt="{{ $prod->name }}" width="50" height="50" class="rounded p-1" style="background-color: #061122; border: 1px solid #1e3150; object-fit: contain;">
                         </td>
                         <td>
                             <div class="text-white fw-bold">{{ $prod->name }}</div>
-                            <small class="text-info font-monospace">SKU: {{ $prod->sku }}</small>
+                            <small class="font-monospace fw-semibold" style="color: #38bdf8;">SKU: {{ $prod->sku }}</small>
                             @if($prod->is_featured)
-                                <span class="badge bg-warning text-dark ms-1" style="font-size: 0.65rem;">Destacado</span>
+                                <span class="badge ms-1" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.65rem;">Destacado</span>
                             @endif
                         </td>
                         <td>
-                            <div class="small text-light">{{ $prod->category->name ?? 'Sin Categoría' }}</div>
-                            <small class="text-muted">{{ $prod->brand->name ?? 'RODOPERU' }}</small>
+                            <div class="small fw-semibold text-white">{{ $prod->category->name ?? 'Sin Categoría' }}</div>
+                            <small class="font-metric fw-semibold" style="color: #ffdea6;">{{ $prod->brand->name ?? 'RODOPERU' }}</small>
                         </td>
                         <td>
                             <span class="text-white fw-bold">{{ $currency }} {{ number_format($prod->effective_price, 2) }}</span>
@@ -110,7 +111,7 @@
                             @endif
                         </td>
                         <td class="text-center">
-                            <span class="badge {{ $prod->stock > 3 ? 'bg-dark border border-secondary text-light' : 'bg-danger' }}">
+                            <span class="badge font-metric {{ $prod->stock > 3 ? '' : 'bg-danger' }}" style="{{ $prod->stock > 3 ? 'background-color: #061122; border: 1px solid #1e3150; color: #f8fafc;' : '' }}">
                                 {{ $prod->stock }} unid.
                             </span>
                         </td>

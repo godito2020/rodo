@@ -75,13 +75,13 @@
                         </td>
                         <td>
                             <div class="text-white fw-bold">{{ $ord->customer_name }}</div>
-                            <small class="text-muted">{{ $ord->customer_phone }} &bull; {{ $ord->customer_email }}</small>
+                            <small style="color: #cbd5e1;">{{ $ord->customer_phone }} &bull; {{ $ord->customer_email }}</small>
                         </td>
-                        <td class="text-muted small">
+                        <td class="small" style="color: #cbd5e1;">
                             {{ $ord->created_at->format('d/m/Y H:i') }}
                         </td>
                         <td>
-                            <span class="badge bg-dark border border-secondary text-uppercase">{{ $ord->payment_method }}</span>
+                            <span class="badge" style="background-color: #061122; border: 1px solid #1e3150; color: #cbd5e1;">{{ $ord->payment_method }}</span>
                         </td>
                         <td class="text-white fw-bold">
                             {{ $currency }} {{ number_format($ord->total, 2) }}
@@ -98,7 +98,7 @@
                                     <i class="fas fa-paperclip me-1"></i> Ver
                                 </a>
                             @else
-                                <span class="badge bg-secondary">Sin Voucher</span>
+                                <span class="badge" style="background-color: #1a2a44; border: 1px solid #2d456d; color: #cbd5e1;">Sin Voucher</span>
                             @endif
                         </td>
                         <td class="text-end">

@@ -49,7 +49,7 @@
                     <div class="col-md-6">
                         <div class="p-4 rounded-3 border border-secondary bg-dark">
                             <label class="form-label text-light fw-bold">Logo Oficial del Sistema</label>
-                            <div class="p-3 bg-secondary rounded text-center mb-3">
+                            <div class="p-3 rounded text-center mb-3" style="background-color: #061122; border: 1px solid #1e3150;">
                                 <img src="{{ asset($settings['logo_path'] ?? 'images/logo/RODO.png') }}?v={{ time() }}" alt="Logo RODOPERU" style="max-height: 70px; object-fit: contain;">
                             </div>
                             <label class="form-label text-light small">Subir Nuevo Logo (PNG transparente / SVG)</label>
@@ -60,7 +60,7 @@
                     <div class="col-md-6">
                         <div class="p-4 rounded-3 border border-secondary bg-dark">
                             <label class="form-label text-light fw-bold">Favicon (Ícono de Navegador)</label>
-                            <div class="p-3 bg-secondary rounded text-center mb-3">
+                            <div class="p-3 rounded text-center mb-3" style="background-color: #061122; border: 1px solid #1e3150;">
                                 <img src="{{ asset($settings['favicon_path'] ?? 'favicon.png') }}?v={{ time() }}" alt="Favicon" style="max-height: 48px; object-fit: contain;">
                             </div>
                             <label class="form-label text-light small">Subir Nuevo Favicon (.ico o PNG cuadrado)</label>

@@ -87,8 +87,8 @@
                     </div>
                 </div>
             @else
-                <div class="p-4 bg-dark rounded border border-secondary text-center text-muted">
-                    <i class="fas fa-file-invoice fs-3 mb-2 d-block"></i>
+                <div class="p-4 rounded border text-center" style="background-color: #061122; border-color: #1e3150; color: #cbd5e1;">
+                    <i class="fas fa-file-invoice fs-3 mb-2 d-block text-warning"></i>
                     El cliente no ha adjuntado voucher aún.
                 </div>
             @endif
@@ -99,7 +99,7 @@
     <div class="col-lg-4">
         <!-- Status Management Form -->
         <div class="card-custom p-4 mb-4">
-            <h5 class="text-white fw-bold mb-3 pb-2 border-bottom border-secondary"><i class="fas fa-cogs text-info me-2"></i> Cambiar Estado</h5>
+            <h5 class="text-white fw-bold mb-3 pb-2 border-bottom" style="border-color: #1e3150 !important;"><i class="fas fa-cogs text-info me-2"></i> Cambiar Estado</h5>
 
             <form action="{{ route('admin.orders.update_status', $order->id) }}" method="POST">
                 @csrf
@@ -132,7 +132,7 @@
 
         <!-- Customer & Delivery info -->
         <div class="card-custom p-4">
-            <h5 class="text-white fw-bold mb-3 pb-2 border-bottom border-secondary"><i class="fas fa-address-card text-info me-2"></i> Información del Cliente</h5>
+            <h5 class="text-white fw-bold mb-3 pb-2 border-bottom" style="border-color: #1e3150 !important;"><i class="fas fa-address-card text-info me-2"></i> Información del Cliente</h5>
 
             <p class="mb-2"><strong class="text-info">Nombre:</strong> <span class="text-white">{{ $order->customer_name }}</span></p>
             <p class="mb-2"><strong class="text-info">Teléfono:</strong> <span class="text-white">{{ $order->customer_phone }}</span></p>
@@ -142,8 +142,8 @@
             <p class="mb-3"><strong class="text-info">Ciudad:</strong> <span class="text-white">{{ $order->shipping_city }}</span></p>
 
             @if($order->notes)
-                <div class="p-3 bg-dark rounded border border-secondary small text-muted mb-3">
-                    <strong>Notas del Cliente:</strong> {{ $order->notes }}
+                <div class="p-3 rounded border small mb-3" style="background-color: #061122; border-color: #1e3150; color: #cbd5e1;">
+                    <strong class="text-white">Notas del Cliente:</strong> {{ $order->notes }}
                 </div>
             @endif
 

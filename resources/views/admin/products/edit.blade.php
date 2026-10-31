@@ -70,7 +70,7 @@
                 <!-- Technical Specs Builder -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="text-info fw-bold mb-0 text-uppercase">2. Ficha Técnica / Especificaciones Dinámicas</h6>
+                        <h6 class="section-header-stitch mb-0">2. Ficha Técnica / Especificaciones Dinámicas</h6>
                         <button type="button" class="btn btn-sm btn-outline-info" id="add-spec-btn">
                             <i class="fas fa-plus me-1"></i> Agregar Fila
                         </button>
@@ -109,7 +109,7 @@
 
                 <!-- SEO Tools (Per Product) -->
                 <div class="p-4 rounded-3 border border-secondary bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">3. Herramientas SEO para Posicionamiento Web</h6>
+                    <h6 class="section-header-stitch mb-3">3. Herramientas SEO para Posicionamiento Web</h6>
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label text-light small fw-bold">Meta Título (SEO Title)</label>
@@ -131,7 +131,7 @@
             <div class="col-lg-4">
                 <!-- Pricing & Behavior -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">Precios & Botones de Acción</h6>
+                    <h6 class="section-header-stitch mb-3">Precios & Botones de Acción</h6>
 
                     <div class="mb-3">
                         <label class="form-label text-light small fw-bold">Precio Regular (USD $) *</label>
@@ -185,7 +185,7 @@
 
                 <!-- Existing & New Images -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">Galería de Imágenes</h6>
+                    <h6 class="section-header-stitch mb-3">Galería de Imágenes</h6>
 
                     @if($product->images->count() > 0)
                         <div class="d-flex flex-wrap gap-2 mb-3">

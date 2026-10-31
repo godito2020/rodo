@@ -82,7 +82,7 @@
                                     <div class="p-3 rounded-3 text-start" style="background: linear-gradient(135deg, var(--electric-cyan) 0%, var(--electric-blue) 100%); color: #070d1e; font-weight: 500;">
                                         {{ $msg->message }}
                                     </div>
-                                    <small class="text-muted mt-1 d-block" style="font-size: 0.72rem;">Tú &bull; {{ $msg->created_at->format('H:i') }}</small>
+                                    <small class="mt-1 d-block" style="font-size: 0.72rem; color: #cbd5e1;">Tú &bull; {{ $msg->created_at->format('H:i') }}</small>
                                 </div>
                             @elseif($msg->sender_type === 'admin')
                                 <!-- Admin / Seller Message Bubble -->
@@ -94,7 +94,7 @@
                                         </div>
                                         {{ $msg->message }}
                                     </div>
-                                    <small class="text-muted mt-1 d-block" style="font-size: 0.72rem;">{{ $msg->created_at->format('H:i') }}</small>
+                                    <small class="mt-1 d-block" style="font-size: 0.72rem; color: #cbd5e1;">{{ $msg->created_at->format('H:i') }}</small>
                                 </div>
                             @else
                                 <!-- Bot Message Bubble -->
@@ -105,17 +105,17 @@
                                         </div>
                                         {{ $msg->message }}
                                     </div>
-                                    <small class="text-muted mt-1 d-block" style="font-size: 0.72rem;">{{ $msg->created_at->format('H:i') }}</small>
+                                    <small class="mt-1 d-block" style="font-size: 0.72rem; color: #cbd5e1;">{{ $msg->created_at->format('H:i') }}</small>
                                 </div>
                             @endif
                         @endforeach
                     </div>
 
                     <!-- Chat Input Box -->
-                    <div class="p-3 border-top border-secondary bg-dark">
+                    <div class="p-3 border-top" style="background-color: #061122; border-color: #1e3150 !important;">
                         <form action="{{ route('customer.chat_send', $conversation->id) }}" method="POST" id="chat-send-form" class="d-flex gap-2">
                             @csrf
-                            <input type="text" name="message" id="chat-input" class="form-control bg-dark text-white border-secondary" placeholder="Escribe tu mensaje o consulta al vendedor..." required autocomplete="off">
+                            <input type="text" name="message" id="chat-input" class="form-control text-white" style="background-color: #0b172d !important; border: 1px solid #1e3150 !important;" placeholder="Escribe tu mensaje o consulta al vendedor..." required autocomplete="off">
                             <button type="submit" class="btn btn-electric px-4 fw-bold">
                                 <i class="fas fa-paper-plane me-1"></i> Enviar
                             </button>

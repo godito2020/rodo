@@ -106,8 +106,8 @@
 
             <!-- Sidebar Info -->
             <div class="col-lg-4">
-                <div class="p-4 rounded-4 border border-secondary mb-4" style="background: #0f182e;">
-                    <h5 class="text-white fw-bold mb-3 pb-2 border-bottom border-secondary">Datos de Despacho</h5>
+                <div class="p-4 rounded-4 border mb-4" style="background: #0f182e; border-color: #1e3150;">
+                    <h5 class="text-white fw-bold mb-3 pb-2 border-bottom" style="border-color: #1e3150;">Datos de Despacho</h5>
                     <p class="mb-2"><strong class="text-info">Destinatario:</strong> <span class="text-white">{{ $order->customer_name }}</span></p>
                     <p class="mb-2"><strong class="text-info">Teléfono:</strong> <span class="text-white">{{ $order->customer_phone }}</span></p>
                     <p class="mb-2"><strong class="text-info">Correo:</strong> <span class="text-white">{{ $order->customer_email }}</span></p>
@@ -115,15 +115,15 @@
                     <p class="mb-2"><strong class="text-info">Dirección:</strong> <span class="text-white">{{ $order->shipping_address }}</span></p>
                     <p class="mb-3"><strong class="text-info">Ciudad:</strong> <span class="text-white">{{ $order->shipping_city }}</span></p>
                     @if($order->notes)
-                        <div class="p-2 bg-dark rounded border border-secondary small text-muted">
-                            <strong>Notas:</strong> {{ $order->notes }}
+                        <div class="p-2.5 rounded border small mb-2" style="background-color: #061122; border-color: #1e3150; color: #cbd5e1;">
+                            <strong class="text-white">Notas:</strong> {{ $order->notes }}
                         </div>
                     @endif
                 </div>
 
                 <div class="p-4 rounded-4 border border-info" style="background: rgba(0, 242, 254, 0.05);">
                     <h6 class="text-info fw-bold mb-2"><i class="fas fa-headset me-2"></i> ¿Preguntas sobre tu Despacho?</h6>
-                    <p class="text-muted small mb-3">Comunícate con logística indicando tu número de orden <strong>{{ $order->order_number }}</strong>.</p>
+                    <p class="small mb-3" style="color: #cbd5e1;">Comunícate con logística indicando tu número de orden <strong class="text-white">{{ $order->order_number }}</strong>.</p>
                     <a href="https://api.whatsapp.com/send?phone={{ \App\Models\Setting::get('whatsapp_number', '+51987654321') }}&text={{ rawurlencode('Hola RODOPERU, consulto por el estado de mi pedido ' . $order->order_number) }}" target="_blank" class="btn btn-whatsapp-quote w-100 py-2">
                         <i class="fab fa-whatsapp me-1"></i> Consultar Despacho
                     </a>

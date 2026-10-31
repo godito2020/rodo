@@ -21,7 +21,7 @@
         </nav>
         <span class="badge bg-dark border border-info text-info mb-2">{{ $article->category }}</span>
         <h1 class="display-6 fw-bold text-white mb-2">{{ $article->title }}</h1>
-        <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Publicado el {{ $article->created_at->format('d de F, Y') }} &bull; {{ $article->views_count }} visualizaciones</small>
+        <small style="color: #cbd5e1;"><i class="fas fa-calendar-alt me-1 text-warning"></i> Publicado el {{ $article->created_at->format('d de F, Y') }} &bull; {{ $article->views_count }} visualizaciones</small>
     </div>
 </div>
 
@@ -69,7 +69,7 @@
                         @foreach($relatedArticles as $rel)
                             <a href="{{ route('novedades.show', $rel->slug) }}" class="text-decoration-none text-light border-bottom border-dark pb-2">
                                 <div class="small fw-bold hover-cyan">{{ $rel->title }}</div>
-                                <small class="text-muted" style="font-size: 0.75rem;">{{ $rel->category }}</small>
+                                <small style="font-size: 0.75rem; color: #ffdea6;">{{ $rel->category }}</small>
                             </a>
                         @endforeach
                     </div>
@@ -78,7 +78,7 @@
 
                 <div class="p-4 rounded-3 border border-secondary" style="background: #0d1527;">
                     <h5 class="text-white fw-bold mb-3"><i class="fas fa-envelope text-info me-2"></i> Asesoría Personalizada</h5>
-                    <p class="text-muted small mb-3">¿Requieres un estudio de costos operativos para renovar la flota de tu empresa?</p>
+                    <p class="small mb-3" style="color: #cbd5e1;">¿Requieres un estudio de costos operativos para renovar la flota de tu empresa?</p>
                     <a href="{{ route('contacto') }}" class="btn btn-electric w-100 py-2">Solicitar Análisis</a>
                 </div>
             </div>

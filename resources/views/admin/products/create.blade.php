@@ -64,12 +64,12 @@
                 <!-- Technical Specs Builder -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="text-info fw-bold mb-0 text-uppercase">2. Ficha Técnica / Especificaciones Dinámicas</h6>
+                        <h6 class="section-header-stitch mb-0">2. Ficha Técnica / Especificaciones Dinámicas</h6>
                         <button type="button" class="btn btn-sm btn-outline-info" id="add-spec-btn">
                             <i class="fas fa-plus me-1"></i> Agregar Fila
                         </button>
                     </div>
-                    <p class="text-muted small">Agrega especificaciones técnicas como: Autonomía, Batería, Potencia de Motor, Capacidad de Carga, Ejes, Suspensión, etc.</p>
+                    <p class="small mb-3" style="color: #cbd5e1;">Agrega especificaciones técnicas como: Autonomía, Batería, Potencia de Motor, Capacidad de Carga, Ejes, Suspensión, etc.</p>
 
                     <div id="specs-container">
                         <div class="row g-2 mb-2 spec-row">
@@ -88,7 +88,7 @@
 
                 <!-- SEO Tools (Per Product) -->
                 <div class="p-4 rounded-3 border border-secondary bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">3. Herramientas SEO para Posicionamiento Web</h6>
+                    <h6 class="section-header-stitch mb-3">3. Herramientas SEO para Posicionamiento Web</h6>
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label text-light small fw-bold">Meta Título (SEO Title)</label>
@@ -110,7 +110,7 @@
             <div class="col-lg-4">
                 <!-- Pricing & Behavior -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">Precios & Botones de Acción</h6>
+                    <h6 class="section-header-stitch mb-3">Precios & Botones de Acción</h6>
 
                     <div class="mb-3">
                         <label class="form-label text-light small fw-bold">Precio Regular (USD $) *</label>
@@ -120,7 +120,7 @@
                     <div class="mb-3">
                         <label class="form-label text-light small fw-bold">Precio de Oferta / Descuento (Opcional)</label>
                         <input type="number" step="0.01" name="sale_price" class="form-control" placeholder="0.00" value="{{ old('sale_price') }}">
-                        <small class="text-muted" style="font-size: 0.75rem;">Si se establece, se mostrará el badge de descuento automático.</small>
+                        <small class="d-block mt-1" style="color: #cbd5e1; font-size: 0.75rem;">Si se establece, se mostrará el badge de descuento automático.</small>
                     </div>
 
                     <div class="mb-3">
@@ -136,7 +136,7 @@
                         <label class="form-check-label text-light fw-bold" for="show_price">
                             Mostrar Precio al Público
                         </label>
-                        <small class="text-muted d-block" style="font-size: 0.75rem;">Si se desmarca, aparecerá como "Precio a Cotizar" para solicitar consulta.</small>
+                        <small class="d-block mt-1" style="color: #cbd5e1; font-size: 0.75rem;">Si se desmarca, aparecerá como "Precio a Cotizar" para solicitar consulta.</small>
                     </div>
 
                     <!-- User Requirement: Configurar si en el producto va a ver boton de compra, o boton de consulta por whatsapp o correo -->
@@ -147,7 +147,7 @@
                             <option value="buy" {{ old('action_type') == 'buy' ? 'selected' : '' }}>Solo Botón de Compra Directa</option>
                             <option value="whatsapp" {{ old('action_type') == 'whatsapp' ? 'selected' : '' }}>Solo Botón de Consulta por WhatsApp</option>
                         </select>
-                        <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">El botón de WhatsApp pre-configurará el mensaje con modelo y SKU para el asesor.</small>
+                        <small class="d-block mt-1" style="color: #cbd5e1; font-size: 0.75rem;">El botón de WhatsApp pre-configurará el mensaje con modelo y SKU para el asesor.</small>
                     </div>
 
                     <div class="form-check mb-2">
@@ -167,11 +167,11 @@
 
                 <!-- Multi-image Upload -->
                 <div class="p-4 rounded-3 border border-secondary mb-4 bg-dark">
-                    <h6 class="text-info fw-bold mb-3 text-uppercase">Imágenes del Producto</h6>
+                    <h6 class="section-header-stitch mb-3">Imágenes del Producto</h6>
                     <div class="mb-3">
                         <label class="form-label text-light small fw-bold">Subir Fotos (Múltiple selección)</label>
                         <input type="file" name="images[]" class="form-control" multiple accept="image/*">
-                        <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">Formatos soportados: JPG, PNG, WEBP, SVG. La primera imagen será la principal.</small>
+                        <small class="d-block mt-1" style="color: #cbd5e1; font-size: 0.75rem;">Formatos soportados: JPG, PNG, WEBP, SVG. La primera imagen será la principal.</small>
                     </div>
                 </div>
 
