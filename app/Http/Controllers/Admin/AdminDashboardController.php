@@ -15,26 +15,64 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $totalSales = Order::where('payment_status', 'paid')->sum('total');
-        $totalOrders = Order::count();
-        $pendingOrders = Order::where('order_status', 'pending')->count();
-        $totalProducts = Product::count();
-        $totalCustomers = User::where('role', 'customer')->count();
-        $activeChats = ChatConversation::whereIn('status', ['open', 'in_progress'])->count();
-        $unreadInquiries = ContactInquiry::where('is_read', false)->count();
+        try {
+            $totalSales = (float) Order::where('payment_status', 'paid')->sum('total');
+            $totalOrders = Order::count();
+            $pendingOrders = Order::where('order_status', 'pending')->count();
+        } catch (\Throwable $e) {
+            $totalSales = 0.0;
+            $totalOrders = 0;
+            $pendingOrders = 0;
+        }
 
-        $recentOrders = Order::with('items')->latest()->take(6)->get();
-        
-        $topSearches = SearchLog::select('query', DB::raw('count(*) as count'))
-            ->groupBy('query')
-            ->orderBy('count', 'desc')
-            ->take(6)
-            ->get();
+        try {
+            $totalProducts = Product::count();
+        } catch (\Throwable $e) {
+            $totalProducts = 0;
+        }
 
-        $recentChats = ChatConversation::with(['user', 'product', 'latestMessage'])
-            ->latest('last_message_at')
-            ->take(5)
-            ->get();
+        try {
+            $totalCustomers = User::where('role', 'customer')->count();
+        } catch (\Throwable $e) {
+            $totalCustomers = 0;
+        }
+
+        try {
+            $activeChats = ChatConversation::whereIn('status', ['open', 'in_progress'])->count();
+        } catch (\Throwable $e) {
+            $activeChats = 0;
+        }
+
+        try {
+            $unreadInquiries = ContactInquiry::where('is_read', false)->count();
+        } catch (\Throwable $e) {
+            $unreadInquiries = 0;
+        }
+
+        try {
+            $recentOrders = Order::with('items')->latest()->take(6)->get();
+        } catch (\Throwable $e) {
+            $recentOrders = collect();
+        }
+
+        try {
+            $topSearches = SearchLog::select('query', DB::raw('count(*) as count'))
+                ->groupBy('query')
+                ->orderBy('count', 'desc')
+                ->take(6)
+                ->get();
+        } catch (\Throwable $e) {
+            $topSearches = collect();
+        }
+
+        try {
+            $recentChats = ChatConversation::with(['user', 'product', 'latestMessage'])
+                ->latest('last_message_at')
+                ->take(5)
+                ->get();
+        } catch (\Throwable $e) {
+            $recentChats = collect();
+        }
 
         return view('admin.dashboard', compact(
             'totalSales',

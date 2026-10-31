@@ -482,7 +482,12 @@
             </li>
             <li class="nav-item">
                 @php
-                    $pendingOrdersCount = \App\Models\Order::where('order_status', 'pending')->count();
+                    $pendingOrdersCount = 0;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('orders')) {
+                            $pendingOrdersCount = \App\Models\Order::where('order_status', 'pending')->count();
+                        }
+                    } catch (\Throwable $e) {}
                 @endphp
                 <a class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }} d-flex justify-content-between align-items-center" href="{{ route('admin.orders.index') }}">
                     <div class="d-flex align-items-center gap-2">
@@ -516,7 +521,12 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 @php
-                    $unreadChats = \App\Models\ChatConversation::whereIn('status', ['open', 'in_progress'])->count();
+                    $unreadChats = 0;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('chat_conversations')) {
+                            $unreadChats = \App\Models\ChatConversation::whereIn('status', ['open', 'in_progress'])->count();
+                        }
+                    } catch (\Throwable $e) {}
                 @endphp
                 <a class="nav-link {{ request()->routeIs('admin.chats.*') ? 'active' : '' }} d-flex justify-content-between align-items-center" href="{{ route('admin.chats.index') }}">
                     <div class="d-flex align-items-center gap-2">
@@ -530,7 +540,12 @@
             </li>
             <li class="nav-item">
                 @php
-                    $unreadInquiries = \App\Models\ContactInquiry::where('is_read', false)->count();
+                    $unreadInquiries = 0;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('contact_inquiries')) {
+                            $unreadInquiries = \App\Models\ContactInquiry::where('is_read', false)->count();
+                        }
+                    } catch (\Throwable $e) {}
                 @endphp
                 <a class="nav-link {{ request()->routeIs('admin.inquiries.*') ? 'active' : '' }} d-flex justify-content-between align-items-center" href="{{ route('admin.inquiries.index') }}">
                     <div class="d-flex align-items-center gap-2">
@@ -544,7 +559,12 @@
             </li>
             <li class="nav-item">
                 @php
-                    $pendingClaims = \App\Models\Claim::where('status', 'pendiente')->count();
+                    $pendingClaims = 0;
+                    try {
+                        if (\Illuminate\Support\Facades\Schema::hasTable('claims')) {
+                            $pendingClaims = \App\Models\Claim::where('status', 'pendiente')->count();
+                        }
+                    } catch (\Throwable $e) {}
                 @endphp
                 <a class="nav-link {{ request()->routeIs('admin.claims.*') ? 'active' : '' }} d-flex justify-content-between align-items-center" href="{{ route('admin.claims.index') }}">
                     <div class="d-flex align-items-center gap-2">
