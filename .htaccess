@@ -1,6 +1,18 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /rodo/
-    RewriteRule ^$ public/ [L,R=301]
-    RewriteRule ^(.*)$ public/$1 [L,R=301]
+
+    # 1. Evitar cualquier bucle infinito de reescritura interna
+    RewriteCond %{ENV:REDIRECT_STATUS} 200
+    RewriteRule ^ - [L]
+
+    # 2. Seguridad: Bloquear acceso web a carpetas y archivos confidenciales
+    RewriteRule ^\.env - [F,L,NC]
+    RewriteRule ^\.git - [F,L,NC]
+    RewriteRule ^\.cpanel - [F,L,NC]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|vendor|tests)($|/) - [F,L,NC]
+    RewriteRule ^(artisan|composer\.(json|lock)|package\.(json|lock)|VERSION) - [F,L,NC]
+
+    # 3. Enviar todo internamente a la carpeta public/ sin modificar la URL del navegador
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L]
 </IfModule>
