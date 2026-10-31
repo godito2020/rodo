@@ -319,7 +319,7 @@
                     </button>
 
                     <!-- WhatsApp Advisor -->
-                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20comunicarme%20con%20un%20asesor%20comercial." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20bd5a] transition-all shadow-sm">
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20comunicarme%20con%20un%20asesor%20comercial." target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20bd5a] transition-all shadow-sm">
                         <i class="fab fa-whatsapp text-[16px]"></i>
                         <span class="hidden md:inline">Asesor WhatsApp</span>
                     </a>
