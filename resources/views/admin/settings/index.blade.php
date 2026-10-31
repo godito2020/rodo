@@ -109,9 +109,9 @@
                     <div class="col-md-4">
                         <label class="form-label text-light small fw-bold">Cifrado (Encryption)</label>
                         <select name="smtp_encryption" class="form-select">
-                            <option value="tls" {{ ($settings['smtp_encryption'] ?? '') === 'tls' ? 'selected' : '' }}>TLS</option>
-                            <option value="ssl" {{ ($settings['smtp_encryption'] ?? '') === 'ssl' ? 'selected' : '' }}>SSL</option>
-                            <option value="null" {{ ($settings['smtp_encryption'] ?? '') === 'null' ? 'selected' : '' }}>Sin Cifrado</option>
+                            <option value="ssl" {{ in_array(($settings['smtp_encryption'] ?? ''), ['ssl', 'smtps']) ? 'selected' : '' }}>SSL (Puerto 465 - Cifrado SMTPS)</option>
+                            <option value="tls" {{ in_array(($settings['smtp_encryption'] ?? ''), ['tls', 'smtp']) ? 'selected' : '' }}>TLS (Puerto 587 - STARTTLS)</option>
+                            <option value="null" {{ ($settings['smtp_encryption'] ?? '') === 'null' ? 'selected' : '' }}>Sin Cifrado (Puerto 25)</option>
                         </select>
                     </div>
                     <div class="col-md-4">

@@ -57,23 +57,38 @@ class AdminSettingController extends Controller
         try {
             // Dynamically set mail configuration from database settings
             $smtpHost = Setting::get('smtp_host', config('mail.mailers.smtp.host'));
-            $smtpPort = Setting::get('smtp_port', config('mail.mailers.smtp.port'));
+            $smtpPort = (int) Setting::get('smtp_port', config('mail.mailers.smtp.port', 587));
             $smtpUser = Setting::get('smtp_username', config('mail.mailers.smtp.username'));
             $smtpPass = Setting::get('smtp_password', config('mail.mailers.smtp.password'));
-            $smtpEnc = Setting::get('smtp_encryption', config('mail.mailers.smtp.scheme'));
-            $fromAddress = Setting::get('smtp_from_address', config('mail.from.address'));
-            $fromName = Setting::get('smtp_from_name', config('mail.from.name'));
+            $rawEnc = strtolower(trim((string) Setting::get('smtp_encryption', '')));
+            $fromAddress = Setting::get('smtp_from_address', config('mail.from.address', 'ventas@rodoperu.com'));
+            $fromName = Setting::get('smtp_from_name', config('mail.from.name', 'RODOPERU'));
+
+            // Symfony Mailer (Laravel 9+) only supports schemes: 'smtp' or 'smtps'
+            // 'ssl' maps to 'smtps' (direct SSL wrapper, typically port 465)
+            // 'tls' maps to 'smtp' (STARTTLS command, typically port 587 or 25)
+            if ($rawEnc === 'ssl' || $rawEnc === 'smtps' || $smtpPort === 465) {
+                $scheme = 'smtps';
+            } elseif ($rawEnc === 'tls' || $rawEnc === 'smtp' || $smtpPort === 587) {
+                $scheme = 'smtp';
+            } else {
+                $scheme = null; // Auto-detected based on port by Laravel
+            }
 
             Config::set('mail.default', 'smtp');
+            Config::set('mail.mailers.smtp.transport', 'smtp');
             Config::set('mail.mailers.smtp.host', $smtpHost);
-            Config::set('mail.mailers.smtp.port', (int)$smtpPort);
+            Config::set('mail.mailers.smtp.port', $smtpPort);
             Config::set('mail.mailers.smtp.username', $smtpUser);
             Config::set('mail.mailers.smtp.password', $smtpPass);
-            Config::set('mail.mailers.smtp.scheme', $smtpEnc);
+            Config::set('mail.mailers.smtp.scheme', $scheme);
             Config::set('mail.from.address', $fromAddress);
             Config::set('mail.from.name', $fromName);
 
-            Mail::raw("¡Excelente! La configuración de correo SMTP para RODOPERU está funcionando correctamente.\n\nFecha y hora: " . now()->toDateTimeString(), function ($message) use ($testEmail, $fromAddress, $fromName) {
+            // Purge cached mail transport instance so the new credentials take effect immediately
+            Mail::purge('smtp');
+
+            Mail::raw("¡Excelente! La configuración de correo SMTP para RODOPERU está funcionando correctamente.\n\nServidor: {$smtpHost}:{$smtpPort}\nEsquema: " . ($scheme ?? 'auto') . "\nFecha y hora: " . now()->toDateTimeString(), function ($message) use ($testEmail, $fromAddress, $fromName) {
                 $message->to($testEmail)
                         ->from($fromAddress, $fromName)
                         ->subject("Prueba de Conexión SMTP Exitosa - RODOPERU");
