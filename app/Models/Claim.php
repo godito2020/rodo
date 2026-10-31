@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
 class Claim extends Model
@@ -46,17 +47,25 @@ class Claim extends Model
         $year = date('Y');
         $prefix = "LRV-{$year}-";
 
-        $lastClaim = static::where('claim_number', 'LIKE', "{$prefix}%")
-            ->orderBy('id', 'desc')
-            ->first();
-
-        if ($lastClaim && preg_match('/LRV-\d{4}-(\d+)/', $lastClaim->claim_number, $matches)) {
-            $nextSequence = intval($matches[1]) + 1;
-        } else {
-            $nextSequence = 1;
+        if (!Schema::hasTable('claims')) {
+            return $prefix . '00001';
         }
 
-        return $prefix . str_pad((string) $nextSequence, 5, '0', STR_PAD_LEFT);
+        try {
+            $lastClaim = static::where('claim_number', 'LIKE', "{$prefix}%")
+                ->orderBy('id', 'desc')
+                ->first();
+
+            if ($lastClaim && preg_match('/LRV-\d{4}-(\d+)/', $lastClaim->claim_number, $matches)) {
+                $nextSequence = intval($matches[1]) + 1;
+            } else {
+                $nextSequence = 1;
+            }
+
+            return $prefix . str_pad((string) $nextSequence, 5, '0', STR_PAD_LEFT);
+        } catch (\Throwable $e) {
+            return $prefix . '00001';
+        }
     }
 
     /**
@@ -64,7 +73,8 @@ class Claim extends Model
      */
     public function getDeadlineAttribute(): Carbon
     {
-        $date = $this->created_at->copy();
+        $createdAt = $this->created_at ? Carbon::parse($this->created_at) : Carbon::now();
+        $date = $createdAt->copy();
         $businessDaysAdded = 0;
 
         while ($businessDaysAdded < 15) {
@@ -87,7 +97,7 @@ class Claim extends Model
         $deadline = $this->deadline;
 
         if ($now->greaterThan($deadline)) {
-            return -1 * $now->diffInDays($deadline);
+            return -1 * (int) $now->diffInDays($deadline);
         }
 
         return (int) $now->diffInDays($deadline);

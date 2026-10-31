@@ -7,6 +7,8 @@ use App\Models\Claim;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 
 class ClaimController extends Controller
 {
@@ -61,6 +63,14 @@ class ClaimController extends Controller
             'consumer_request.required' => 'Especifica el pedido concreto que solicitas a la empresa.',
             'terms_accepted.required' => 'Debes confirmar la veracidad de la información según Ley N° 29571.',
         ]);
+
+        if (!Schema::hasTable('claims')) {
+            try {
+                Artisan::call('migrate', ['--force' => true]);
+            } catch (\Throwable $e) {
+                Log::error("Auto-migrate claims before store failed: " . $e->getMessage());
+            }
+        }
 
         $validated['claim_number'] = Claim::generateClaimNumber();
         $validated['is_minor'] = $request->boolean('is_minor');

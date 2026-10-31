@@ -4,6 +4,28 @@
 @section('page_title', 'Gestión de Reclamaciones (Normativa INDECOPI)')
 
 @section('content')
+@if(!empty($tableNotReady))
+    <div class="alert alert-warning border-0 shadow-lg p-4 rounded-3 text-white mb-4" style="background-color: #78350f;">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <span class="material-symbols-outlined text-[36px] text-warning">warning</span>
+                <div>
+                    <h5 class="fw-bold mb-1 text-white">Inicialización de la Base de Datos Requerida</h5>
+                    <p class="small mb-0 text-white-50">
+                        La tabla de reclamaciones <code>claims</code> aún no ha sido creada en la base de datos de producción. Haz clic en el botón de la derecha o ejecuta <code>php artisan migrate --force</code> en la terminal de cPanel.
+                    </p>
+                </div>
+            </div>
+            <form action="{{ route('admin.claims.init_table') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-warning fw-bold px-4 py-2 text-nowrap shadow-sm">
+                    <i class="fas fa-magic me-1"></i> Inicializar Tabla Ahora
+                </button>
+            </form>
+        </div>
+    </div>
+@endif
+
 <!-- Metric Cards -->
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-4">

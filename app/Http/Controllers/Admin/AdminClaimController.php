@@ -8,43 +8,93 @@ use App\Models\Claim;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminClaimController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Claim::query()->orderBy('created_at', 'desc');
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
+        // 1. Auto-check and auto-migrate claims table if missing on hosting
+        if (!Schema::hasTable('claims')) {
+            try {
+                Artisan::call('migrate', ['--force' => true]);
+            } catch (\Throwable $e) {
+                Log::error("Auto-migrate claims failed: " . $e->getMessage());
+            }
         }
 
-        if ($request->filled('claim_type')) {
-            $query->where('claim_type', $request->claim_type);
+        // 2. If table is still missing, gracefully show setup screen instead of crashing with 500
+        if (!Schema::hasTable('claims')) {
+            $claims = new LengthAwarePaginator([], 0, 15);
+            $pendingCount = 0;
+            $inProcessCount = 0;
+            $resolvedCount = 0;
+            $tableNotReady = true;
+
+            return view('admin.claims.index', compact(
+                'claims',
+                'pendingCount',
+                'inProcessCount',
+                'resolvedCount',
+                'tableNotReady'
+            ));
         }
 
-        if ($request->filled('q')) {
-            $search = $request->q;
-            $query->where(function ($q) use ($search) {
-                $q->where('claim_number', 'LIKE', "%{$search}%")
-                  ->orWhere('full_name', 'LIKE', "%{$search}%")
-                  ->orWhere('doc_number', 'LIKE', "%{$search}%")
-                  ->orWhere('email', 'LIKE', "%{$search}%");
-            });
+        try {
+            $query = Claim::query()->orderBy('created_at', 'desc');
+
+            if ($request->filled('status')) {
+                $query->where('status', $request->status);
+            }
+
+            if ($request->filled('claim_type')) {
+                $query->where('claim_type', $request->claim_type);
+            }
+
+            if ($request->filled('q')) {
+                $search = $request->q;
+                $query->where(function ($q) use ($search) {
+                    $q->where('claim_number', 'LIKE', "%{$search}%")
+                      ->orWhere('full_name', 'LIKE', "%{$search}%")
+                      ->orWhere('doc_number', 'LIKE', "%{$search}%")
+                      ->orWhere('email', 'LIKE', "%{$search}%");
+                });
+            }
+
+            $claims = $query->paginate(15)->withQueryString();
+
+            $pendingCount = Claim::where('status', 'pendiente')->count();
+            $inProcessCount = Claim::where('status', 'en_proceso')->count();
+            $resolvedCount = Claim::where('status', 'atendido')->count();
+            $tableNotReady = false;
+        } catch (\Throwable $e) {
+            Log::error("Error loading claims in AdminClaimController: " . $e->getMessage());
+            $claims = new LengthAwarePaginator([], 0, 15);
+            $pendingCount = 0;
+            $inProcessCount = 0;
+            $resolvedCount = 0;
+            $tableNotReady = true;
         }
-
-        $claims = $query->paginate(15)->withQueryString();
-
-        $pendingCount = Claim::where('status', 'pendiente')->count();
-        $inProcessCount = Claim::where('status', 'en_proceso')->count();
-        $resolvedCount = Claim::where('status', 'atendido')->count();
 
         return view('admin.claims.index', compact(
             'claims',
             'pendingCount',
             'inProcessCount',
-            'resolvedCount'
+            'resolvedCount',
+            'tableNotReady'
         ));
+    }
+
+    public function initTable()
+    {
+        try {
+            Artisan::call('migrate', ['--force' => true]);
+            return back()->with('success', '¡Tabla de reclamaciones inicializada exitosamente en la base de datos!');
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Error al ejecutar migración: ' . $e->getMessage());
+        }
     }
 
     public function show($id)

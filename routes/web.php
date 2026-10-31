@@ -186,6 +186,7 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
 
     // Libro de Reclamaciones (INDECOPI)
     Route::get('claims', [AdminClaimController::class, 'index'])->name('claims.index');
+    Route::post('claims/init-table', [AdminClaimController::class, 'initTable'])->name('claims.init_table');
     Route::get('claims/{id}', [AdminClaimController::class, 'show'])->name('claims.show');
     Route::post('claims/{id}/status', [AdminClaimController::class, 'updateStatus'])->name('claims.update_status');
     Route::get('claims/{id}/imprimir', [AdminClaimController::class, 'print'])->name('claims.print');
