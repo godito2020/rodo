@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminChatController;
 use App\Http\Controllers\Admin\AdminInquiryController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -179,4 +180,9 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::get('settings', [AdminSettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [AdminSettingController::class, 'update'])->name('settings.update');
     Route::post('settings/test-smtp', [AdminSettingController::class, 'testSmtp'])->name('settings.test_smtp');
+
+    // Admin Profile & Security (Cambiar Contraseña)
+    Route::get('perfil', [AdminProfileController::class, 'index'])->name('profile');
+    Route::put('perfil', [AdminProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('perfil/clave', [AdminProfileController::class, 'updatePassword'])->name('profile.password');
 });

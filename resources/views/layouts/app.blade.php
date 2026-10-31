@@ -19,6 +19,8 @@
         $whatsappClean = preg_replace('/[^0-9]/', '', $whatsappNumber);
         $companyPhone = \App\Models\Setting::get('company_phone', '+51 (01) 719-8900');
         $supportEmail = \App\Models\Setting::get('support_email', 'ventas@rodoperu.com');
+        $companyAddress = \App\Models\Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima');
+        $companySchedule = \App\Models\Setting::get('company_schedule', 'Lun - Vie: 08:30 - 18:00 | Sáb: 09:00 - 13:00');
         $cartCount = count(session('cart', []));
     @endphp
 
@@ -63,10 +65,10 @@
       "email": "{{ $supportEmail }}",
       "address": {
         "@@type": "PostalAddress",
-        "streetAddress": "Av. Evitamiento Km 8.5, Zona Industrial",
-        "addressLocality": "Ate",
+        "streetAddress": "{{ $companyAddress }}",
+        "addressLocality": "Lima",
         "addressRegion": "Lima",
-        "postalCode": "15022",
+        "postalCode": "15000",
         "addressCountry": "PE"
       },
       "geo": {
@@ -256,9 +258,10 @@
                     </a>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center text-[#25D366] hover:text-white transition-all hover:scale-110" title="WhatsApp: {{ $whatsappNumber }}" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp text-[18px]"></i>
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20asesoria%20comercial%20de%20unidades" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#25D366] hover:text-white transition-all font-semibold" title="WhatsApp Oficial: {{ $whatsappNumber }}" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp text-[17px]"></i>
+                        <span class="font-metric text-[12px]">{{ $whatsappNumber }}</span>
                     </a>
                     <span class="hidden md:inline text-white/60">|</span>
                     <span class="hidden md:inline px-2.5 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-[#1B263B] text-[#B39255] border border-[#B39255]/40">
@@ -492,12 +495,16 @@
                     <h4 class="font-headline text-white uppercase tracking-wider text-sm font-bold text-[#ffdea6]">Contacto &amp; Planta</h4>
                     <div class="space-y-2.5 font-body text-xs text-slate-300">
                         <div class="flex items-start gap-2">
-                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">location_on</span>
-                            <span>Av. Evitamiento Km 8.5, Zona Industrial, Ate - Lima, Perú</span>
+                            <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0 mt-0.5">location_on</span>
+                            <span>{{ $companyAddress }}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">call</span>
                             <a href="tel:{{ preg_replace('/[^0-9]/', '', $companyPhone) }}" class="hover:text-white transition-colors">{{ $companyPhone }}</a>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-[#25D366] text-[18px] shrink-0"></i>
+                            <a href="https://wa.me/{{ $whatsappClean }}" target="_blank" class="hover:text-white transition-colors">{{ $whatsappNumber }}</a>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">mail</span>
@@ -505,7 +512,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-[18px] text-[#ffdea6] shrink-0">schedule</span>
-                            <span>Lun - Vie: 08:30 - 18:00 | Sáb: 09:00 - 13:00</span>
+                            <span>{{ $companySchedule }}</span>
                         </div>
                     </div>
                 </div>

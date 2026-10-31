@@ -10,6 +10,10 @@
     $companyPhone = \App\Models\Setting::get('company_phone', '+51 (01) 719-8900');
     $supportEmail = \App\Models\Setting::get('support_email', 'ventas@rodoperu.com');
     $salesEmail = \App\Models\Setting::get('sales_email', 'cotizaciones@rodoperu.com');
+    $companyAddress = \App\Models\Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima');
+    $companyLocationTitle = \App\Models\Setting::get('company_location_title', 'Sede Central El Agustino - Lima');
+    $companyLocationDescription = \App\Models\Setting::get('company_location_description', 'Showroom comercial, patio de maniobras y atención corporativa personalizada de flotas pesadas y electromovilidad.');
+    $companySchedule = \App\Models\Setting::get('company_schedule', 'Lunes a Viernes de 08:30 a 18:00 | Sábado de 09:00 a 13:00');
 @endphp
 
 @section('content')
@@ -173,14 +177,20 @@
                     <span>Showroom Industrial &amp; Patio de Pruebas</span>
                 </div>
                 
-                <h4 class="font-headline text-xl font-bold text-white">Sede Central Ate - Lima</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">
-                    Av. Evitamiento Km 8.5, Zona Industrial, Ate - Lima, Perú. Contamos con 10,000 m² con cargadores rápidos DC y zona de maniobra para semirremolques Facchini.
-                </p>
+                <h4 class="font-headline text-xl font-bold text-white">{{ $companyLocationTitle }}</h4>
+                <div class="space-y-1.5">
+                    <p class="text-sm font-semibold text-white flex items-start gap-1.5">
+                        <span class="material-symbols-outlined text-[17px] text-[#ffdea6] shrink-0 mt-0.5">pin_drop</span>
+                        <span>{{ $companyAddress }}</span>
+                    </p>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        {{ $companyLocationDescription }}
+                    </p>
+                </div>
 
                 <div class="pt-2 flex items-center gap-2 text-xs text-[#ffdea6] font-metric">
                     <span class="material-symbols-outlined text-[16px]">schedule</span>
-                    <span>Horario: Lunes a Viernes de 08:30 a 18:00 | Sábado de 09:00 a 13:00</span>
+                    <span>Horario: {{ $companySchedule }}</span>
                 </div>
             </div>
 

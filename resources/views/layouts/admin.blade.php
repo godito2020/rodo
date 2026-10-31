@@ -575,6 +575,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
+                    <span class="material-symbols-outlined text-info" style="font-size: 19px;">shield_person</span>
+                    <span>Seguridad &amp; Mi Perfil</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-warning" href="{{ route('home') }}" target="_blank">
                     <span class="material-symbols-outlined" style="font-size: 19px;">open_in_new</span>
                     <span>Ver Sitio Oficial</span>
@@ -612,6 +618,12 @@
                                 <div class="font-bold text-white small">{{ Auth::user()->name }}</div>
                                 <div class="font-metric text-muted" style="font-size: 0.72rem;">{{ Auth::user()->email }}</div>
                             </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2 d-flex align-items-center gap-2" href="{{ route('admin.profile') }}">
+                                <span class="material-symbols-outlined text-info" style="font-size: 18px;">key</span>
+                                <span>Mi Perfil &amp; Cambiar Clave</span>
+                            </a>
                         </li>
                         <li>
                             <a class="dropdown-item py-2 d-flex align-items-center gap-2" href="{{ route('admin.settings.index') }}">

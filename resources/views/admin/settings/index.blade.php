@@ -38,6 +38,20 @@
 
     <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        
+        <!-- Quick Security Banner -->
+        <div class="px-4 pt-4">
+            <div class="alert alert-dark border border-secondary d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-0 p-3 rounded-3" style="background-color: #061122;">
+                <div class="d-flex align-items-center">
+                    <span class="material-symbols-outlined text-warning me-2" style="font-size: 22px;">shield_person</span>
+                    <span class="text-light small">¿Necesitas cambiar la contraseña o correo del Administrador Master?</span>
+                </div>
+                <a href="{{ route('admin.profile') }}" class="btn btn-sm btn-outline-warning fw-bold text-nowrap">
+                    <i class="fas fa-key me-1"></i> Ir a Mi Perfil &amp; Cambiar Clave
+                </a>
+            </div>
+        </div>
+
         <div class="p-4 tab-content" id="settingsTabContent">
             
             <!-- 1. Branding Tab (Logo & Favicon) -->
@@ -179,6 +193,11 @@
             <div class="tab-pane fade" id="tab-social">
                 <h5 class="text-white fw-bold mb-3"><i class="fab fa-whatsapp text-success me-2"></i> Integración de WhatsApp & Redes Sociales</h5>
 
+                <div class="alert alert-dark border border-success/30 p-3 mb-4 rounded-3 text-light small" style="background-color: #061f18;">
+                    <i class="fab fa-whatsapp text-success me-2 fs-5"></i>
+                    <strong>Alcance del Número de WhatsApp:</strong> Este número se actualiza en tiempo real en la barra superior (Header), el botón flotante verde 24/7, el pie de página (Footer), la página de Contacto y en todas las cotizaciones automáticas con código SKU del catálogo.
+                </div>
+
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label text-light small fw-bold">Número de WhatsApp Principal * (Formato Internacional)</label>
@@ -232,17 +251,42 @@
                         <input type="number" name="tax_rate" class="form-control" value="{{ $settings['tax_rate'] ?? '18' }}">
                     </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label text-light small fw-bold">Dirección de la Sede</label>
-                        <input type="text" name="company_address" class="form-control" value="{{ $settings['company_address'] ?? '' }}">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label text-light small fw-bold">Central Telefónica</label>
-                        <input type="text" name="company_phone" class="form-control" value="{{ $settings['company_phone'] ?? '' }}">
+                    <!-- Sede, Horarios y Contacto -->
+                    <div class="col-12 mt-4 pt-3 border-top border-secondary">
+                        <h6 class="text-warning fw-bold mb-3 text-uppercase">
+                            <span class="material-symbols-outlined text-warning me-1" style="font-size: 18px;">store</span>
+                            Sede Central, Dirección y Horario de Atención
+                        </h6>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label text-light small fw-bold">Correo de Soporte</label>
+                        <label class="form-label text-light small fw-bold">Dirección de la Sede (Showroom / Planta)</label>
+                        <input type="text" name="company_address" class="form-control" placeholder="Av. Nicolas Ayllon 2925 el Agustino - Lima" value="{{ $settings['company_address'] ?? 'Av. Nicolas Ayllon 2925 el Agustino - Lima' }}">
+                        <small class="text-muted" style="font-size: 0.72rem;">Se muestra en el pie de página, órdenes de compra y página de contacto.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-light small fw-bold">Horario de Atención Oficial *</label>
+                        <input type="text" name="company_schedule" class="form-control" placeholder="Lunes a Viernes de 08:30 a 18:00 | Sábado de 09:00 a 13:00" value="{{ $settings['company_schedule'] ?? 'Lunes a Viernes de 08:30 a 18:00 | Sábado de 09:00 a 13:00' }}">
+                        <small class="text-muted" style="font-size: 0.72rem;">Visible en la página de Contacto y en el pie de página de todo el sitio.</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-light small fw-bold">Título de la Sede / Showroom</label>
+                        <input type="text" name="company_location_title" class="form-control" placeholder="Sede Central El Agustino - Lima" value="{{ $settings['company_location_title'] ?? 'Sede Central El Agustino - Lima' }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-light small fw-bold">Central Telefónica Fija / Móvil</label>
+                        <input type="text" name="company_phone" class="form-control" value="{{ $settings['company_phone'] ?? '' }}">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label text-light small fw-bold">Detalle / Instalaciones de la Sede (Texto inferior en Contacto)</label>
+                        <textarea name="company_location_description" class="form-control" rows="2" placeholder="Showroom comercial, patio de maniobras y atención corporativa personalizada de flotas pesadas y electromovilidad.">{{ $settings['company_location_description'] ?? 'Showroom industrial, zona de maniobras y atención corporativa personalizada de flotas pesadas y electromovilidad.' }}</textarea>
+                        <small class="text-muted" style="font-size: 0.72rem;">Reemplaza el texto descriptivo de la sede en la página de contacto.</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-light small fw-bold">Correo de Soporte y Proformas</label>
                         <input type="email" name="support_email" class="form-control" value="{{ $settings['support_email'] ?? '' }}">
                     </div>
                     <div class="col-md-6">

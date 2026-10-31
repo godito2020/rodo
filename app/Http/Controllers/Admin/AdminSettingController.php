@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminSettingController extends Controller
 {
@@ -42,6 +44,12 @@ class AdminSettingController extends Controller
             // Also copy to root public/favicon.png for browser direct requests
             @copy(public_path('uploads/settings/' . $fileName), public_path('favicon.png'));
         }
+
+        // Invalidate all setting cache and clear compiled views for immediate reflection across the website
+        Cache::flush();
+        try {
+            Artisan::call('view:clear');
+        } catch (\Throwable $e) {}
 
         return back()->with('success', 'Configuraciones del sistema actualizadas exitosamente.');
     }
