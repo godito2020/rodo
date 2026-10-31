@@ -294,42 +294,45 @@
                     </a>
 
                     <!-- User Account Dropdown -->
-                    <div class="relative group">
-                        <button type="button" class="w-10 h-10 rounded-full bg-[#051125] text-white flex items-center justify-center hover:bg-[#1b263b] transition-colors" aria-label="Cuenta de usuario">
+                    <div class="relative" id="userDropdownContainer">
+                        <button type="button" onclick="toggleUserDropdown(event)" class="w-10 h-10 rounded-full bg-[#051125] text-white flex items-center justify-center hover:bg-[#1b263b] transition-all focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" aria-label="Cuenta de usuario" id="userDropdownBtn">
                             <span class="material-symbols-outlined text-[20px]">person</span>
                         </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-2 hidden group-hover:block z-50 font-body text-xs">
+                        <div id="userDropdownMenu" class="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-2xl border border-slate-200 py-2 hidden z-50 font-body text-xs transform origin-top-right">
                             @auth
                                 <div class="px-4 py-2 border-b border-slate-100">
                                     <p class="font-bold text-slate-800 truncate">{{ auth()->user()->name }}</p>
                                     <p class="text-[11px] text-slate-500 truncate">{{ auth()->user()->email }}</p>
                                 </div>
                                 @if(auth()->user()->role === 'admin')
-                                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-blue-700 hover:bg-blue-50 font-semibold">
-                                        <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span> Panel de Control
+                                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2.5 text-blue-700 hover:bg-blue-50 font-semibold transition-colors">
+                                        <span class="material-symbols-outlined text-[18px]">admin_panel_settings</span> Panel de Control
                                     </a>
                                 @endif
-                                <a href="{{ route('customer.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
-                                    <span class="material-symbols-outlined text-[16px]">dashboard</span> Mi Cuenta
+                                <a href="{{ route('customer.dashboard') }}" class="flex items-center gap-2 px-4 py-2.5 text-slate-700 hover:bg-slate-50 transition-colors">
+                                    <span class="material-symbols-outlined text-[18px]">dashboard</span> Mi Cuenta
                                 </a>
-                                <a href="{{ route('customer.orders') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
-                                    <span class="material-symbols-outlined text-[16px]">inventory_2</span> Mis Pedidos
+                                <a href="{{ route('customer.orders') }}" class="flex items-center gap-2 px-4 py-2.5 text-slate-700 hover:bg-slate-50 transition-colors">
+                                    <span class="material-symbols-outlined text-[18px]">inventory_2</span> Mis Pedidos
                                 </a>
                                 <form method="POST" action="{{ route('logout') }}" class="border-t border-slate-100 mt-1">
                                     @csrf
-                                    <button type="submit" class="w-full text-left flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50">
-                                        <span class="material-symbols-outlined text-[16px]">logout</span> Cerrar Sesión
+                                    <button type="submit" class="w-full text-left flex items-center gap-2 px-4 py-2.5 text-red-600 hover:bg-red-50 transition-colors font-medium">
+                                        <span class="material-symbols-outlined text-[18px]">logout</span> Cerrar Sesión
                                     </button>
                                 </form>
                             @else
-                                <a href="{{ route('login') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50 font-semibold">
-                                    <span class="material-symbols-outlined text-[16px]">login</span> Iniciar Sesión
+                                <div class="px-4 py-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                    Acceso a Clientes
+                                </div>
+                                <a href="{{ route('login') }}" class="flex items-center gap-2.5 px-4 py-2.5 text-[#051125] hover:bg-slate-50 font-bold transition-colors">
+                                    <span class="material-symbols-outlined text-[18px] text-blue-600">login</span> Iniciar Sesión
                                 </a>
-                                <a href="{{ route('register') }}" class="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-50">
-                                    <span class="material-symbols-outlined text-[16px]">person_add</span> Registrarse
+                                <a href="{{ route('register') }}" class="flex items-center gap-2.5 px-4 py-2.5 text-slate-700 hover:bg-slate-50 font-semibold transition-colors">
+                                    <span class="material-symbols-outlined text-[18px] text-emerald-600">person_add</span> Registrarse
                                 </a>
                                 <div class="border-t border-slate-100 my-1"></div>
-                                <a href="{{ route('admin.login') }}" class="flex items-center gap-2 px-4 py-2 text-slate-500 hover:text-slate-800 hover:bg-slate-50">
+                                <a href="{{ route('admin.login') }}" class="flex items-center gap-2.5 px-4 py-2 text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors text-[11px]">
                                     <span class="material-symbols-outlined text-[16px]">lock</span> Acceso Admin
                                 </a>
                             @endauth
@@ -354,6 +357,20 @@
             <a href="{{ route('novedades.index') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Novedades &amp; Blog</a>
             <a href="{{ route('contacto') }}" class="block py-2 text-slate-800 font-semibold hover:text-blue-700">Contacto &amp; Sedes</a>
             <div class="pt-3 border-t border-slate-200 flex flex-col gap-2">
+                @auth
+                    <a href="{{ route('customer.dashboard') }}" class="w-full py-2.5 px-3 rounded-lg bg-slate-100 text-slate-800 font-semibold text-xs flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[16px]">dashboard</span> Mi Cuenta ({{ auth()->user()->name }})
+                    </a>
+                @else
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{{ route('login') }}" class="py-2.5 rounded-lg border border-slate-300 text-slate-800 font-semibold text-center text-xs flex items-center justify-center gap-1.5 hover:bg-slate-50">
+                            <span class="material-symbols-outlined text-[16px]">login</span> Iniciar Sesión
+                        </a>
+                        <a href="{{ route('register') }}" class="py-2.5 rounded-lg bg-[#051125] text-[#ffdea6] font-semibold text-center text-xs flex items-center justify-center gap-1.5 hover:bg-[#1b263b]">
+                            <span class="material-symbols-outlined text-[16px]">person_add</span> Registrarse
+                        </a>
+                    </div>
+                @endauth
                 <button type="button" onclick="openQuickQuoteModal()" class="w-full py-2.5 rounded bg-[#051125] text-white font-semibold text-center text-xs">
                     Cotizar en Línea
                 </button>
@@ -638,6 +655,23 @@
         function closeSpecModal() {
             document.getElementById('specModal').classList.add('hidden');
         }
+
+        function toggleUserDropdown(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('userDropdownMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('userDropdownContainer');
+            const menu = document.getElementById('userDropdownMenu');
+            if (container && menu && !container.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
     </script>
 
     @stack('scripts')
