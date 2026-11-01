@@ -141,7 +141,7 @@ class AdminClaimController extends Controller
                     "En cumplimiento del Código de Protección y Defensa del Consumidor (Ley N° 29571) y los lineamientos del INDECOPI, quedamos a su entera disposición para cualquier aclaración o seguimiento.\n\n" .
                     "Atentamente,\n" .
                     "Dirección de Atención y Gestión de Reclamos\n" .
-                    "RODOPERU S.A.C. - RUC 20601234567\n" .
+                    "RODOPERU S.A.C. - RUC " . Setting::get('company_ruc', '20616665589') . "\n" .
                     Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima') . "\n" .
                     "Teléfono: " . Setting::get('company_phone', '+51 953 501 762');
 
@@ -166,7 +166,7 @@ class AdminClaimController extends Controller
         $claim = Claim::findOrFail($id);
         $companyName = Setting::get('site_name', 'RODOPERU S.A.C.');
         $companyAddress = Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima');
-        $companyRuc = '20601234567';
+        $companyRuc = Setting::get('company_ruc', '20616665589');
         $companyPhone = Setting::get('company_phone', '+51 953 501 762');
         $companyEmail = Setting::get('support_email', 'ventas@rodoperu.com.pe');
 

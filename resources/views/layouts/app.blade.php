@@ -21,6 +21,7 @@
         $supportEmail = \App\Models\Setting::get('support_email', 'ventas@rodoperu.com');
         $companyAddress = \App\Models\Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima');
         $companySchedule = \App\Models\Setting::get('company_schedule', 'Lun - Vie: 08:30 - 18:00 | Sáb: 09:00 - 13:00');
+        $companyRuc = \App\Models\Setting::get('company_ruc', '20616665589');
         $cartCount = count(session('cart', []));
     @endphp
 
@@ -318,10 +319,10 @@
                         <span>Cotizar en Línea</span>
                     </button>
 
-                    <!-- WhatsApp Advisor -->
-                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20comunicarme%20con%20un%20asesor%20comercial." target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20bd5a] transition-all shadow-sm">
+                    <!-- WhatsApp Advisor (Solo en Desktop XL) -->
+                    <a href="https://wa.me/{{ $whatsappClean }}?text=Hola%20RODOPERU,%20deseo%20comunicarme%20con%20un%20asesor%20comercial." target="_blank" rel="noopener noreferrer" class="hidden xl:inline-flex items-center justify-center gap-1.5 h-10 px-3.5 rounded bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20bd5a] transition-all shadow-sm">
                         <i class="fab fa-whatsapp text-[16px]"></i>
-                        <span class="hidden md:inline">Asesor WhatsApp</span>
+                        <span>Asesor WhatsApp</span>
                     </a>
 
                     <!-- Cart icon with badge -->
@@ -521,7 +522,7 @@
             <!-- Bottom Legal Bar -->
             <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body text-xs text-slate-400">
                 <div class="flex flex-wrap items-center gap-4">
-                    <span class="font-metric text-[#ffdea6] font-semibold">RUC: 20601234567</span>
+                    <span class="font-metric text-[#ffdea6] font-semibold">RUC: {{ $companyRuc }}</span>
                     <span>&copy; {{ date('Y') }} RODOPERU S.A.C. Todos los derechos reservados. | Disegn by GCC.</span>
                     <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-metric text-[10px] font-semibold border border-slate-700">v2.0</span>
                 </div>

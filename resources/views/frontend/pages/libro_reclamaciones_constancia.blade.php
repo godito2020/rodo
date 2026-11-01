@@ -96,7 +96,7 @@
             <!-- Indecopi Info Footer -->
             <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-500 text-center space-y-1">
                 <p>
-                    RODOPERU S.A.C. &bull; RUC 20601234567 &bull; {{ $companyAddress }}
+                    RODOPERU S.A.C. &bull; RUC {{ $companyRuc ?? \App\Models\Setting::get('company_ruc', '20616665589') }} &bull; {{ $companyAddress }}
                 </p>
                 <p>
                     Si transcurrido el plazo legal de 15 días hábiles no ha recibido respuesta o no está conforme con la misma, puede presentar su reclamo ante el <a href="https://enlinea.indecopi.gob.pe/reclamavirtual/" target="_blank" class="text-blue-600 font-bold underline">Servicio de Atención al Ciudadano del INDECOPI</a>.

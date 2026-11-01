@@ -27,7 +27,7 @@ class RodoEcommerceSeeder extends Seeder
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'phone' => '+51 987 654 321',
-                'dni_ruc' => '20601234567',
+                'dni_ruc' => '20616665589',
                 'company_name' => 'RODOPERU S.A.C.',
                 'address' => 'Av. Evitamiento Km 8.5, Ate',
                 'city' => 'Lima',
@@ -87,7 +87,7 @@ class RodoEcommerceSeeder extends Seeder
 
             // Payment Gateways
             ['key' => 'payment_bank_transfer_enabled', 'value' => '1', 'group' => 'payment'],
-            ['key' => 'payment_bank_instructions', 'value' => "Banco BCP Cta Cte Dólares: 191-88992233-1-45 (CCI: 002-1910088992233145-56)\nBanco BBVA Cta Cte Soles: 0011-0345-0100098765\nTitular: RODOPERU S.A.C. - RUC 20601234567\nPor favor adjuntar voucher de transferencia para validar su orden.", 'group' => 'payment'],
+            ['key' => 'payment_bank_instructions', 'value' => "Banco BCP Cta Cte Dólares: 191-88992233-1-45 (CCI: 002-1910088992233145-56)\nBanco BBVA Cta Cte Soles: 0011-0345-0100098765\nTitular: RODOPERU S.A.C. - RUC 20616665589\nPor favor adjuntar voucher de transferencia para validar su orden.", 'group' => 'payment'],
             ['key' => 'payment_yape_plin_enabled', 'value' => '1', 'group' => 'payment'],
             ['key' => 'payment_yape_phone', 'value' => '987 654 321 (RODOPERU S.A.C.)', 'group' => 'payment'],
             ['key' => 'payment_mercadopago_enabled', 'value' => '1', 'group' => 'payment'],

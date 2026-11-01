@@ -29,7 +29,7 @@
                 <span>Sede Industrial Ate Operativa</span>
             </span>
             <span>•</span>
-            <span class="font-bold text-[#051125]">RUC: 20601234567</span>
+            <span class="font-bold text-[#051125]">RUC: {{ \App\Models\Setting::get('company_ruc', '20616665589') }}</span>
         </div>
     </div>
 </div>

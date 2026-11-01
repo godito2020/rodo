@@ -187,7 +187,7 @@
             <div class="col-6">
                 <div class="border-top border-dark mx-4 pt-1">
                     <strong>RODOPERU S.A.C.</strong><br>
-                    <small class="text-muted">RUC 20601234567</small>
+                    <small class="text-muted">RUC {{ $companyRuc ?? \App\Models\Setting::get('company_ruc', '20616665589') }}</small>
                 </div>
             </div>
         </div>

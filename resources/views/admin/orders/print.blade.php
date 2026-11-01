@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
             <div>
                 <h2 class="fw-bold mb-0 text-dark">RODOPERU S.A.C.</h2>
-                <small class="text-muted d-block">RUC: 20601234567</small>
+                <small class="text-muted d-block">RUC: {{ \App\Models\Setting::get('company_ruc', '20616665589') }}</small>
                 <small class="text-muted d-block">{{ \App\Models\Setting::get('company_address', 'Av. Nicolas Ayllon 2925 el Agustino - Lima') }}</small>
                 <small class="text-muted d-block">Teléfono: {{ \App\Models\Setting::get('company_phone') }} | {{ \App\Models\Setting::get('support_email', 'ventas@rodoperu.com') }}</small>
             </div>

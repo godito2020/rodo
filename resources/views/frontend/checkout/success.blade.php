@@ -4,7 +4,7 @@
 
 @php
     $currency = \App\Models\Setting::get('currency_symbol', 'USD $');
-    $bankInstructions = \App\Models\Setting::get('payment_bank_instructions', "Banco BCP Cta Cte Dólares: 191-88992233-1-45 (CCI: 002-1910088992233145-56)\nBanco BBVA Cta Cte Soles: 0011-0345-0100098765\nTitular: RODOPERU S.A.C. - RUC 20601234567");
+    $bankInstructions = \App\Models\Setting::get('payment_bank_instructions', "Banco BCP Cta Cte Dólares: 191-88992233-1-45 (CCI: 002-1910088992233145-56)\nBanco BBVA Cta Cte Soles: 0011-0345-0100098765\nTitular: RODOPERU S.A.C. - RUC " . \App\Models\Setting::get('company_ruc', '20616665589'));
     $yapePhone = \App\Models\Setting::get('payment_yape_phone', '987 654 321 (RODOPERU S.A.C.)');
     $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '+51987654321');
     $whatsappClean = preg_replace('/[^0-9]/', '', $whatsappNumber);

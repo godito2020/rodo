@@ -66,7 +66,7 @@
 
                 <div class="space-y-1.5">
                     <label class="block font-metric text-xs font-semibold text-slate-700">RUC o DNI (para Facturación)</label>
-                    <input type="text" name="dni_ruc" value="{{ old('dni_ruc') }}" placeholder="20601234567" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-metric text-slate-900 bg-slate-50/50">
+                    <input type="text" name="dni_ruc" value="{{ old('dni_ruc') }}" placeholder="20123456789" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-metric text-slate-900 bg-slate-50/50">
                 </div>
 
                 <div class="sm:col-span-2 space-y-1.5">

@@ -260,6 +260,12 @@
                     </div>
 
                     <div class="col-md-6">
+                        <label class="form-label text-light small fw-bold">RUC de la Empresa *</label>
+                        <input type="text" name="company_ruc" class="form-control" placeholder="20616665589" value="{{ $settings['company_ruc'] ?? '20616665589' }}">
+                        <small class="text-muted" style="font-size: 0.72rem;">Visible en pie de página, órdenes, proformas y Libro de Reclamaciones.</small>
+                    </div>
+
+                    <div class="col-md-6">
                         <label class="form-label text-light small fw-bold">Dirección de la Sede (Showroom / Planta)</label>
                         <input type="text" name="company_address" class="form-control" placeholder="Av. Nicolas Ayllon 2925 el Agustino - Lima" value="{{ $settings['company_address'] ?? 'Av. Nicolas Ayllon 2925 el Agustino - Lima' }}">
                         <small class="text-muted" style="font-size: 0.72rem;">Se muestra en el pie de página, órdenes de compra y página de contacto.</small>
